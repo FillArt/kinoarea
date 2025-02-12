@@ -1,9 +1,13 @@
 import LogoIcon from './assets/logo.svg';
-import {SocialLinks} from "@/widgets/Header/model/social.ts";
+import {SocialLinksType} from "@/widgets/Header/model/social.ts";
 import {SocialButtons} from "@/widgets/Header/ui/Logo/SocialButtons/SocialButtons.tsx";
 
 
-export const Logo = () => {
+type LogoProps = {
+    socialLinks: SocialLinksType[];
+}
+
+export const Logo = ({socialLinks}: LogoProps) => {
     return (
         <div>
             <a href="/">
@@ -18,7 +22,7 @@ export const Logo = () => {
                 </div>
             </a>
 
-            <SocialButtons icons={SocialLinks}/>
+            <SocialButtons icons={socialLinks}/>
         </div>
 
     );
