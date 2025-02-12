@@ -35,6 +35,13 @@ export default {
                 titleFontSize: '65px',
                 subtitleFontSize: '45px',
                 descriptionFontSize: '25px',
+            },
+            spacing: {
+                13: '13px',
+                45: '45px',
+            },
+            boxShadow: {
+                hoverDefaultButton: '0px 0px 15px 0px #4871FFCC'
             }
         },
         plugins: [],

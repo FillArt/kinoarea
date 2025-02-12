@@ -10,7 +10,7 @@ export const Navigation = ({links}: NavigationProps) => {
             {links.map((link, i) => {
                 const {title, link: url} = link;
                 return (
-                    <li key={i} className='text-white'>
+                    <li key={i} className='text-white text-smallFontSize'>
                         <a href={url}>{title}</a>
                     </li>
                 );
