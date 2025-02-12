@@ -6,7 +6,7 @@ import {navigationLinks} from "@/widgets/Header/model/navigationLinks.ts";
 
 export const Header = () => {
     return (
-        <header style={{'outline': '1px solid red'}} className="font-main py-5">
+        <header className="font-main py-5 bg-backgroundColor">
             <div className="container max-w-container mx-auto grid grid-cols-12">
                 <div className="col-span-2">
                     <Logo/>
