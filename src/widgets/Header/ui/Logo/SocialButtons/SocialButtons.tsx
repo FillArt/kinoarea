@@ -6,7 +6,7 @@ type SocialButtonsProps = {
 
 export const SocialButtons = ({icons}: SocialButtonsProps) => {
     return (
-        <div className="flex gap-[20px]">
+        <div className="flex gap-[18px]">
             {icons.map((item, i) => {
                 const {key ,link, icon } = item;
                 return (
