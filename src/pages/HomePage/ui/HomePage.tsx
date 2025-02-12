@@ -1,9 +1,10 @@
-import {HomePageLayout} from "../../../common/components/layouts";
+import {HomePageLayout} from "@/common/components/layouts";
+import {NowInCinema} from "@/widgets/NowInCinema";
 
 export const HomePage = () => {
     return (
         <HomePageLayout>
-            HomePage
+            <NowInCinema/>
         </HomePageLayout>
     );
 };
