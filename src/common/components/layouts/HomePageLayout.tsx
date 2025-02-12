@@ -1,5 +1,5 @@
 import {ReactNode} from "react";
-import {Header} from "../../../widgets/Header";
+import {Header} from "@/widgets/Header";
 
 interface HomeLayoutProps {
     children: ReactNode;
