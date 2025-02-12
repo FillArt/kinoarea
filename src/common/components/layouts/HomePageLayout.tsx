@@ -1,4 +1,5 @@
 import {ReactNode} from "react";
+import {Header} from "../../../widgets/Header";
 
 interface HomeLayoutProps {
     children: ReactNode;
@@ -6,10 +7,10 @@ interface HomeLayoutProps {
 
 export const HomePageLayout = ({children}: HomeLayoutProps) => {
     return (
-        <div>
-            <div>Header</div>
+        <>
+            <Header />
             {children}
             <div>Footer</div>
-        </div>
+        </>
     );
 };

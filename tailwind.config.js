@@ -25,6 +25,9 @@ export default {
                 neutralReviewColor: "#FFF065",
                 negativeReview: "#E04141"
             },
+            maxWidth: {
+                container: '1431px',
+            },
 
             fontSize: {
                 defaultFontSize: '20px',
