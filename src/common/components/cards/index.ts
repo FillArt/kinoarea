@@ -1,0 +1,1 @@
+export {CardMovie} from "@/common/components/cards/CardMovie/CardMovie.tsx";

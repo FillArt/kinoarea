@@ -1,0 +1,1 @@
+export {NowInCinema} from "@/widgets/NowInCinema/ui/NowInCinema.tsx";
