@@ -13,7 +13,8 @@ export default {
                 baseTextColor: "#FFFFFF",
                 decorTextColor: "#F2F60F",
                 subTextColor: "#3B486B",
-                emptyTextColor: "#404961"
+                emptyTextColor: "#404961",
+                formTextColor: "#3657CB"
             },
             backgroundColor: {
                 backgroundColor: "#1E2538",
