@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { SectionTitle } from "@/common/components/sections/SectionTitle.tsx";
-import { categoriesList } from "@/widgets/NowInCinema/model/categoriesList.ts";
-import { ChinemaList } from "@/widgets/NowInCinema/ui/ChinemaList";
-import { instance } from "@/instance/instance.ts";
-import { GenreAPI, NowInCinemaAPI } from "@/widgets/NowInCinema/api/NowInCinemaAPI.types.ts";
+import {useEffect, useState} from "react";
+import {SectionTitle} from "@/common/components/sections/SectionTitle.tsx";
+import {categoriesList} from "@/widgets/NowInCinema/model/categoriesList.ts";
+import {ChinemaList} from "@/widgets/NowInCinema/ui/ChinemaList";
+import {instance} from "@/instance/instance.ts";
+import {GenreAPI, NowInCinemaAPI} from "@/widgets/NowInCinema/api/NowInCinemaAPI.types.ts";
 
 export type Filter = "all" | "action" | "adventures" | "comedy" | "fantasy" | "thrillers" | "drama";
 
@@ -19,6 +19,11 @@ export const NowInCinema = () => {
         acc[genre.id] = genre.name;
         return acc;
     }, {} as Record<number, string>);
+
+    const filterByCategory = (category: string) => {
+        return movies.filter((movie) =>
+            movie.genres?.some((genre) => genre.toLowerCase().includes(category.toLowerCase())))
+    }
 
     useEffect(() => {
         instance.get<{ genres: GenreAPI[] }>("/genre/movie/list").then((r) => {
@@ -37,6 +42,29 @@ export const NowInCinema = () => {
             setMovies(formatMovies);
         });
     }, [genres]);
+
+    let filteredMovies: NowInCinemaAPI[] = movies;
+
+    switch (filter) {
+        case "action":
+            filteredMovies = filterByCategory('action')
+            break;
+        case "adventures":
+            filteredMovies = filterByCategory('adventure')
+            break;
+        case "comedy":
+            filteredMovies = filterByCategory('comedy')
+            break;
+        case "fantasy":
+            filteredMovies = filterByCategory('fantasy')
+            break;
+        case "thrillers":
+            filteredMovies = filterByCategory('thrillers')
+            break;
+        case "drama":
+            filteredMovies = filterByCategory('drama')
+            break;
+    }
 
     return (
         <section className="font-main bg-backgroundColor pt-6 text-white">
@@ -57,7 +85,7 @@ export const NowInCinema = () => {
                     </div>
                 </SectionTitle>
 
-                <ChinemaList movies={movies} />
+                <ChinemaList movies={filteredMovies}/>
             </div>
         </section>
     );

@@ -14,7 +14,7 @@ export const CardMovie = (item: CardMovie) => {
     const rounded = (num: number, decimals: number) => Number(num.toFixed(decimals));
 
     const imgStyle = poster_path ? {
-        backgroundImage: `url("https://image.tmdb.org/t/p/original${poster_path}")`,
+        backgroundImage: `url("https://image.tmdb.org/t/p/w500${poster_path}")`,
         backgroundSize: "cover",
         backgroundPosition: "center"
     } : {}
@@ -34,9 +34,7 @@ export const CardMovie = (item: CardMovie) => {
 
 
                 <Rating rating={rounded(vote_average, 1)}/>
-                {!poster_path && (
-                    <Empty/>
-                )}
+                {!poster_path && <Empty/>}
             </div>
 
             <h3 className="text-smallFontSize mt-2 mb-1">{title}</h3>
