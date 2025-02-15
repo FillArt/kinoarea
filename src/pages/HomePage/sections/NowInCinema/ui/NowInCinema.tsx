@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
 import {SectionTitle} from "@/common/components/sections/SectionTitle.tsx";
-import {categoriesList} from "@/widgets/NowInCinema/model/categoriesList.ts";
-import {ChinemaList} from "@/widgets/NowInCinema/ui/ChinemaList";
+import {categoriesList} from "@/pages/HomePage/sections/NowInCinema/model/categoriesList.ts";
+import {ChinemaList} from "@/pages/HomePage/sections/NowInCinema/ui/CinemaList";
 import {instance} from "@/instance/instance.ts";
-import {GenreAPI, NowInCinemaAPI} from "@/widgets/NowInCinema/api/NowInCinemaAPI.types.ts";
+import {GenreAPI, NowInCinemaAPI} from "@/pages/HomePage/sections/NowInCinema/api/NowInCinemaAPI.types.ts";
 import {ButtonBase} from "@/common/components/buttons/ButtonBase.tsx";
 
 export type Filter = "all" | "action" | "adventures" | "comedy" | "fantasy" | "thrillers" | "drama";
@@ -16,17 +16,21 @@ export const NowInCinema = () => {
 
     const [isShowButton, setIsShowButton] = useState<boolean>(true);
 
-    const onClickHandler = (filter: Filter) => setFilter(filter);
+    const onClickHandler = (filter: Filter) => {
+        setFilter(filter);
+        showMoreMovies()
+    }
+
+    const showMoreMovies = () => {
+        setMovies(allMovies)
+        setIsShowButton(false)
+    };
 
     const genreMap: Record<number, string> = genres.reduce((acc, genre) => {
         acc[genre.id] = genre.name;
         return acc;
     }, {} as Record<number, string>);
 
-    const showMoreMovies = () => {
-        setMovies(allMovies)
-        setIsShowButton(false)
-    };
 
     useEffect(() => {
         instance.get<{ genres: GenreAPI[] }>("/genre/movie/list").then((r) => {
@@ -50,7 +54,7 @@ export const NowInCinema = () => {
 
 
     return (
-        <section className="font-main bg-backgroundColor pt-6 text-white">
+        <section className="font-main bg-backgroundColor pt-6 mb-10 text-white">
             <div className="container max-w-container mx-auto">
                 <SectionTitle title={"Сейчас в кино"}>
                     <div className="max-w-[765px] w-full flex justify-between">

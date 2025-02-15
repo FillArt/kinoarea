@@ -1,6 +1,6 @@
 import {CardMovie} from "@/common/components/cards";
-import {NowInCinemaAPI} from "@/widgets/NowInCinema/api/NowInCinemaAPI.types.ts";
-import {Filter} from "@/widgets/NowInCinema/ui/NowInCinema.tsx";
+import {NowInCinemaAPI} from "@/pages/HomePage/sections/NowInCinema/api/NowInCinemaAPI.types.ts";
+import {Filter} from "@/pages/HomePage/sections/NowInCinema/ui/NowInCinema.tsx";
 
 
 type ChinemaListProps = {
