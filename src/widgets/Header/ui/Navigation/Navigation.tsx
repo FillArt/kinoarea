@@ -1,12 +1,13 @@
 import {NavigationLinksType} from "@/widgets/Header/model/navigationLinks.ts";
 
 type NavigationProps = {
-    links: NavigationLinksType[]
+    links: NavigationLinksType[],
+    ulStyle: string,
 }
 
-export const Navigation = ({links}: NavigationProps) => {
+export const Navigation = ({links, ulStyle}: NavigationProps) => {
     return (
-        <ul className="flex max-w-[523px] tabletLg:max-w-[750px] w-full justify-between">
+        <ul className={ulStyle}>
             {links.map((link, i) => {
                 const {title, link: url} = link;
                 return (

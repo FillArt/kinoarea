@@ -6,6 +6,8 @@ import {SocialLinksType} from "@/widgets/Header/model/social.ts";
 import SearchIcon from "@/common/components/buttons/assets/search.svg";
 import {ButtonIcon} from "@/common/components/buttons/ButtonIcon.tsx";
 import {ButtonBase} from "@/common/components/buttons/ButtonBase.tsx";
+import Popup from "@/widgets/Header/ui/Popup/Popup.tsx";
+import {useState} from "react";
 
 type HeaderProps = {
     navigation: NavigationLinksType[];
@@ -13,26 +15,44 @@ type HeaderProps = {
 }
 
 export const Header = ({navigation, socialLinks}: HeaderProps) => {
+
+    const [isShowPopup, setShowPopup] = useState(false);
+
     return (
-        <header className="font-main py-5 bg-backgroundColor">
-            <div className="container max-w-container order-1 mx-auto grid grid-cols-12">
-                <div className="tabletLg:col-span-2 tabletLg:justify-normal flex justify-center col-span-8 tabletLg:order-1 order-2">
-                    <Logo socialLinks={socialLinks}/>
-                </div>
-                <div className="tabletLg:col-span-7 tabletLg:order-2 order-4 col-span-12 tabletLg:mt-0 mt-7 flex items-center justify-center">
-                    <Navigation links={navigation}/>
-                </div>
+        <>
+            <Popup isShow={isShowPopup} setShow={setShowPopup}>
+                <Navigation
+                    ulStyle="flex flex-col items-center mt-5 gap-[20px]"
+                    links={navigation}/>
+            </Popup>
 
-                <div className="tabletLg:col-span-1 col-span-2 tabletLg:order-3 order-1 flex items-center tabletLg:justify-end">
-                    <ButtonIcon onClick={() => alert('Открыл поиск...')}>
-                        <img src={SearchIcon}  alt=""/>
-                    </ButtonIcon>
-                </div>
+            <header className="font-main py-5 bg-backgroundColor">
+                <div className="container max-w-container order-1 mx-auto grid grid-cols-12">
+                    <div
+                        className="tabletLg:col-span-2 tabletLg:justify-normal flex justify-center col-span-8 tabletLg:order-1 order-2">
+                        <Logo socialLinks={socialLinks}/>
+                    </div>
+                    <div
+                        className="tabletLg:col-span-7 none hidden phone:flex tabletLg:order-2 order-4 col-span-12 tabletLg:mt-0 mt-7 items-center justify-center">
 
-                <div className="tabletLg:col-span-2 col-span-2 tabletLg:order-4 order-3 flex items-center tabletLg:w-[150px] justify-end">
-                    <ButtonBase title='Войти' onClick={() => alert('Вошёл')} />
+                        <Navigation
+                            ulStyle="flex max-w-[523px] tabletLg:max-w-[750px] w-full justify-between"
+                            links={navigation}/>
+                    </div>
+
+                    <div
+                        className="tabletLg:col-span-1 col-span-2 tabletLg:order-3 order-1 flex items-center tabletLg:justify-end">
+                        <ButtonIcon onClick={() => alert('Открыл поиск...')}>
+                            <img src={SearchIcon} alt=""/>
+                        </ButtonIcon>
+                    </div>
+
+                    <div
+                        className="tabletLg:col-span-2 col-span-2 tabletLg:order-4 order-3 flex items-center tabletLg:w-[150px] justify-end">
+                        <ButtonBase title='Войти' onClick={() => alert('Вошёл')}/>
+                    </div>
                 </div>
-            </div>
-        </header>
+            </header>
+        </>
     );
 };

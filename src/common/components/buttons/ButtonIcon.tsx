@@ -17,7 +17,7 @@ export const ButtonIcon = ({children, onClick, disable = false, style = 'primary
 
     const classNamePrepare = style === 'primary'
         ? 'bg-white'
-        : 'bg-black';
+        : 'bg-transparent';
 
     return (
         <button

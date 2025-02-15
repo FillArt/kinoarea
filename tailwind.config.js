@@ -64,7 +64,9 @@ export default {
                 hoverDefaultButton: '0px 0px 15px 0px #4871FFCC'
             },
             screens: {
-                'tabletLg': '996px'
+                'tabletLg': '996px',
+                'tablet': '768px',
+                'phone': '470px'
             }
         },
         plugins: [],

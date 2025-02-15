@@ -4,25 +4,25 @@ import {SocialButtons} from "@/widgets/Header/ui/Logo/SocialButtons/SocialButton
 
 
 type LogoProps = {
-    socialLinks: SocialLinksType[];
+    socialLinks?: SocialLinksType[];
 }
 
 export const Logo = ({socialLinks}: LogoProps) => {
     return (
         <div>
             <a href="/">
-                <div className="flex items-center gap-[6px] mb-2">
+                <div className="flex items-center gap-[6px] mb-2 tabletLg:justify-normal justify-center">
 
                     <img src={LogoIcon} alt="Kinoarea Logo"/>
 
-                    <strong className="text-descriptionFontSize text-white">
+                    <strong className="tabletLg:text-descriptionFontSize text-[19px] text-white">
                         <span style={{color: '#3657CB'}}>Kino</span>
                         area
                     </strong>
                 </div>
             </a>
 
-            <SocialButtons icons={socialLinks}/>
+            { socialLinks && <SocialButtons icons={socialLinks}/>}
         </div>
 
     );
