@@ -3,13 +3,13 @@ import {NowInCinemaAPI} from "@/pages/HomePage/sections/NowInCinema/api/NowInCin
 import {Filter} from "@/pages/HomePage/sections/NowInCinema/ui/NowInCinema.tsx";
 
 
-type ChinemaListProps = {
+type CinemaListProps = {
     movies: NowInCinemaAPI[],
     filter: Filter,
 }
 
 
-export const ChinemaList = ({movies, filter}: ChinemaListProps) => {
+export const CinemaList = ({movies, filter}: CinemaListProps) => {
 
     let filteredMovies: NowInCinemaAPI[] = movies;
 

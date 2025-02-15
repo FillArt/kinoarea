@@ -1,4 +1,4 @@
-export type NowInCinemaAPI = {
+export type NowInCinemaType = {
     adult: false
     backdrop_path: string
     genre_ids: number[]
