@@ -5,7 +5,6 @@ export type NavigationLinksType = {
 
 export const navigationLinks: NavigationLinksType[] = [
     {title: 'Афиша', link: '/poster'},
-    {title: 'Медиа', link : '/media'},
     {title: 'Фильмы', link: '/movies'},
     {title: 'Актёры', link : '/actors'},
     {title: 'Новости', link: '/news'},

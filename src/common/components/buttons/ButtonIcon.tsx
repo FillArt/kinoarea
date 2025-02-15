@@ -22,7 +22,7 @@ export const ButtonIcon = ({children, onClick, disable = false, style = 'primary
     return (
         <button
             disabled={disable}
-            className={`${classNamePrepare} py-13 px-13 w-14 flex items-center justify-center box-border transition-opacity duration-300 rounded-[10px]`}
+            className={`${classNamePrepare} py-13 px-13 w-12 h-12 flex items-center justify-center box-border transition-opacity duration-300 rounded-[10px]`}
             onClick={onClickHandler}>
             {children}
         </button>

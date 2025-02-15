@@ -6,11 +6,13 @@ type NavigationProps = {
 
 export const Navigation = ({links}: NavigationProps) => {
     return (
-        <ul className="flex max-w-[750px] w-full justify-between">
+        <ul className="flex max-w-[523px] tabletLg:max-w-[750px] w-full justify-between">
             {links.map((link, i) => {
                 const {title, link: url} = link;
                 return (
-                    <li key={i} className='text-white text-smallFontSize'>
+                    <li key={i} className='text-white
+                                        tabletLg:text-smallFontSize
+                                        text-smallFontSizeTabletLg'>
                         <a href={url}>{title}</a>
                     </li>
                 );

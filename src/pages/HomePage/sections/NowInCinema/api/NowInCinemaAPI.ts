@@ -7,6 +7,6 @@ export const NowInCinemaAPI = {
         return instance.get<{ genres: GenreAPI[] }>("/genre/movie/list")
     },
     getNowPlaying() {
-      return instance.get<{ results: NowInCinemaType[] }>("/movie/popular")
+      return instance.get<{ results: NowInCinemaType[] }>("/movie/now_playing")
     }
 }
