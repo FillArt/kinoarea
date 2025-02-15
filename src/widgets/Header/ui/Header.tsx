@@ -3,7 +3,10 @@ import {Navigation} from "@/widgets/Header/ui/Navigation/Navigation.tsx";
 
 import {NavigationLinksType} from "@/widgets/Header/model/navigationLinks.ts";
 import {SocialLinksType} from "@/widgets/Header/model/social.ts";
+
 import SearchIcon from "@/common/components/buttons/assets/search.svg";
+import BurgerIcon from "@/common/components/buttons/assets/burger.svg";
+
 import {ButtonIcon} from "@/common/components/buttons/ButtonIcon.tsx";
 import {ButtonBase} from "@/common/components/buttons/ButtonBase.tsx";
 import Popup from "@/widgets/Header/ui/Popup/Popup.tsx";
@@ -26,10 +29,10 @@ export const Header = ({navigation, socialLinks}: HeaderProps) => {
                     links={navigation}/>
             </Popup>
 
-            <header className="font-main py-5 bg-backgroundColor">
+            <header className="font-main phone:py-5 py-[11px] bg-backgroundColor">
                 <div className="container max-w-container order-1 mx-auto grid grid-cols-12">
                     <div
-                        className="tabletLg:col-span-2 tabletLg:justify-normal flex justify-center col-span-8 tabletLg:order-1 order-2">
+                        className="tabletLg:col-span-2 tabletLg:justify-normal flex justify-center phone:col-span-10 col-span-8 tabletLg:order-1 order-2">
                         <Logo socialLinks={socialLinks}/>
                     </div>
                     <div
@@ -41,14 +44,18 @@ export const Header = ({navigation, socialLinks}: HeaderProps) => {
                     </div>
 
                     <div
-                        className="tabletLg:col-span-1 col-span-2 tabletLg:order-3 order-1 flex items-center tabletLg:justify-end">
+                        className="phone:col-span-1 col-span-2 tabletLg:order-3 order-1 flex gap-[5px] items-center tabletLg:justify-end">
+                        <ButtonIcon customStyle="phone:hidden" onClick={() => setShowPopup(true) }>
+                            <img src={BurgerIcon} alt=""/>
+                        </ButtonIcon>
+
                         <ButtonIcon onClick={() => alert('Открыл поиск...')}>
                             <img src={SearchIcon} alt=""/>
                         </ButtonIcon>
                     </div>
 
                     <div
-                        className="tabletLg:col-span-2 col-span-2 tabletLg:order-4 order-3 flex items-center tabletLg:w-[150px] justify-end">
+                        className="tabletLg:col-span-2 phone:col-span-1 col-span-2 tabletLg:order-4 order-3 flex items-center tabletLg:w-[150px] justify-end">
                         <ButtonBase title='Войти' onClick={() => alert('Вошёл')}/>
                     </div>
                 </div>
