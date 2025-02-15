@@ -1,5 +1,5 @@
 import {HomePageLayout} from "@/common/components/layouts";
-import {NowInCinema} from "@/widgets/NowInCinema";
+import {NowInCinema} from "@/pages/HomePage/sections/NowInCinema";
 
 export const HomePage = () => {
     return (

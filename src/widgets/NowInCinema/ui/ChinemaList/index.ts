@@ -1,1 +1,0 @@
-export {ChinemaList} from "@/widgets/NowInCinema/ui/ChinemaList/ChinemaList.tsx";

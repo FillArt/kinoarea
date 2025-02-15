@@ -1,0 +1,1 @@
+export {ChinemaList} from "@/pages/HomePage/sections/NowInCinema/ui/CinemaList/ChinemaList.tsx";
