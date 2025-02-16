@@ -5,6 +5,7 @@ import {CinemaList} from "@/pages/HomePage/sections/NowInCinema/ui/CinemaList";
 import {GenreAPI, NowInCinemaType} from "@/pages/HomePage/sections/NowInCinema/api/NowInCinemaAPI.types.ts";
 import {ButtonBase} from "@/common/components/buttons/ButtonBase.tsx";
 import {NowInCinemaAPI} from "@/pages/HomePage/sections/NowInCinema/api/NowInCinemaAPI.ts";
+import {CardMovieSkeleton} from "@/common/components/cards";
 
 export type Filter = "all" | "action" | "adventures" | "comedy" | "fantasy" | "thrillers" | "drama";
 
@@ -15,6 +16,7 @@ export const NowInCinema = () => {
     const [genres, setGenres] = useState<GenreAPI[]>([]);
 
     const [isShowButton, setIsShowButton] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(true);
 
     const onClickHandler = (filter: Filter) => {
         setFilter(filter);
@@ -48,8 +50,10 @@ export const NowInCinema = () => {
 
                 setAllMovies(formatMovies);
                 setMovies(formatMovies.slice(0, 8));
+                setLoading(false);
             });
-    }, [genres]);
+
+    }, [genreMap, genres]);
 
 
     return (
@@ -72,7 +76,18 @@ export const NowInCinema = () => {
                     </div>
                 </SectionTitle>
 
-                <CinemaList movies={movies} filter={filter}/>
+                {loading ? (
+                    <div className="mt-14 grid grid-cols-12 gap-[23px]">
+                        {[...Array(8)].map((_, i) => (
+                            <div key={i} className="col-span-3">
+                                <CardMovieSkeleton/>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <CinemaList movies={movies} filter={filter}/>
+                )}
+
 
                 {isShowButton && (
                     <div className="flex justify-center mt-14">

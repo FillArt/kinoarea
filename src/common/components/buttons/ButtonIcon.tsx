@@ -23,7 +23,7 @@ export const ButtonIcon = ({children, onClick, customStyle, disable = false, sty
     return (
         <button
             disabled={disable}
-            className={`${classNamePrepare} ${customStyle} phone:p-13  p-2 tabletLg:w-[55px] tabletLg:h-[50px]  phone:w-[40px] phone:h-[40px] w-[27px] h-[27px] flex items-center justify-center box-border transition-opacity duration-300 phone:rounded-[10px] rounded-[5px]`}
+            className={`${classNamePrepare} ${customStyle}  phone:p-13  p-2 tabletLg:w-[55px] tabletLg:h-[50px]  phone:w-[40px] phone:h-[40px] w-[27px] h-[27px] flex items-center justify-center box-border transition-opacity duration-300 phone:rounded-[10px] rounded-[5px]`}
             onClick={onClickHandler}>
             {children}
         </button>

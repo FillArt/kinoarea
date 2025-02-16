@@ -36,7 +36,7 @@ export const Header = ({navigation, socialLinks}: HeaderProps) => {
                         <Logo socialLinks={socialLinks}/>
                     </div>
                     <div
-                        className="tabletLg:col-span-7 none hidden phone:flex tabletLg:order-2 order-4 col-span-12 tabletLg:mt-0 mt-7 items-center justify-center">
+                        className="tabletLg:col-span-8 none hidden phone:flex tabletLg:order-2 order-4 col-span-12 tabletLg:mt-0 mt-7 items-center justify-center">
 
                         <Navigation
                             ulStyle="flex max-w-[523px] tabletLg:max-w-[750px] w-full justify-between"
@@ -44,7 +44,7 @@ export const Header = ({navigation, socialLinks}: HeaderProps) => {
                     </div>
 
                     <div
-                        className="phone:col-span-1 col-span-2 tabletLg:order-3 order-1 flex gap-[5px] items-center tabletLg:justify-end">
+                        className="phone:col-span-1 tabletLg:hidden col-span-2 tabletLg:order-3 order-1 flex gap-[5px] items-center tabletLg:justify-end">
                         <ButtonIcon customStyle="phone:hidden" onClick={() => setShowPopup(true) }>
                             <img src={BurgerIcon} alt=""/>
                         </ButtonIcon>
@@ -55,7 +55,11 @@ export const Header = ({navigation, socialLinks}: HeaderProps) => {
                     </div>
 
                     <div
-                        className="tabletLg:col-span-2 phone:col-span-1 col-span-2 tabletLg:order-4 order-3 flex items-center tabletLg:w-[150px] justify-end">
+                        className="tabletLg:col-span-2 tabletLg:gap-[12px] phone:col-span-1 col-span-2 tabletLg:order-4 order-3 flex items-center justify-end">
+                        <ButtonIcon customStyle="hidden tabletLg:flex" onClick={() => alert('Открыл поиск...')}>
+                            <img src={SearchIcon} className="" width="17px" height="17px" alt=""/>
+                        </ButtonIcon>
+
                         <ButtonBase title='Войти' onClick={() => alert('Вошёл')}/>
                     </div>
                 </div>

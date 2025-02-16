@@ -1,10 +1,10 @@
 import {Empty} from "@/common/components/cards/CardMovie/Empty/Empty.tsx";
 import {Rating} from "@/common/components/cards/CardMovie/Rating/Rating.tsx";
 import {ButtonBase} from "@/common/components/buttons/ButtonBase.tsx";
-import {NowInCinemaAPI} from "@/pages/HomePage/sections/NowInCinema/api/NowInCinemaAPI.types.ts";
+import {NowInCinemaType} from "@/pages/HomePage/sections/NowInCinema/api/NowInCinemaAPI.types.ts";
 
 type CardMovie = {
-    movie: NowInCinemaAPI
+    movie: NowInCinemaType
 }
 
 export const CardMovie = (item: CardMovie) => {
