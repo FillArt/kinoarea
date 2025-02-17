@@ -1,39 +1,41 @@
-import { Header } from "./Header";
-import { Meta, StoryFn } from "@storybook/react";
-
-import { NavigationLinksType } from "@/widgets/Header/model/navigationLinks";
-import { SocialLinksType } from "@/widgets/Header/model/social";
+import {Header, HeaderProps} from "./Header";
+import {Meta, StoryFn} from "@storybook/react";
 
 import FacebookIcon from '../ui/Logo/SocialButtons/assets/fb.svg';
 import InstagramIcon from '../ui/Logo/SocialButtons/assets/instagram.svg';
 import LinkedinIcon from '../ui/Logo/SocialButtons/assets/linkedin.svg';
 import TwitterIcon from '../ui/Logo/SocialButtons/assets/twitter.svg';
+import {action} from "@storybook/addon-actions";
 
 export default {
     title: "Widgets/Header",
     component: Header,
+    tags: ['autodocs'],
+    parameters: {
+        layout: 'fullscreen',
+    },
     argTypes: {
+        authFunc: { description: "Функция аутентификации" },
+        searchFunc: { description: "Функция поиска" },
         navigation: {
-            control: {
-                type: "object",
-            },
+            control: { type: "object" },
             description: "Массив объектов с ссылками для навигации.",
         },
         socialLinks: {
-            control: {
-                type: "object",
-            },
+            control: { type: "object" },
             description: "Массив объектов с социальными сетями.",
         },
     },
 } as Meta;
 
-const Template: StoryFn<{ navigation: NavigationLinksType[], socialLinks: SocialLinksType[] }> = (args) => {
+const Template: StoryFn<HeaderProps> = (args) => {
     return <Header {...args} />;
 };
 
 export const Default = Template.bind({});
 Default.args = {
+    authFunc: action("onLogin"),
+    searchFunc: action("onSearch"),
     navigation: [
         { title: 'Афиша', link: '/poster' },
         { title: 'Медиа', link: '/media' },

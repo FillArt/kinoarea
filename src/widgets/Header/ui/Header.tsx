@@ -12,12 +12,14 @@ import {ButtonBase} from "@/common/components/buttons/ButtonBase.tsx";
 import Popup from "@/widgets/Header/ui/Popup/Popup.tsx";
 import {useState} from "react";
 
-type HeaderProps = {
+export type HeaderProps = {
     navigation: NavigationLinksType[];
     socialLinks: SocialLinksType[];
+    authFunc: () => void;
+    searchFunc: () => void;
 }
 
-export const Header = ({navigation, socialLinks}: HeaderProps) => {
+export const Header = ({navigation, socialLinks, authFunc, searchFunc}: HeaderProps) => {
 
     const [isShowPopup, setShowPopup] = useState(false);
 
@@ -56,11 +58,11 @@ export const Header = ({navigation, socialLinks}: HeaderProps) => {
 
                     <div
                         className="tabletLg:col-span-2 tabletLg:gap-[12px] phone:col-span-1 col-span-2 tabletLg:order-4 order-3 flex items-center justify-end">
-                        <ButtonIcon customStyle="hidden tabletLg:flex" onClick={() => alert('Открыл поиск...')}>
+                        <ButtonIcon customStyle="hidden tabletLg:flex" onClick={searchFunc}>
                             <img src={SearchIcon} className="" width="17px" height="17px" alt=""/>
                         </ButtonIcon>
 
-                        <ButtonBase title='Войти' onClick={() => alert('Вошёл')}/>
+                        <ButtonBase title='Войти' onClick={authFunc}/>
                     </div>
                 </div>
             </header>
