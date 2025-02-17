@@ -1,9 +1,16 @@
 import {Logo} from "@/widgets/Header/ui/Logo/Logo.tsx";
 import {Navigation} from "@/widgets/Header/ui/Navigation/Navigation.tsx";
-import {Buttons} from "@/widgets/Header/ui/Buttons/Buttons.tsx";
 
 import {NavigationLinksType} from "@/widgets/Header/model/navigationLinks.ts";
 import {SocialLinksType} from "@/widgets/Header/model/social.ts";
+
+import SearchIcon from "@/common/components/buttons/assets/search.svg";
+import BurgerIcon from "@/common/components/buttons/assets/burger.svg";
+
+import {ButtonIcon} from "@/common/components/buttons/ButtonIcon.tsx";
+import {ButtonBase} from "@/common/components/buttons/ButtonBase.tsx";
+import Popup from "@/widgets/Header/ui/Popup/Popup.tsx";
+import {useState} from "react";
 
 type HeaderProps = {
     navigation: NavigationLinksType[];
@@ -11,19 +18,52 @@ type HeaderProps = {
 }
 
 export const Header = ({navigation, socialLinks}: HeaderProps) => {
+
+    const [isShowPopup, setShowPopup] = useState(false);
+
     return (
-        <header className="font-main py-5 bg-backgroundColor">
-            <div className="container max-w-container mx-auto grid grid-cols-12">
-                <div className="col-span-2">
-                    <Logo socialLinks={socialLinks} />
+        <>
+            <Popup isShow={isShowPopup} setShow={setShowPopup}>
+                <Navigation
+                    ulStyle="flex flex-col items-center mt-5 gap-[20px]"
+                    links={navigation}/>
+            </Popup>
+
+            <header className="font-main phone:py-5 py-[11px] bg-backgroundColor">
+                <div className="container max-w-container order-1 mx-auto grid grid-cols-12">
+                    <div
+                        className="tabletLg:col-span-2 tabletLg:justify-normal flex justify-center phone:col-span-10 col-span-8 tabletLg:order-1 order-2">
+                        <Logo socialLinks={socialLinks}/>
+                    </div>
+                    <div
+                        className="tabletLg:col-span-8 none hidden phone:flex tabletLg:order-2 order-4 col-span-12 tabletLg:mt-0 mt-7 items-center justify-center">
+
+                        <Navigation
+                            ulStyle="flex max-w-[523px] tabletLg:max-w-[750px] w-full justify-between"
+                            links={navigation}/>
+                    </div>
+
+                    <div
+                        className="phone:col-span-1 tabletLg:hidden col-span-2 tabletLg:order-3 order-1 flex gap-[5px] items-center tabletLg:justify-end">
+                        <ButtonIcon customStyle="phone:hidden" onClick={() => setShowPopup(true) }>
+                            <img src={BurgerIcon} alt=""/>
+                        </ButtonIcon>
+
+                        <ButtonIcon onClick={() => alert('Открыл поиск...')}>
+                            <img src={SearchIcon} alt=""/>
+                        </ButtonIcon>
+                    </div>
+
+                    <div
+                        className="tabletLg:col-span-2 tabletLg:gap-[12px] phone:col-span-1 col-span-2 tabletLg:order-4 order-3 flex items-center justify-end">
+                        <ButtonIcon customStyle="hidden tabletLg:flex" onClick={() => alert('Открыл поиск...')}>
+                            <img src={SearchIcon} className="" width="17px" height="17px" alt=""/>
+                        </ButtonIcon>
+
+                        <ButtonBase title='Войти' onClick={() => alert('Вошёл')}/>
+                    </div>
                 </div>
-                <div className="col-span-8 flex items-center justify-center">
-                    <Navigation links={navigation}/>
-                </div>
-                <div className="col-span-2 flex items-center justify-end">
-                    <Buttons/>
-                </div>
-            </div>
-        </header>
+            </header>
+        </>
     );
 };

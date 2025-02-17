@@ -1,10 +1,10 @@
 import {Empty} from "@/common/components/cards/CardMovie/Empty/Empty.tsx";
 import {Rating} from "@/common/components/cards/CardMovie/Rating/Rating.tsx";
 import {ButtonBase} from "@/common/components/buttons/ButtonBase.tsx";
-import {NowInCinemaAPI} from "@/pages/HomePage/sections/NowInCinema/api/NowInCinemaAPI.types.ts";
+import {NowInCinemaType} from "@/pages/HomePage/sections/NowInCinema/api/NowInCinemaAPI.types.ts";
 
 type CardMovie = {
-    movie: NowInCinemaAPI
+    movie: NowInCinemaType
 }
 
 export const CardMovie = (item: CardMovie) => {
@@ -23,8 +23,7 @@ export const CardMovie = (item: CardMovie) => {
         <div className="group relative">
             <div
                 style={imgStyle}
-                className="bg-emptyColor h-[470px] relative flex justify-center items-center rounded-[10px]">
-
+                className="bg-emptyColor tabletLg:h-[470px] h-[286px] relative flex justify-center items-center rounded-[10px]">
 
                 <div
                     className="absolute w-full h-full duration-300 bg-formElementColor bg-opacity-65 hidden group-hover:flex items-center justify-center rounded-[10px]">
@@ -32,16 +31,15 @@ export const CardMovie = (item: CardMovie) => {
                                 style="card"/>
                 </div>
 
-
                 <Rating rating={rounded(vote_average, 1)}/>
                 {!poster_path && <Empty/>}
             </div>
 
-            <h3 className="text-smallFontSize mt-2 mb-1">{title}</h3>
+            <h3 className="tabletLg:text-smallFontSize text-[15px] mt-2 mb-1">{title}</h3>
 
             {genres && genres.map((genre: string, index: number) => (
                 <span key={index}>
-                    <a className="inline-block text-decorTextColor" href="/">{genre}</a>
+                    <a className="inline-block text-decorTextColor tabletLg:text-[15px] text-[12px]" href="/">{genre}</a>
                     {index < genres.length - 1 && <span>,  </span>}
                 </span>
             ))}

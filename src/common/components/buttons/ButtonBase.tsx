@@ -21,7 +21,7 @@ export const ButtonBase = ({title, onClick, disable = false, style = 'primary'}:
     return (
         <button
             disabled={disable}
-            className={`${classNamePrepare} py-13 px-45 transition-opacity font-bold duration-300 rounded-[10px]`}
+            className={`${classNamePrepare}  tabletLg:py-[13px] tabletLg:px-[47px] phone:py-[10px] phone:px-[30px] px-[27px] py-[9px] transition-opacity font-bold tabletLg:text-[16px] text-smallFontSizeTabletLg duration-300 rounded-[10px]`}
             onClick={onClickHandler}>
             {title}
         </button>

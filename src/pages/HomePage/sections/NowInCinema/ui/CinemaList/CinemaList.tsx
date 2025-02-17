@@ -1,21 +1,21 @@
 import {CardMovie} from "@/common/components/cards";
-import {NowInCinemaAPI} from "@/pages/HomePage/sections/NowInCinema/api/NowInCinemaAPI.types.ts";
+import {NowInCinemaType} from "@/pages/HomePage/sections/NowInCinema/api/NowInCinemaAPI.types.ts";
 import {Filter} from "@/pages/HomePage/sections/NowInCinema/ui/NowInCinema.tsx";
 
 
-type ChinemaListProps = {
-    movies: NowInCinemaAPI[],
+type CinemaListProps = {
+    movies: NowInCinemaType[],
     filter: Filter,
 }
 
 
-export const ChinemaList = ({movies, filter}: ChinemaListProps) => {
+export const CinemaList = ({movies, filter}: CinemaListProps) => {
 
-    let filteredMovies: NowInCinemaAPI[] = movies;
+    let filteredMovies: NowInCinemaType[] = movies;
 
     const filterByCategory = (category: string) => {
         return movies.filter((movie) =>
-            movie.genres?.some((genre) => genre.toLowerCase().includes(category.toLowerCase())))
+            movie.genres?.some((genre: string) => genre.toLowerCase().includes(category.toLowerCase())))
     }
 
     switch (filter) {
@@ -41,9 +41,9 @@ export const ChinemaList = ({movies, filter}: ChinemaListProps) => {
 
 
     return (
-        <div className="mt-14 grid grid-cols-12 gap-[23px]">
+        <div className="tabletLg:mt-14 mt-[28px] grid grid-cols-12 gap-[23px]">
 
-            {filteredMovies.map((movie: NowInCinemaAPI) => (
+            {filteredMovies.map((movie: NowInCinemaType) => (
                 <div className="col-span-3" key={movie.id}>
                     <CardMovie movie={movie} />
                 </div>

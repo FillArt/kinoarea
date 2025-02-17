@@ -9,6 +9,10 @@ export default {
             fontFamily: {
                 main: ['Qanelas', 'sans-serif']
             },
+            container: {
+                center: true,
+                padding: "10px",
+            },
             colors: {
                 baseTextColor: "#FFFFFF",
                 decorTextColor: "#F2F60F",
@@ -40,7 +44,7 @@ export default {
                 rating1: "#FF0000",
             },
             maxWidth: {
-                container: '1431px',
+                container: '1451px',
             },
 
             fontSize: {
@@ -49,6 +53,8 @@ export default {
                 titleFontSize: '65px',
                 subtitleFontSize: '45px',
                 descriptionFontSize: '25px',
+
+                smallFontSizeTabletLg: '13px',
             },
             spacing: {
                 13: '13px',
@@ -56,6 +62,11 @@ export default {
             },
             boxShadow: {
                 hoverDefaultButton: '0px 0px 15px 0px #4871FFCC'
+            },
+            screens: {
+                'tabletLg': '996px',
+                'tablet': '768px',
+                'phone': '470px'
             }
         },
         plugins: [],
