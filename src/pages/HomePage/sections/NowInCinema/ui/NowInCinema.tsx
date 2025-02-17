@@ -53,7 +53,7 @@ export const NowInCinema = () => {
                 setLoading(false);
             });
 
-    }, [genreMap, genres]);
+    }, [genres]);
 
 
     return (
@@ -61,14 +61,14 @@ export const NowInCinema = () => {
             <div className="container max-w-container mx-auto">
 
                 <SectionTitle title={"Сейчас в кино"}>
-                    <div className="max-w-[765px] w-full flex justify-between">
+                    <div className="tabletLg:max-w-[765px] max-w-[615px] w-full flex justify-between">
                         {categoriesList.map((item) => (
                             <button
                                 key={item.key}
                                 onClick={() => onClickHandler(item.key as Filter)}
                                 className={`${
                                     filter === item.key ? "opacity-100" : "opacity-50"
-                                } text-smallFontSize`}
+                                } tabletLg:text-smallFontSize text-[15px]`}
                             >
                                 {item.title}
                             </button>
