@@ -51,7 +51,7 @@ export const Header = ({navigation, socialLinks, authFunc, searchFunc}: HeaderPr
                             <img src={BurgerIcon} alt=""/>
                         </ButtonIcon>
 
-                        <ButtonIcon onClick={() => alert('Открыл поиск...')}>
+                        <ButtonIcon onClick={searchFunc}>
                             <img src={SearchIcon} alt=""/>
                         </ButtonIcon>
                     </div>

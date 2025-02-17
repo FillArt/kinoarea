@@ -13,6 +13,9 @@ export default {
     tags: ['autodocs'],
     parameters: {
         layout: 'fullscreen',
+        docs: {
+            disable: true,
+        }
     },
     argTypes: {
         authFunc: { description: "Функция аутентификации" },
