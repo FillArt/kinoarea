@@ -6,6 +6,8 @@ import {GenreAPI, NowInCinemaType} from "@/pages/HomePage/sections/NowInCinema/a
 import {ButtonBase} from "@/common/components/buttons/ButtonBase.tsx";
 import {NowInCinemaAPI} from "@/pages/HomePage/sections/NowInCinema/api/NowInCinemaAPI.ts";
 import {CardMovieSkeleton} from "@/common/components/cards";
+import Icon from "@/common/components/buttons/assets/burgerWhite.svg";
+import {ButtonIcon} from "@/common/components/buttons/ButtonIcon.tsx";
 
 export type Filter = "all" | "action" | "adventures" | "comedy" | "fantasy" | "thrillers" | "drama";
 
@@ -45,7 +47,7 @@ export const NowInCinema = () => {
             .then((r) => {
                 const formatMovies = r.data.results.map((movie) => ({
                     ...movie,
-                    genres: movie.genre_ids.map((id: number) => genreMap[id]),
+                    genres: movie.genre_ids?.map((id: number) => genreMap[id]),
                 }));
 
                 setAllMovies(formatMovies);
@@ -61,7 +63,7 @@ export const NowInCinema = () => {
             <div className="container max-w-container mx-auto">
 
                 <SectionTitle title={"Сейчас в кино"}>
-                    <div className="tabletLg:max-w-[765px] max-w-[615px] w-full flex justify-between">
+                    <div className="tabletLg:max-w-[765px] max-w-[615px] w-full phone:flex hidden justify-between">
                         {categoriesList.map((item) => (
                             <button
                                 key={item.key}
@@ -74,6 +76,13 @@ export const NowInCinema = () => {
                             </button>
                         ))}
                     </div>
+
+                    <div className="phone:hidden block mt-[8px]">
+                        <ButtonIcon onClick={() => alert('Заглушка')} style="secondary">
+                            <img src={Icon} width="12px" height="12px" alt="Close Popup"/>
+                        </ButtonIcon>
+                    </div>
+
                 </SectionTitle>
 
                 {loading ? (

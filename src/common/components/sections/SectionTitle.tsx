@@ -7,8 +7,8 @@ type SectionTitleProps = {
 
 export const SectionTitle = ({title, children}: SectionTitleProps) => {
     return (
-        <div className="flex justify-between font-bold tabletLg:items-center items-baseline flex-col tabletLg:flex-row">
-            <h2 className='tabletLg:text-titleFontSize text-[40px]'>{title}</h2>
+        <div className="flex phone:justify-between justify-center phone:gap-0 gap-[10px] font-bold tabletLg:items-center phone:items-baseline items-center phone:flex-col tabletLg:flex-row flex-row">
+            <h2 className='tabletLg:text-titleFontSize phone:text-[40px] text-[32px]'>{title}</h2>
             <div className="tabletLg:block hidden" style={{width: '51px', height: '2px', backgroundColor: 'white'}}></div>
             {children}
         </div>

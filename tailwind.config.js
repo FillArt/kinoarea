@@ -66,7 +66,7 @@ export default {
             screens: {
                 'tabletLg': '996px',
                 'tablet': '768px',
-                'phone': '470px'
+                'phone': '566px'
             }
         },
         plugins: [],
