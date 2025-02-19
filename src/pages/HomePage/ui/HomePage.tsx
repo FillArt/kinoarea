@@ -22,31 +22,46 @@ export const HomePage = () => {
     },[allMovies])
 
     useEffect(() => {
-        NowInCinemaAPI.getGenres().then((r) => setGenres(r.data.genres));
+        const fetchGeneres = async () => {
+            try {
+                const response = await NowInCinemaAPI.getGenres()
+                setGenres(response.data.genres)
+            } catch (e) {
+                console.error(`Ошибка загрузки жанров: ${e}`)
+            }
+        }
+
+        fetchGeneres()
     }, []);
 
     useEffect(() => {
         if (genres.length === 0) return;
 
-        NowInCinemaAPI.getNowPlaying()
-            .then((r) => {
-                const formatMovies = r.data.results.map((movie) => ({
+
+        const fetchMoviesNow = async () => {
+            try {
+                const response = await NowInCinemaAPI.getNowPlaying()
+                const formatMovies = response.data.results.map((movie) => ({
                     ...movie,
                     genres: movie.genre_ids?.map((id: number) => genreMap[id]),
-                }));
-
+                }))
                 setAllMovies(formatMovies);
                 setMovies(formatMovies.slice(0, 8));
+            } catch (e) {
+                console.error(`Ошибка загрузки фильмов: ${e}`)
+            } finally {
                 setLoading(false);
-            });
+            }
+        }
 
+        fetchMoviesNow()
     }, [genres]);
 
 
     return (
         <HomePageLayout>
             <NowInCinema movies={movies} loading={loading} allMoviesHandler={allMoviesHandler} />
-            <NewTrailers/>
+            <NewTrailers movies={movies} />
         </HomePageLayout>
     );
 };
