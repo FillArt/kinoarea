@@ -1,16 +1,15 @@
+import {trailerType} from "@/pages/HomePage/sections/NewTrailers/ui/NewTrailers.tsx";
 
 type MainPreviewProps = {
-    keyMain: string;
+    trailerMain: trailerType;
 }
 
-export const MainPreview = ({keyMain}: MainPreviewProps) => {
-
-    const poster = `https://img.youtube.com/vi/${keyMain}/maxresdefault.jpg`
+export const MainPreview = ({trailerMain}: MainPreviewProps) => {
 
     return (
         <article>
             <div>
-                <img className="w-full rounded-[10px]" src={poster} alt=""/>
+                <img className="w-full rounded-[10px]" src={trailerMain?.posterUrl} alt=""/>
             </div>
         </article>
     );

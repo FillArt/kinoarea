@@ -8,27 +8,75 @@ type NewTrailersProps = {
     movies: NowInCinemaType[];
 }
 
+export type trailerType = {
+    id: number,
+    posterUrl: string,
+    trailer: {
+        name: string,
+        url: string,
+    }
+}
+
 export const NewTrailers = ({movies}: NewTrailersProps) => {
 
-    const [mainPreviewKey, setMainPreviewKey] = useState('');
+    const [trailerMain, setTrailerMain] = useState<trailerType>()
+    const [trailers, setTrailers] = useState<trailerType[]>([])
+
+
+    const fetchMovieDetails = async (id: number | undefined) => {
+        try {
+            if (!id) return;
+
+            const movieInfo = await NewTrailersAPI.getTrailer(id)
+            const trailer = movieInfo.data.results[0]
+            const posterUrl = `https://img.youtube.com/vi/${trailer.key}/maxresdefault.jpg`
+
+            return {
+                id,
+                posterUrl,
+                trailer: {
+                    name: trailer.name,
+                    url: `https://www.youtube.com/watch?v=${trailer.key}`
+                }
+            }
+
+        } catch (e) {
+            console.error(`Ошибка загрузки данных о фильме: ${e}`);
+        }
+    }
+    const fetchAllTrailers = async () => {
+        try {
+            const movieDetailPromises = movies.map(movie => fetchMovieDetails(movie.id))
+            const results = await Promise.all(movieDetailPromises);
+
+            return results.filter((result): result is trailerType => result !== undefined);
+
+        } catch (e) {
+            console.error(`Ошибка загрузки всех трейлеров: ${e}`);
+            return [];
+        }
+    }
+
 
     useEffect(() => {
         if (!movies.length) return;
 
-        const id = movies[0]?.id;
-        if (id !== undefined) {
-            const fetchNewTrailer = async () => {
-                try {
-                    const response = await  NewTrailersAPI.getTrailer(id);
-                    setMainPreviewKey(response.data.results[0].key);
-                } catch (e) {
-                    console.error(`Ошибка загрузки постера: ${e}`);
-                }
-            }
+        const fetchTrailers = async () => {
+            try {
+                const trailers = await fetchAllTrailers();
+                setTrailerMain(trailers[0]);
+                setTrailers(trailers.slice(1));
 
-            fetchNewTrailer();
+            } catch (e) {
+                console.error(`Ошибка загрузки всех трейлеров: ${e}`);
+            }
         }
+
+        fetchTrailers()
+        console.log(trailerMain, 'Главный трейлер.')
+        console.log(trailers, 'Все остальные.')
     }, [movies]);
+
 
     return (
         <section className="bg-backgroundColor text-white pt-6 mb-10">
@@ -36,7 +84,7 @@ export const NewTrailers = ({movies}: NewTrailersProps) => {
                 <SectionTitle line={false} title="Новые трейлеры"> Hello </SectionTitle>
 
                 <div className="mt-14 grid">
-                    {mainPreviewKey ? <MainPreview keyMain={mainPreviewKey} /> : 'Gecnj' }
+                    <MainPreview trailerMain={trailerMain} />
 
                 </div>
 
