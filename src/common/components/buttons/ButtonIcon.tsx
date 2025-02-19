@@ -4,7 +4,7 @@ type ButtonPropsType = {
     children: ReactNode;
     onClick: () => void;
     disable?: boolean;
-    style?: 'primary' | 'secondary'; // Если есть другие стили, добавляем их
+    style?: 'primary' | 'secondary' | 'like'; // Если есть другие стили, добавляем их
     customStyle?: string;
 };
 
@@ -18,7 +18,8 @@ export const ButtonIcon = ({children, onClick, customStyle, disable = false, sty
 
     const classNamePrepare = style === 'primary'
         ? 'bg-white'
-        : 'bg-transparent';
+        : style === 'secondary' ? 'bg-transparent'
+            : style === 'like' ? 'bg-emptyColor' : 'bg-transparent';
 
     return (
         <button

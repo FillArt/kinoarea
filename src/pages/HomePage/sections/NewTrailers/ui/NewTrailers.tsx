@@ -77,15 +77,17 @@ export const NewTrailers = ({movies}: NewTrailersProps) => {
         console.log(trailers, 'Все остальные.')
     }, [movies]);
 
-
     return (
-        <section className="bg-backgroundColor text-white pt-6 mb-10">
+        <section className="bg-backgroundColor text-white pt-6 mb-10 font-main ">
             <div className="container max-w-container mx-auto">
                 <SectionTitle line={false} title="Новые трейлеры"> Hello </SectionTitle>
 
                 <div className="mt-14 grid">
                     <MainPreview trailerMain={trailerMain} />
 
+                    <div>
+
+                    </div>
                 </div>
 
             </div>
