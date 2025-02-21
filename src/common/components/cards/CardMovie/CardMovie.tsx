@@ -3,11 +3,11 @@ import {Rating} from "@/common/components/cards/CardMovie/Rating/Rating.tsx";
 import {ButtonBase} from "@/common/components/buttons/ButtonBase.tsx";
 import {NowInCinemaType} from "@/pages/HomePage/sections/NowInCinema/api/NowInCinemaAPI.types.ts";
 
-type CardMovie = {
+export type CardMovieProps = {
     movie: NowInCinemaType
 }
 
-export const CardMovie = (item: CardMovie) => {
+export const CardMovie = (item: CardMovieProps) => {
 
     const {title, vote_average, poster_path, genres} = item.movie;
 
@@ -20,7 +20,7 @@ export const CardMovie = (item: CardMovie) => {
     } : {}
 
     return (
-        <div className="group relative">
+        <div className="group relative max-w-[340px] ">
             <div
                 style={imgStyle}
                 className="bg-emptyColor tabletLg:h-[470px] h-[286px] relative flex justify-center items-center rounded-[10px]">

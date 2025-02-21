@@ -1,0 +1,1 @@
+export {NewTrailers} from "@/pages/HomePage/sections/NewTrailers/ui/NewTrailers.tsx";

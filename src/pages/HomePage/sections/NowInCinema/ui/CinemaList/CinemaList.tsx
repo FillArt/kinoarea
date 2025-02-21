@@ -44,7 +44,7 @@ export const CinemaList = ({movies, filter}: CinemaListProps) => {
         <div className="tabletLg:mt-14 mt-[28px] grid grid-cols-12 gap-[23px]">
 
             {filteredMovies.map((movie: NowInCinemaType) => (
-                <div className="col-span-3" key={movie.id}>
+                <div className="tablet:col-span-3 phone:col-span-4 col-span-6" key={movie.id}>
                     <CardMovie movie={movie} />
                 </div>
             ))}

@@ -12,7 +12,12 @@ export const HomePageLayout = ({children}: HomeLayoutProps) => {
 
     return (
         <>
-            <Header navigation={navigationLinks} socialLinks={SocialLinks} />
+            <Header
+                navigation={navigationLinks}
+                socialLinks={SocialLinks}
+                authFunc={() => alert('Открываю форму входа ...')}
+                searchFunc={() => alert('Открываю форму поиска ...')}
+            />
             {children}
             <div>Footer</div>
         </>
