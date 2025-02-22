@@ -3,6 +3,8 @@ import {NowInCinemaType} from "@/pages/HomePage/sections/NowInCinema/api/NowInCi
 import {useEffect, useState} from "react";
 import {NewTrailersAPI} from "@/pages/HomePage/sections/NewTrailers/api/NewTrailers.ts";
 import {MainPreview} from "@/pages/HomePage/sections/NewTrailers/ui/MainPreview/MainPreview.tsx";
+import {MovieSlider} from "@/pages/HomePage/sections/NewTrailers/ui/MovieSlider/MovieSlider.tsx";
+
 
 type NewTrailersProps = {
     movies: NowInCinemaType[];
@@ -73,6 +75,7 @@ export const NewTrailers = ({movies}: NewTrailersProps) => {
         }
 
         fetchTrailers()
+
         console.log(trailerMain, 'Главный трейлер.')
         console.log(trailers, 'Все остальные.')
     }, [movies]);
@@ -83,11 +86,24 @@ export const NewTrailers = ({movies}: NewTrailersProps) => {
                 <SectionTitle line={false} title="Новые трейлеры"> Hello </SectionTitle>
 
                 <div className="mt-14 grid">
-                    <MainPreview trailerMain={trailerMain} />
+                    <MainPreview trailerMain={trailerMain}/>
+                    <MovieSlider movies={trailers} />
+                    {/*<MovieSlider />*/}
 
-                    <div>
+                    {/*<div className="">*/}
+                    {/*    <Slider {...settings} className="max-w-[1500px] mx-auto w-full">*/}
+                    {/*        {trailers.map(trailer => {*/}
+                    {/*            return (*/}
+                    {/*                <div className="max-w-[345px]">*/}
+                    {/*                    <img src={trailer.posterUrl} alt=""/>*/}
+                    {/*                </div>*/}
+                    {/*            )*/}
+                    {/*        })}*/}
+                    {/*    </Slider>*/}
+                    {/*</div>*/}
 
-                    </div>
+
+
                 </div>
 
             </div>

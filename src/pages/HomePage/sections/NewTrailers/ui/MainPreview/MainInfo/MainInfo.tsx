@@ -17,9 +17,9 @@ export const MainInfo = ({title, likes = 0, dislikes = 0}: MainInfoProps) => {
 
     return (
         <div>
-            <div className="flex w-full items-center justify-between">
-                <div className="mt-[26px] text-[40px] max-w-2xl">
-                    <h2>{title}</h2>
+            <div className="flex w-full items-baseline justify-between">
+                <div className="mt-[26px] text-[40px] font-bold max-w-[750px]">
+                    <h3>{title}</h3>
                 </div>
 
                 <div className="flex items-center gap-[8px]">
