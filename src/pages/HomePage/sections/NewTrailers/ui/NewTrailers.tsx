@@ -23,6 +23,7 @@ export const NewTrailers = ({movies}: NewTrailersProps) => {
 
     const [trailerMain, setTrailerMain] = useState<trailerType>()
     const [trailers, setTrailers] = useState<trailerType[]>([])
+    const [isVideoMode, setIsVideoMode] = useState(false)
 
 
     const fetchMovieDetails = async (id: number | undefined) => {
@@ -38,7 +39,7 @@ export const NewTrailers = ({movies}: NewTrailersProps) => {
                 posterUrl,
                 trailer: {
                     name: trailer.name,
-                    url: `https://www.youtube.com/watch?v=${trailer.key}`
+                    url: trailer.key
                 }
             }
 
@@ -62,7 +63,9 @@ export const NewTrailers = ({movies}: NewTrailersProps) => {
 
     const chooseNextMovie = (idMovie: number) => {
         const findMovie = trailers.find((trailer) => trailer.id === idMovie)
+
         setTrailerMain(findMovie)
+        setIsVideoMode(false)
     }
 
     useEffect(() => {
@@ -89,7 +92,7 @@ export const NewTrailers = ({movies}: NewTrailersProps) => {
                 <SectionTitle line={false} title="Новые трейлеры"> Hello </SectionTitle>
 
                 <div className="mt-14 grid">
-                    <MainPreview trailerMain={trailerMain}/>
+                    <MainPreview videoMod={isVideoMode} setVideoMod={setIsVideoMode} trailerMain={trailerMain} />
                     <MovieSlider onClick={chooseNextMovie} movies={trailers} />
                 </div>
 

@@ -21,6 +21,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-loading-skeleton": "^3.5.0",
+    "react-youtube": "^10.1.0",
     "swiper": "^11.2.4"
   },
   "devDependencies": {
