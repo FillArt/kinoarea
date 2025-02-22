@@ -6,9 +6,10 @@ import IconPlay from "../assets/play.svg"
 
 type MovieSliderProps = {
     movies: trailerType[];
+    onClick: (id: number) => void;
 };
 
-export const MovieSlider = ({movies}: MovieSliderProps) => {
+export const MovieSlider = ({movies, onClick}: MovieSliderProps) => {
     return (
         <div className="relative overflow-hidden">
             <Swiper
@@ -19,14 +20,17 @@ export const MovieSlider = ({movies}: MovieSliderProps) => {
                 className="mt-4 w-full max-w-[1451px] mx-auto"
             >
                 {movies.map((movie, index) => (
-                    <SwiperSlide key={index} className="cursor-pointer">
+                    <SwiperSlide key={index} className="cursor-pointer" onClick={() => onClick(movie.id)}>
                         <div
-                            className="flex justify-center items-center h-[248px] bg-no-repeat bg-cover bg-center rounded-[10px] mb-[8px]"
+                            className="flex justify-center items-center h-[248px] bg-no-repeat bg-cover bg-center rounded-[10px] mb-[10px]"
                             style={{backgroundImage: `url(${movie.posterUrl})`}}
                         >
                             <img width="35px" height="31px" src={IconPlay} alt=""/>
                         </div>
-                        {movie.trailer.name}
+
+                        <div>
+                            <h5 className="text-[20px]">{movie.trailer.name}</h5>
+                        </div>
                     </SwiperSlide>
                 ))}
             </Swiper>

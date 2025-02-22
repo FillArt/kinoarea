@@ -60,6 +60,11 @@ export const NewTrailers = ({movies}: NewTrailersProps) => {
     }
 
 
+    const chooseNextMovie = (idMovie: number) => {
+        const findMovie = trailers.find((trailer) => trailer.id === idMovie)
+        setTrailerMain(findMovie)
+    }
+
     useEffect(() => {
         if (!movies.length) return;
 
@@ -76,8 +81,6 @@ export const NewTrailers = ({movies}: NewTrailersProps) => {
 
         fetchTrailers()
 
-        console.log(trailerMain, 'Главный трейлер.')
-        console.log(trailers, 'Все остальные.')
     }, [movies]);
 
     return (
@@ -87,23 +90,7 @@ export const NewTrailers = ({movies}: NewTrailersProps) => {
 
                 <div className="mt-14 grid">
                     <MainPreview trailerMain={trailerMain}/>
-                    <MovieSlider movies={trailers} />
-                    {/*<MovieSlider />*/}
-
-                    {/*<div className="">*/}
-                    {/*    <Slider {...settings} className="max-w-[1500px] mx-auto w-full">*/}
-                    {/*        {trailers.map(trailer => {*/}
-                    {/*            return (*/}
-                    {/*                <div className="max-w-[345px]">*/}
-                    {/*                    <img src={trailer.posterUrl} alt=""/>*/}
-                    {/*                </div>*/}
-                    {/*            )*/}
-                    {/*        })}*/}
-                    {/*    </Slider>*/}
-                    {/*</div>*/}
-
-
-
+                    <MovieSlider onClick={chooseNextMovie} movies={trailers} />
                 </div>
 
             </div>
