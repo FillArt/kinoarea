@@ -5,6 +5,7 @@ import {NewTrailersAPI} from "@/pages/HomePage/sections/NewTrailers/api/NewTrail
 import {MainPreview} from "@/pages/HomePage/sections/NewTrailers/ui/MainPreview/MainPreview.tsx";
 import {MovieSlider} from "@/pages/HomePage/sections/NewTrailers/ui/MovieSlider/MovieSlider.tsx";
 
+import ArrowIcon from '../assets/arrow.svg'
 
 type NewTrailersProps = {
     movies: NowInCinemaType[];
@@ -60,7 +61,6 @@ export const NewTrailers = ({movies}: NewTrailersProps) => {
         }
     }
 
-
     const chooseNextMovie = (idMovie: number) => {
         const findMovie = trailers.find((trailer) => trailer.id === idMovie)
 
@@ -89,11 +89,16 @@ export const NewTrailers = ({movies}: NewTrailersProps) => {
     return (
         <section className="bg-backgroundColor text-white pt-6 mb-10 font-main ">
             <div className="container max-w-container mx-auto">
-                <SectionTitle line={false} title="Новые трейлеры"> Hello </SectionTitle>
+                <SectionTitle line={false} title="Новые трейлеры">
+                    <a className="text-[22px] flex items-center" href="/">
+                        Все трейлеры
+                        <img src={ArrowIcon} alt="Стрелка" className="ml-[27px] w-6 h-6"/>
+                    </a>
+                </SectionTitle>
 
                 <div className="mt-14 grid">
-                    <MainPreview videoMod={isVideoMode} setVideoMod={setIsVideoMode} trailerMain={trailerMain} />
-                    <MovieSlider onClick={chooseNextMovie} movies={trailers} />
+                    <MainPreview videoMod={isVideoMode} setVideoMod={setIsVideoMode} trailerMain={trailerMain}/>
+                    <MovieSlider onClick={chooseNextMovie} movies={trailers}/>
                 </div>
 
             </div>
