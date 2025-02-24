@@ -16,7 +16,7 @@ export const LikesOrDislikes = ({digital, onClick, type}: LikesOrDislikesProps) 
     }
 
     const styleImg = type === "like" ? 'rotate-0' : 'rotate-180'
-    const marginStyle = type === "like" ? 'mb-[7px]' : 'mt-[7px]'
+    const marginStyle = type === "like" ? 'mb-[7px]' : 'tableLg:mt-[7px]'
 
     return (
         <div className="flex flex-col gap-[8px] items-center">
@@ -24,7 +24,7 @@ export const LikesOrDislikes = ({digital, onClick, type}: LikesOrDislikesProps) 
                 <img src={LikeIcon} className={`${styleImg} ${marginStyle}`} alt=""/>
             </ButtonIcon>
 
-            <span>{digital}</span>
+            <span className="tabletLg:text-[15px] text-[11px]">{digital}</span>
         </div>
     );
 };

@@ -89,14 +89,14 @@ export const NewTrailers = ({movies}: NewTrailersProps) => {
     return (
         <section className="bg-backgroundColor text-white pt-6 mb-10 font-main ">
             <div className="container max-w-container mx-auto">
-                <SectionTitle line={false} title="Новые трейлеры">
-                    <a className="text-[22px] flex items-center" href="/">
+                <SectionTitle line={false} title="Новые трейлеры" sectionVersion="two">
+                    <a className="tabletLg:text-[22px] text-[18px] flex items-center" href="/">
                         Все трейлеры
-                        <img src={ArrowIcon} alt="Стрелка" className="ml-[27px] w-6 h-6"/>
+                        <img src={ArrowIcon} alt="Стрелка" className="tabletLg:ml-[27px] ml-[14px] w-6 h-6"/>
                     </a>
                 </SectionTitle>
 
-                <div className="mt-14 grid">
+                <div className="phone:mt-[32px] mt-[18px] grid">
                     <MainPreview videoMod={isVideoMode} setVideoMod={setIsVideoMode} trailerMain={trailerMain}/>
                     <MovieSlider onClick={chooseNextMovie} movies={trailers}/>
                 </div>
