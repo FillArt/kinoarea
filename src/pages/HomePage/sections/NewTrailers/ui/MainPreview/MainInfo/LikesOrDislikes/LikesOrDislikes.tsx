@@ -24,7 +24,7 @@ export const LikesOrDislikes = ({digital, onClick, type}: LikesOrDislikesProps) 
                 <img src={LikeIcon} className={`${styleImg} ${marginStyle}`} alt=""/>
             </ButtonIcon>
 
-            <span className="tabletLg:text-[15px] text-[11px]">{digital}</span>
+            <span className="tabletLg:text-[15px] phone:text-[11px] text-[9px]">{digital}</span>
         </div>
     );
 };

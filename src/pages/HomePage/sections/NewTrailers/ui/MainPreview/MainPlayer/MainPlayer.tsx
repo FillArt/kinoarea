@@ -22,7 +22,7 @@ export const MainPlayer = ({stop, trailerUrl}: MainPlayerProps) => {
     };
 
     return (
-        <div className="h-[760px] w-full">
+        <div className="tabletLg:h-[760px] tablet:h-[455px] phone:h-[350px] h-[196px] w-full">
             <YouTube className="w-full h-full" videoId={trailerUrl} opts={opts} onEnd={handleVideoEnd} />
         </div>
     );

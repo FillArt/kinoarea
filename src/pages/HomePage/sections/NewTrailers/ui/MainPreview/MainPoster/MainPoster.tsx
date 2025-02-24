@@ -10,7 +10,7 @@ export const MainPoster = ({setVideoMod, posterUrl}: MainPosterProps) => {
     return (
         <div className="relative cursor-pointer group" onClick={() => setVideoMod(true)}>
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-                <img src={IconPlay} alt=""/>
+                <img className="tabletLg:w-[60px] tabletLg:h-[60px] tablet:w-[44px] tablet:h-[44px] phone:w-[34px] phone:h-[34px] w-[22px] h-[22px]" src={IconPlay} alt=""/>
             </div>
 
             <div
