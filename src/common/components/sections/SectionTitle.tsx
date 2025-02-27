@@ -8,9 +8,6 @@ type SectionTitleProps = {
 }
 
 export const SectionTitle = ({title, children, line = true, sectionVersion = 'one'}: SectionTitleProps) => {
-
-    console.log(sectionVersion)
-
     const styleOne: string = 'tabletLg:flex-row phone:flex-col flex-row tabletLg:items-center phone:items-baseline items-center'
     const styleTwo: string = 'phone:flex-row flex-col items-center'
 
