@@ -31,7 +31,7 @@ export const Header = ({navigation, socialLinks, authFunc, searchFunc}: HeaderPr
                     links={navigation}/>
             </Popup>
 
-            <header className="font-main phone:py-5 py-[11px] bg-backgroundColor">
+            <header className="font-main phone:py-5 py-[11px]">
                 <div className="container max-w-container order-1 mx-auto grid grid-cols-12">
                     <div
                         className="tabletLg:col-span-2 tabletLg:justify-normal flex justify-center phone:col-span-10 col-span-8 tabletLg:order-1 order-2">
