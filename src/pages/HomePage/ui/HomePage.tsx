@@ -6,6 +6,9 @@ import {GenreAPI, NowInCinemaType} from "@/pages/HomePage/sections/NowInCinema/a
 import {NowInCinemaAPI} from "@/pages/HomePage/sections/NowInCinema/api/NowInCinemaAPI.ts";
 import {PopularFilms} from "@/pages/HomePage/sections/PopularFilms";
 import {PopularFilmsAPI} from "@/pages/HomePage/sections/PopularFilms/api/PopularFilmsAPI.ts";
+import {PopularPeople} from "@/pages/HomePage/sections/PopularPeople";
+import {PopularPeopleAPI} from "@/pages/HomePage/sections/PopularPeople/api/PopularPeopleAPI.ts";
+import {PopularPeopleType} from "@/pages/HomePage/sections/PopularPeople/api/PopularPeopleAPI.type.ts";
 
 export const HomePage = () => {
 
@@ -13,6 +16,9 @@ export const HomePage = () => {
     const [allMovies, setAllMovies] = useState<NowInCinemaType[]>([]);
     const [popularMovies, setPopularMovies] = useState<NowInCinemaType[]>([]);
     const [genres, setGenres] = useState<GenreAPI[]>([]);
+    const [popularPersonDay, setPopularPersonDay] = useState<PopularPeopleType[]>([]);
+    const [popularPersonWeek, setPopularPersonWeek] = useState<PopularPeopleType[]>([]);
+
     const [loading, setLoading] = useState<boolean>(true);
 
     const genreMap: Record<number, string> = genres.reduce((acc, genre) => {
@@ -33,13 +39,11 @@ export const HomePage = () => {
                 console.error(`Ошибка загрузки жанров: ${e}`)
             }
         }
-
         fetchGeneres()
     }, []);
 
     useEffect(() => {
         if (genres.length === 0) return;
-
 
         const fetchMoviesNow = async () => {
             try {
@@ -56,13 +60,14 @@ export const HomePage = () => {
                 setLoading(false);
             }
         }
-
         const fetchPopularMovies = async () => {
             try {
                 let allMovies: NowInCinemaType[] = [];
 
                 for (let page = 1; page <= 5; page++) {
                     const response = await PopularFilmsAPI.getPopular100(page);
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-expect-error
                     allMovies = [...allMovies, ...response.data.results];
                 }
 
@@ -86,11 +91,29 @@ export const HomePage = () => {
 
     }, [genres]);
 
+    useEffect(() => {
+
+        const fetchPopularPerson = async (time: 'day' | 'week') => {
+            const res = await PopularPeopleAPI.getPopularPeople(time)
+            return res.data.results;
+
+        }
+
+        fetchPopularPerson('day').then((res) => setPopularPersonDay(res.slice(0,6)))
+        fetchPopularPerson('week').then((res) => setPopularPersonWeek(res.slice(0,6)))
+    }, []);
+
+    useEffect(() => {
+        console.log(popularPersonDay, 'POPULAR DAY');
+        console.log(popularPersonWeek, 'POPULAR WEEK');
+    }, [popularPersonDay, popularPersonWeek]);
+
     return (
         <HomePageLayout>
             <NowInCinema movies={movies} loading={loading} allMoviesHandler={allMoviesHandler} />
             <NewTrailers movies={movies} />
             <PopularFilms movies={popularMovies} />
+            <PopularPeople popularDay={popularPersonDay} popularWeek={popularPersonWeek} />
         </HomePageLayout>
     );
 };
