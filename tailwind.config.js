@@ -28,6 +28,7 @@ export default {
                 formElementColor: "#3657CB",
                 socialButtonColor: "#3C4767",
 
+
                 positiveReviewColor: "#57D043",
                 neutralReviewColor: "#FFF065",
                 negativeReview: "#E04141",

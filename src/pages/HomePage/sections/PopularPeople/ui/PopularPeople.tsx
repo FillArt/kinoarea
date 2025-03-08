@@ -2,6 +2,7 @@ import {SectionTitle} from "@/common/components/sections/SectionTitle.tsx";
 import {PopularPeopleType} from "@/pages/HomePage/sections/PopularPeople/api/PopularPeopleAPI.type.ts";
 import {useEffect, useState} from "react";
 import {PopularPhotoInfo} from "@/pages/HomePage/sections/PopularPeople/ui/PopularPhotoInfo/PopularPhotoInfo.tsx";
+import {PopularListInfo} from "@/pages/HomePage/sections/PopularPeople/ui/PopularListInfo/PopularListInfo.tsx";
 
 type PopularPeopleProps = {
     popularDay: PopularPeopleType[],
@@ -11,6 +12,8 @@ type PopularPeopleProps = {
 export const PopularPeople = ({popularDay, popularWeek}: PopularPeopleProps) => {
 
     const [filterPopularTime, setFilterPopularTime] = useState<'day' | 'week'>('day');
+
+    console.log(setFilterPopularTime);
 
     const [firstPerson, setFirstPerson] = useState<PopularPeopleType | null>(null);
     const [secondPerson, setSecondPerson] = useState<PopularPeopleType | null>(null);
@@ -42,14 +45,14 @@ export const PopularPeople = ({popularDay, popularWeek}: PopularPeopleProps) => 
                 </SectionTitle>
 
                 <div className="grid grid-cols-12 gap-[23px] mt-[63px]">
-                    <div className="col-span-4 h-[444px]">
-                        <PopularPhotoInfo data={firstPerson} place={1} />
+                    <div className="col-span-4">
+                        <PopularPhotoInfo data={firstPerson} place={1}/>
                     </div>
-                    <div className="col-span-4 h-[444px] rounded-[10px]">
-                        <PopularPhotoInfo data={secondPerson} place={2} />
+                    <div className="col-span-4">
+                        <PopularPhotoInfo data={secondPerson} place={2}/>
                     </div>
-                    <div className="col-span-4 outline h-[444px] rounded-[10px]">
-                        {restPersons.length > 0 ? restPersons.map(p => <p key={p.id}>{p.name}</p>) : "Нет данных"}
+                    <div className="col-span-4">
+                       <PopularListInfo data={restPersons}/>
                     </div>
                 </div>
             </div>
