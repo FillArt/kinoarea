@@ -1,0 +1,1 @@
+export {PopularPeople} from "@/pages/HomePage/sections/PopularPeople/ui/PopularPeople.tsx";

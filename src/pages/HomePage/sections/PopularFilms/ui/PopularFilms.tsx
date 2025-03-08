@@ -1,7 +1,7 @@
 import {SectionTitle} from "@/common/components/sections/SectionTitle.tsx";
 import {ButtonIcon} from "@/common/components/buttons/ButtonIcon.tsx";
 import Icon from "@/common/components/buttons/assets/burgerWhite.svg";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {yearsList} from "@/pages/HomePage/sections/PopularFilms/model/yearsList.ts";
 import {PopularSlider} from "@/pages/HomePage/sections/PopularFilms/ui/PopularSlider/PopularSlider.tsx";
 import {NowInCinemaType} from "@/pages/HomePage/sections/NowInCinema/api/NowInCinemaAPI.types.ts";
@@ -13,10 +13,22 @@ type PopularFilmsProps = {
 
 export const PopularFilms = ({movies}: PopularFilmsProps) => {
     const [filter, setFilter] = useState("All");
+    const [filteredMovies, setFilteredMovies] = useState(movies);
+
+    useEffect(() => {
+        setFilteredMovies(movies);
+    }, [movies]);
+
 
     const onClickHandler = ((filter: string) => {
         setFilter(filter);
+        if(filter !== "All"){
+            setFilteredMovies(movies.filter(movies => movies.release_date?.split('-')[0] === filter));
+        } else {
+            setFilteredMovies(movies)
+        }
     })
+
 
     const prepareYearsList = ['All', ...yearsList];
 
@@ -46,9 +58,13 @@ export const PopularFilms = ({movies}: PopularFilmsProps) => {
 
                 </SectionTitle>
 
-                <PopularSlider movies={movies}/>
+                {filteredMovies.length > 0 ? (
+                    <PopularSlider movies={filteredMovies} />
+                ) : (
+                    <p className="text-center text-gray-400">Фильмов нет</p>
+                )}
 
             </div>
         </section>
-);
+    );
 };
