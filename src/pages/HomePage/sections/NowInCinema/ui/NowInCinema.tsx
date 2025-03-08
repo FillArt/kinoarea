@@ -10,6 +10,7 @@ import {NowInCinemaType} from "@/pages/HomePage/sections/NowInCinema/api/NowInCi
 
 export type Filter = "all" | "action" | "adventures" | "comedy" | "fantasy" | "thrillers" | "drama";
 
+
 type NowInCinemaProps = {
     movies: NowInCinemaType[],
     loading: boolean,
