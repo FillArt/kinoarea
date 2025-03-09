@@ -3,10 +3,10 @@ import {useEffect, useState} from "react";
 
 
 import ArrowIcon from '../assets/arrow.svg'
-import {NewTrailersAPI} from "@/pages/home/sections/NewTrailers/api/NewTrailers.ts";
+import {NewTrailersAPI} from "@/shared/api/NewTrailers.ts";
 import {MainPreview} from "@/pages/home/sections/NewTrailers/ui/MainPreview/MainPreview.tsx";
 import {MovieSlider} from "@/pages/home/sections/NewTrailers/ui/MovieSlider/MovieSlider.tsx";
-import {NowInCinemaType} from "@/pages/home/sections/NowInCinema/api/NowInCinemaAPI.types.ts";
+import {NowInCinemaType} from "@/shared/types/NowInCinemaAPI.types.ts";
 
 type NewTrailersProps = {
     movies: NowInCinemaType[];

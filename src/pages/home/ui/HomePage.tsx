@@ -1,10 +1,10 @@
 
 import {useCallback, useEffect, useState} from "react";
-import {NowInCinemaAPI} from "@/pages/home/sections/NowInCinema/api/NowInCinemaAPI.ts";
-import {GenreAPI, NowInCinemaType} from "@/pages/home/sections/NowInCinema/api/NowInCinemaAPI.types.ts";
-import {PopularPeopleType} from "@/pages/home/sections/PopularPeople/api/PopularPeopleAPI.type.ts";
-import {PopularFilmsAPI} from "@/pages/home/sections/PopularFilms/api/PopularFilmsAPI.ts";
-import {PopularPeopleAPI} from "@/pages/home/sections/PopularPeople/api/PopularPeopleAPI.ts";
+import {NowInCinemaAPI} from "@/shared/api/NowInCinemaAPI.ts";
+import {GenreAPI, NowInCinemaType} from "@/shared/types/NowInCinemaAPI.types.ts";
+import {PopularPeopleType} from "@/shared/types/PopularPeopleAPI.type.ts";
+import {PopularFilmsAPI} from "@/shared/api/PopularFilmsAPI.ts";
+import {PopularPeopleAPI} from "@/shared/api/PopularPeopleAPI.ts";
 import {HomePageLayout} from "@/shared/layouts";
 import {NowInCinema} from "@/pages/home/sections/NowInCinema/ui/NowInCinema.tsx";
 import {NewTrailers} from "@/pages/home/sections/NewTrailers/ui/NewTrailers.tsx";

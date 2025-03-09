@@ -5,7 +5,7 @@ import Icon from "@/shared/ui/buttons/assets/burgerWhite.svg";
 import {timeList} from "@/pages/home/sections/PopularPeople/model/timeList.ts";
 import {PopularPhotoInfo} from "@/pages/home/sections/PopularPeople/ui/PopularPhotoInfo/PopularPhotoInfo.tsx";
 import {PopularListInfo} from "@/pages/home/sections/PopularPeople/ui/PopularListInfo/PopularListInfo.tsx";
-import {PopularPeopleType} from "@/pages/home/sections/PopularPeople/api/PopularPeopleAPI.type.ts";
+import {PopularPeopleType} from "@/shared/types/PopularPeopleAPI.type.ts";
 
 type PopularPeopleProps = {
     popularDay: PopularPeopleType[],
