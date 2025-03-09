@@ -38,7 +38,7 @@ export const PopularPeople = ({popularDay, popularWeek}: PopularPeopleProps) => 
         <section className="font-main bg-backgroundColor pt-6 mb-10 text-white">
             <div className="container max-w-container mx-auto">
                 <SectionTitle title={'Популярные персоны'} line={false}>
-                    <div className="flex justify-between max-w-[180px] w-full">
+                    <div className="flex justify-between tabletLg:max-w-[180px] max-w-[150px] w-full">
                         {timeList.map((item) => (
                             <button
                                 key={item.value}
@@ -53,15 +53,15 @@ export const PopularPeople = ({popularDay, popularWeek}: PopularPeopleProps) => 
                     </div>
                 </SectionTitle>
 
-                <div className="grid grid-cols-12 gap-[23px] mt-[63px]">
-                    <div className="col-span-4">
+                <div className="grid grid-cols-12 gap-[23px] tabletLg:mt-[63px] mt-[30px]">
+                    <div className="tablet:col-span-4 col-span-6">
                         <PopularPhotoInfo data={firstPerson} place={1}/>
                     </div>
-                    <div className="col-span-4">
+                    <div className="tablet:col-span-4 col-span-6">
                         <PopularPhotoInfo data={secondPerson} place={2}/>
                     </div>
-                    <div className="col-span-4">
-                    <PopularListInfo data={restPersons}/>
+                    <div className="tablet:col-span-4 col-span-12">
+                        <PopularListInfo data={restPersons}/>
                     </div>
                 </div>
             </div>

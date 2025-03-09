@@ -10,6 +10,7 @@ import {NowInCinemaType} from "@/pages/HomePage/sections/NowInCinema/api/NowInCi
 
 export type Filter = "all" | "action" | "adventures" | "comedy" | "fantasy" | "thrillers" | "drama";
 
+
 type NowInCinemaProps = {
     movies: NowInCinemaType[],
     loading: boolean,
@@ -33,7 +34,7 @@ export const NowInCinema = ({movies, loading, allMoviesHandler}: NowInCinemaProp
 
 
     return (
-        <section className="font-main bg-backgroundColor pt-6 mb-10 text-white">
+        <section className="font-main  pt-6 mb-10 text-white">
             <div className="container max-w-container mx-auto">
 
                 <SectionTitle title={"Сейчас в кино"}>
