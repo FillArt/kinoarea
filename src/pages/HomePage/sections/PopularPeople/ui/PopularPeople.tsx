@@ -54,13 +54,13 @@ export const PopularPeople = ({popularDay, popularWeek}: PopularPeopleProps) => 
                 </SectionTitle>
 
                 <div className="grid grid-cols-12 gap-[23px] tabletLg:mt-[63px] mt-[30px]">
-                    <div className="col-span-4">
+                    <div className="tablet:col-span-4 col-span-6">
                         <PopularPhotoInfo data={firstPerson} place={1}/>
                     </div>
-                    <div className="col-span-4">
+                    <div className="tablet:col-span-4 col-span-6">
                         <PopularPhotoInfo data={secondPerson} place={2}/>
                     </div>
-                    <div className="col-span-4">
+                    <div className="tablet:col-span-4 col-span-12">
                         <PopularListInfo data={restPersons}/>
                     </div>
                 </div>

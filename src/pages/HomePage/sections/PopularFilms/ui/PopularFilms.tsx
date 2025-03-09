@@ -36,7 +36,7 @@ export const PopularFilms = ({movies}: PopularFilmsProps) => {
         <section className="font-main bg-backgroundColor pt-6 mb-10 text-white">
             <div className="container max-w-container mx-auto">
                 <SectionTitle title={"Популярные фильмы"}>
-                    <div className="tabletLg:max-w-[490px] max-w-[408px] w-full phone:flex hidden justify-between">
+                    <div className="tabletLg:max-w-[490px] max-w-[408px] w-full phone:flex hidden justify-between z-10">
                         {prepareYearsList.map((item) => (
                             <button
                                 key={item}
@@ -59,7 +59,10 @@ export const PopularFilms = ({movies}: PopularFilmsProps) => {
                 </SectionTitle>
 
                 {filteredMovies.length > 0 ? (
-                    <PopularSlider movies={filteredMovies} />
+                    <div className="tabletLg:m-0 mt-[-35px]">
+                        <PopularSlider movies={filteredMovies} />
+                    </div>
+
                 ) : (
                     <p className="text-center text-gray-400">Фильмов нет</p>
                 )}
