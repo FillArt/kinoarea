@@ -4,6 +4,8 @@ import {useEffect, useState} from "react";
 import {PopularPhotoInfo} from "@/pages/HomePage/sections/PopularPeople/ui/PopularPhotoInfo/PopularPhotoInfo.tsx";
 import {PopularListInfo} from "@/pages/HomePage/sections/PopularPeople/ui/PopularListInfo/PopularListInfo.tsx";
 import {timeList} from "@/pages/HomePage/sections/PopularPeople/model/timeList.ts";
+import {ButtonIcon} from "@/common/components/buttons/ButtonIcon.tsx";
+import Icon from "@/common/components/buttons/assets/burgerWhite.svg";
 
 type PopularPeopleProps = {
     popularDay: PopularPeopleType[],
@@ -38,7 +40,7 @@ export const PopularPeople = ({popularDay, popularWeek}: PopularPeopleProps) => 
         <section className="font-main bg-backgroundColor pt-6 mb-10 text-white">
             <div className="container max-w-container mx-auto">
                 <SectionTitle title={'Популярные персоны'} line={false}>
-                    <div className="flex justify-between tabletLg:max-w-[180px] max-w-[150px] w-full">
+                    <div className="phone:flex hidden justify-between tabletLg:max-w-[180px] max-w-[150px] w-full">
                         {timeList.map((item) => (
                             <button
                                 key={item.value}
@@ -50,6 +52,11 @@ export const PopularPeople = ({popularDay, popularWeek}: PopularPeopleProps) => 
                                 {item.label}
                             </button>
                         ))}
+                    </div>
+                    <div className="phone:hidden block mt-[8px]">
+                        <ButtonIcon onClick={() => alert('Заглушка')} style="secondary">
+                            <img src={Icon} width="12px" height="12px" alt="Close Popup"/>
+                        </ButtonIcon>
                     </div>
                 </SectionTitle>
 
