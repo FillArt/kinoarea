@@ -8,15 +8,12 @@ import {categoriesList} from "@/pages/home/sections/NowInCinema/model/categories
 import {CinemaList} from "@/pages/home/sections/NowInCinema/ui/CinemaList/CinemaList.tsx";
 import {MovieType} from "@/shared/types/MovieType.ts";
 
-
 export type Filter = "all" | "action" | "adventures" | "comedy" | "fantasy" | "thrillers" | "drama";
-
 
 type NowInCinemaProps = {
     movies: MovieType[],
     loading: boolean,
     allMoviesHandler: () => void,
-
 }
 
 export const NowInCinema = ({movies, loading, allMoviesHandler}: NowInCinemaProps) => {

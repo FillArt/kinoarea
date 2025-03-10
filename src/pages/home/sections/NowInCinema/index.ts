@@ -1,1 +1,1 @@
-export {NowInCinema} from "@/pages/HomePage/sections/NowInCinema/ui/NowInCinema.tsx";
+export {NowInCinema} from "@/pages/home/sections/NowInCinema/ui/NowInCinema.tsx";

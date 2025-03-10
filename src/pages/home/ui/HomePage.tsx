@@ -8,6 +8,8 @@ import {GenreType, MovieType} from "@/shared/types/MovieType.ts";
 import {PeopleType} from "@/shared/types/PepoleType.ts";
 import {movieAPI} from "@/shared/api/MovieAPI.ts";
 import {peopleAPI} from "@/shared/api/PeopleAPI.ts";
+import {useAppDispatch} from "@/shared/hooks/useAppDispatch.ts";
+import {fetchGenresTC, fetchMoviesTC} from "@/pages/home/sections/NowInCinema/model/NowInCinemaSlice.ts";
 
 export const HomePage = () => {
 
@@ -40,6 +42,15 @@ export const HomePage = () => {
         }
         fetchGeneres()
     }, []);
+
+
+    // !!!!!!!!!!!!!!!!!!!!!
+    const dispatch = useAppDispatch()
+    useEffect(() => {
+        dispatch(fetchGenresTC())
+        dispatch(fetchMoviesTC())
+    }, []);
+    // !!!!!!!!!!!!!!!!!!!!!!
 
     useEffect(() => {
         if (genres.length === 0) return;
