@@ -22,13 +22,13 @@ export const PopularFilms = ({movies}: PopularFilmsProps) => {
 
     const onClickHandler = ((filter: string) => {
         setFilter(filter);
+
         if(filter !== "All"){
             setFilteredMovies(movies.filter(movies => movies.release_date?.split('-')[0] === filter));
         } else {
             setFilteredMovies(movies)
         }
     })
-
 
     const prepareYearsList = ['All', ...yearsList];
 
@@ -60,7 +60,7 @@ export const PopularFilms = ({movies}: PopularFilmsProps) => {
 
                 {filteredMovies.length > 0 ? (
                     <div className="tabletLg:m-0 mt-[-35px]">
-                        <PopularSlider movies={filteredMovies} />
+                        <PopularSlider movies={filteredMovies}/>
                     </div>
 
                 ) : (
