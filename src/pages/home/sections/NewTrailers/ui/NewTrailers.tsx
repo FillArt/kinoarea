@@ -3,13 +3,13 @@ import {useEffect, useState} from "react";
 
 
 import ArrowIcon from '../assets/arrow.svg'
-import {NewTrailersAPI} from "@/shared/api/NewTrailers.ts";
 import {MainPreview} from "@/pages/home/sections/NewTrailers/ui/MainPreview/MainPreview.tsx";
 import {MovieSlider} from "@/pages/home/sections/NewTrailers/ui/MovieSlider/MovieSlider.tsx";
-import {NowInCinemaType} from "@/shared/types/NowInCinemaAPI.types.ts";
+import {movieAPI} from "@/shared/api/MovieAPI.ts";
+import {MovieType} from "@/shared/types/MovieType.ts";
 
 type NewTrailersProps = {
-    movies: NowInCinemaType[];
+    movies: MovieType[];
 }
 
 export type trailerType = {
@@ -32,7 +32,7 @@ export const NewTrailers = ({movies}: NewTrailersProps) => {
         try {
             if (!id) return;
 
-            const movieInfo = await NewTrailersAPI.getTrailer(id)
+            const movieInfo = await movieAPI.getTrailer(id)
             const trailer = movieInfo.data.results[0]
             const posterUrl = `https://img.youtube.com/vi/${trailer.key}/maxresdefault.jpg`
 

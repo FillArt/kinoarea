@@ -1,24 +1,22 @@
-
 import {useCallback, useEffect, useState} from "react";
-import {NowInCinemaAPI} from "@/shared/api/NowInCinemaAPI.ts";
-import {GenreAPI, NowInCinemaType} from "@/shared/types/NowInCinemaAPI.types.ts";
-import {PopularPeopleType} from "@/shared/types/PopularPeopleAPI.type.ts";
-import {PopularFilmsAPI} from "@/shared/api/PopularFilmsAPI.ts";
-import {PopularPeopleAPI} from "@/shared/api/PopularPeopleAPI.ts";
 import {HomePageLayout} from "@/shared/layouts";
 import {NowInCinema} from "@/pages/home/sections/NowInCinema/ui/NowInCinema.tsx";
 import {NewTrailers} from "@/pages/home/sections/NewTrailers/ui/NewTrailers.tsx";
 import {PopularFilms} from "@/pages/home/sections/PopularFilms/ui/PopularFilms.tsx";
 import {PopularPeople} from "@/pages/home/sections/PopularPeople/ui/PopularPeople.tsx";
+import {GenreType, MovieType} from "@/shared/types/MovieType.ts";
+import {PeopleType} from "@/shared/types/PepoleType.ts";
+import {movieAPI} from "@/shared/api/MovieAPI.ts";
+import {peopleAPI} from "@/shared/api/PeopleAPI.ts";
 
 export const HomePage = () => {
 
-    const [movies, setMovies] = useState<NowInCinemaType[]>([]);
-    const [allMovies, setAllMovies] = useState<NowInCinemaType[]>([]);
-    const [popularMovies, setPopularMovies] = useState<NowInCinemaType[]>([]);
-    const [genres, setGenres] = useState<GenreAPI[]>([]);
-    const [popularPersonDay, setPopularPersonDay] = useState<PopularPeopleType[]>([]);
-    const [popularPersonWeek, setPopularPersonWeek] = useState<PopularPeopleType[]>([]);
+    const [movies, setMovies] = useState<MovieType[]>([]);
+    const [allMovies, setAllMovies] = useState<MovieType[]>([]);
+    const [popularMovies, setPopularMovies] = useState<MovieType[]>([]);
+    const [genres, setGenres] = useState<GenreType[]>([]);
+    const [popularPersonDay, setPopularPersonDay] = useState<PeopleType[]>([]);
+    const [popularPersonWeek, setPopularPersonWeek] = useState<PeopleType[]>([]);
 
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -34,7 +32,7 @@ export const HomePage = () => {
     useEffect(() => {
         const fetchGeneres = async () => {
             try {
-                const response = await NowInCinemaAPI.getGenres()
+                const response = await movieAPI.getGenres()
                 setGenres(response.data.genres)
             } catch (e) {
                 console.error(`Ошибка загрузки жанров: ${e}`)
@@ -48,7 +46,7 @@ export const HomePage = () => {
 
         const fetchMoviesNow = async () => {
             try {
-                const response = await NowInCinemaAPI.getNowPlaying()
+                const response = await movieAPI.getNowPlaying()
                 const formatMovies = response.data.results.map((movie) => ({
                     ...movie,
                     genres: movie.genre_ids?.map((id: number) => genreMap[id]),
@@ -63,12 +61,10 @@ export const HomePage = () => {
         }
         const fetchPopularMovies = async () => {
             try {
-                let allMovies: NowInCinemaType[] = [];
+                let allMovies: MovieType[] = [];
 
                 for (let page = 1; page <= 5; page++) {
-                    const response = await PopularFilmsAPI.getPopular100(page);
-                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                    // @ts-expect-error
+                    const response = await movieAPI.getPopular100(page);
                     allMovies = [...allMovies, ...response.data.results];
                 }
 
@@ -95,7 +91,7 @@ export const HomePage = () => {
     useEffect(() => {
 
         const fetchPopularPerson = async (time: 'day' | 'week') => {
-            const res = await PopularPeopleAPI.getPopularPeople(time)
+            const res = await peopleAPI.getPopularPeople(time)
             return res.data.results;
 
         }
@@ -103,11 +99,6 @@ export const HomePage = () => {
         fetchPopularPerson('day').then((res) => setPopularPersonDay(res.slice(0,6)))
         fetchPopularPerson('week').then((res) => setPopularPersonWeek(res.slice(0,6)))
     }, []);
-
-    useEffect(() => {
-        console.log(popularPersonDay, 'POPULAR DAY');
-        console.log(popularPersonWeek, 'POPULAR WEEK');
-    }, [popularPersonDay, popularPersonWeek]);
 
     return (
         <HomePageLayout>

@@ -1,17 +1,17 @@
 import {CardMovie} from "@/shared/ui/cards";
-import {NowInCinemaType} from "@/pages/HomePage/sections/NowInCinema/api/NowInCinemaAPI.types.ts";
-import {Filter} from "@/pages/HomePage/sections/NowInCinema/ui/NowInCinema.tsx";
+import {Filter} from "@/pages/home/sections/NowInCinema/ui/NowInCinema.tsx"
+import {MovieType} from "@/shared/types/MovieType.ts";
 
 
 type CinemaListProps = {
-    movies: NowInCinemaType[],
+    movies: MovieType[],
     filter: Filter,
 }
 
 
 export const CinemaList = ({movies, filter}: CinemaListProps) => {
 
-    let filteredMovies: NowInCinemaType[] = movies;
+    let filteredMovies: MovieType[] = movies;
 
     const filterByCategory = (category: string) => {
         return movies.filter((movie) =>
@@ -43,7 +43,7 @@ export const CinemaList = ({movies, filter}: CinemaListProps) => {
     return (
         <div className="tabletLg:mt-14 mt-[28px] grid grid-cols-12 gap-[23px]">
 
-            {filteredMovies.map((movie: NowInCinemaType) => (
+            {filteredMovies.map((movie: MovieType) => (
                 <div className="tablet:col-span-3 phone:col-span-4 col-span-6" key={movie.id}>
                     <CardMovie movie={movie} />
                 </div>

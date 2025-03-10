@@ -1,13 +1,13 @@
 import {Swiper, SwiperSlide} from "swiper/react";
-import {NowInCinemaType} from "@/pages/HomePage/sections/NowInCinema/api/NowInCinemaAPI.types.ts";
 import {CardMovie} from "@/shared/ui/cards";
 import {useCallback, useRef, useState} from "react";
 import {Navigation} from "swiper/modules";
 
 import Arrow from '../PopularSlider/assets/arrow.svg'
+import {MovieType} from "@/shared/types/MovieType.ts";
 
 type PopularSliderProps = {
-    movies: NowInCinemaType[]
+    movies: MovieType[]
 }
 
 export const PopularSlider = ({movies}: PopularSliderProps ) => {

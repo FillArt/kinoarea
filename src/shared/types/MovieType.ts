@@ -1,4 +1,4 @@
-export type NowInCinemaType = {
+export type MovieType = {
     adult?: false
     backdrop_path?: string
     genre_ids?: number[]
@@ -16,4 +16,4 @@ export type NowInCinemaType = {
     vote_count?: number
 }
 
-export type GenreAPI = { id: number; name: string };
+export type GenreType = { id: number; name: string };

@@ -5,22 +5,22 @@ import Icon from "@/shared/ui/buttons/assets/burgerWhite.svg";
 import {timeList} from "@/pages/home/sections/PopularPeople/model/timeList.ts";
 import {PopularPhotoInfo} from "@/pages/home/sections/PopularPeople/ui/PopularPhotoInfo/PopularPhotoInfo.tsx";
 import {PopularListInfo} from "@/pages/home/sections/PopularPeople/ui/PopularListInfo/PopularListInfo.tsx";
-import {PopularPeopleType} from "@/shared/types/PopularPeopleAPI.type.ts";
+import {PeopleType} from "@/shared/types/PepoleType.ts";
 
 type PopularPeopleProps = {
-    popularDay: PopularPeopleType[],
-    popularWeek: PopularPeopleType[],
+    popularDay: PeopleType[],
+    popularWeek: PeopleType[],
 }
 
 export const PopularPeople = ({popularDay, popularWeek}: PopularPeopleProps) => {
 
     const [filterPopularTime, setFilterPopularTime] = useState<'day' | 'week'>('day');
 
-    const [firstPerson, setFirstPerson] = useState<PopularPeopleType | null>(null);
-    const [secondPerson, setSecondPerson] = useState<PopularPeopleType | null>(null);
-    const [restPersons, setRestPersons] = useState<PopularPeopleType[]>([]);
+    const [firstPerson, setFirstPerson] = useState<PeopleType | null>(null);
+    const [secondPerson, setSecondPerson] = useState<PeopleType | null>(null);
+    const [restPersons, setRestPersons] = useState<PeopleType[]>([]);
 
-    const distributorPerson = (arr: PopularPeopleType[]) => {
+    const distributorPerson = (arr: PeopleType[]) => {
         const [first, second, ...rest] = arr;
         setFirstPerson(first || null);
         setSecondPerson(second || null);

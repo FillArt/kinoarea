@@ -1,7 +1,7 @@
-import {PopularPeopleType} from "@/pages/HomePage/sections/PopularPeople/api/PopularPeopleAPI.type.ts";
+import {PeopleType} from "@/shared/types/PepoleType.ts";
 
 type PopularListInfoProps = {
-    data: PopularPeopleType[]
+    data: PeopleType[]
 }
 
 export const PopularListInfo = ({data}: PopularListInfoProps) => {

@@ -1,4 +1,4 @@
-export type PopularPeopleType = {
+export type PeopleType = {
     adult: boolean
     gender: number
     id: number

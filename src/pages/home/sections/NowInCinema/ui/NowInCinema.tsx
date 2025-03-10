@@ -4,16 +4,16 @@ import {ButtonBase} from "@/shared/ui/buttons/ButtonBase.tsx";
 import {CardMovieSkeleton} from "@/shared/ui/cards";
 import Icon from "@/shared/ui/buttons/assets/burgerWhite.svg";
 import {ButtonIcon} from "@/shared/ui/buttons/ButtonIcon.tsx";
-import {NowInCinemaType} from "@/shared/types/NowInCinemaAPI.types.ts";
 import {categoriesList} from "@/pages/home/sections/NowInCinema/model/categoriesList.ts";
 import {CinemaList} from "@/pages/home/sections/NowInCinema/ui/CinemaList/CinemaList.tsx";
+import {MovieType} from "@/shared/types/MovieType.ts";
 
 
 export type Filter = "all" | "action" | "adventures" | "comedy" | "fantasy" | "thrillers" | "drama";
 
 
 type NowInCinemaProps = {
-    movies: NowInCinemaType[],
+    movies: MovieType[],
     loading: boolean,
     allMoviesHandler: () => void,
 

@@ -2,14 +2,13 @@ import {SectionTitle} from "@/shared/ui/sections/SectionTitle.tsx";
 import {ButtonIcon} from "@/shared/ui/buttons/ButtonIcon.tsx";
 import Icon from "@/shared/ui/buttons/assets/burgerWhite.svg";
 import {useEffect, useState} from "react";
-import {NowInCinemaType} from "@/shared/types/NowInCinemaAPI.types.ts";
 import {yearsList} from "@/pages/home/sections/PopularFilms/model/yearsList.ts";
 import {PopularSlider} from "@/pages/home/sections/PopularFilms/ui/PopularSlider/PopularSlider.tsx";
-
+import {MovieType} from "@/shared/types/MovieType.ts";
 
 
 type PopularFilmsProps = {
-    movies: NowInCinemaType[]
+    movies: MovieType[]
 }
 
 export const PopularFilms = ({movies}: PopularFilmsProps) => {
