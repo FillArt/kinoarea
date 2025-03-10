@@ -61,14 +61,20 @@ export const HomePage = () => {
         }
         const fetchPopularMovies = async () => {
             try {
-                let allMovies: MovieType[] = [];
+                const pages = [1, 2, 3, 4, 5];
 
-                for (let page = 1; page <= 5; page++) {
-                    const response = await movieAPI.getPopular100(page);
-                    allMovies = [...allMovies, ...response.data.results];
-                }
+                const responses = await Promise.all(
+                    pages.map(page => movieAPI.getPopular100(page))
+                );
 
-                const formatMovies = allMovies.map((movie) => ({
+                const allMovies: MovieType[] = responses.flatMap(response => response.data.results);
+
+                const uniqueMovies = allMovies.filter(
+                    (movie, index, self) =>
+                        index === self.findIndex((m) => m.id === movie.id)
+                ).slice(0, 100);
+
+                const formatMovies = uniqueMovies.map((movie) => ({
                     ...movie,
                     genres: movie.genre_ids?.map((id: number) => genreMap[id]),
                 }));
