@@ -1,20 +1,16 @@
-
 import {configureStore} from "@reduxjs/toolkit";
 
-// export const store = configureStore({})
-// export const store = configureStore({})
-//
-// export type RootState = ReturnType<typeof store.getState>
-//
-// export type AppDispatch = typeof store.dispatch
+import {NowInCinemaSlice} from "@/pages/home/sections/NowInCinema/model/NowInCinemaSlice.ts";
 
-// temporarily!!!!
-export const store = {
-    getState() {
-        return []
-    },
-    subscribe() {}
-}
+export const store = configureStore({
+   reducer: {
+       [NowInCinemaSlice.name]: NowInCinemaSlice.reducer
+   }
+})
 
-// @ts-expect-error: output for debugging the store
+export type RootState = ReturnType<typeof store.getState>
+
+export type AppDispatch = typeof store.dispatch
+
+//@ts-expect-error: output for debugging the store
 window.store = store
