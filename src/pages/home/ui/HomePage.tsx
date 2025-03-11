@@ -119,7 +119,7 @@ export const HomePage = () => {
 
     return (
         <HomePageLayout>
-            <NowInCinema movies={movies} loading={loading} allMoviesHandler={allMoviesHandler} />
+            <NowInCinema allMoviesHandler={allMoviesHandler} />
             <NewTrailers movies={movies} />
             <PopularFilms movies={popularMovies} />
             <PopularPeople popularDay={popularPersonDay} popularWeek={popularPersonWeek} />

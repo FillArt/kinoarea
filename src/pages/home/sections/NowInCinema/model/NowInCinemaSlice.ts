@@ -1,16 +1,19 @@
 import {createAppSlice} from "@/shared/hooks/createAppSlice.ts";
 
-import {GenreType, MovieType} from "@/shared/types/MovieType.ts";
+import {MovieType} from "@/shared/types/MovieType.ts";
 import {movieAPI} from "@/shared/api/MovieAPI.ts";
 
 export const NowInCinemaSlice = createAppSlice({
     name: 'NowInCinema',
     initialState: {
         movies: [] as MovieType[],
-        genre: [] as GenreType[],
+        genres: [] as Record<number, string>,
         isLoaded: false,
     },
-    selectors: {},
+    selectors: {
+        nowMoviesSelector: (state) => state.movies,
+        nowLoadedSelector: (state) => state.isLoaded,
+    },
     reducers: create => ({
         fetchGenresTC: create.asyncThunk(
             async (_, thunkAPI) => {
@@ -22,7 +25,10 @@ export const NowInCinemaSlice = createAppSlice({
                 }
             }, {
                 fulfilled: (state, action) => {
-                    state.genre = action.payload.genres
+                    state.genres = action.payload.genres.reduce((acc, genre) => {
+                        acc[genre.id] = genre.name;
+                        return acc;
+                    }, {} as Record<number, string>)
                 }
             }
         ),
@@ -36,7 +42,15 @@ export const NowInCinemaSlice = createAppSlice({
                 }
             }, {
                 fulfilled: (state, action) => {
-                    state.movies = action.payload.movies
+                    if (Object.keys(state.genres).length === 0) return;
+
+                    state.movies = action.payload.movies.map((movie) => ({
+                        ...movie,
+                        genres: movie.genre_ids?.map((id: number) => state.genres[id]),
+                    }))
+
+                    state.isLoaded = true
+
                 }
             }
         )
@@ -44,5 +58,5 @@ export const NowInCinemaSlice = createAppSlice({
 })
 
 export const NowInCinemaReducer = NowInCinemaSlice.reducer;
-export const {} = NowInCinemaSlice.selectors
+export const { nowMoviesSelector, nowLoadedSelector } = NowInCinemaSlice.selectors
 export const {fetchGenresTC, fetchMoviesTC} = NowInCinemaSlice.actions;

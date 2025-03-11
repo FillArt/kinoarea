@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {SectionTitle} from "@/shared/ui/sections/SectionTitle.tsx";
 import {ButtonBase} from "@/shared/ui/buttons/ButtonBase.tsx";
 import {CardMovieSkeleton} from "@/shared/ui/cards";
@@ -6,29 +6,33 @@ import Icon from "@/shared/ui/buttons/assets/burgerWhite.svg";
 import {ButtonIcon} from "@/shared/ui/buttons/ButtonIcon.tsx";
 import {categoriesList} from "@/pages/home/sections/NowInCinema/model/categoriesList.ts";
 import {CinemaList} from "@/pages/home/sections/NowInCinema/ui/CinemaList/CinemaList.tsx";
-import {MovieType} from "@/shared/types/MovieType.ts";
+import {useAppDispatch} from "@/shared/hooks/useAppDispatch.ts";
+import {
+    fetchGenresTC,
+    fetchMoviesTC,
+    nowLoadedSelector,
+    nowMoviesSelector
+} from "@/pages/home/sections/NowInCinema/model/NowInCinemaSlice.ts";
+import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
 
 export type Filter = "all" | "action" | "adventures" | "comedy" | "fantasy" | "thrillers" | "drama";
 
-type NowInCinemaProps = {
-    movies: MovieType[],
-    loading: boolean,
-    allMoviesHandler: () => void,
-}
-
-export const NowInCinema = ({movies, loading, allMoviesHandler}: NowInCinemaProps) => {
+export const NowInCinema = () => {
     const [filter, setFilter] = useState<Filter>("all");
-    const [isShowButton, setIsShowButton] = useState<boolean>(true);
+    const [fullStatus, setFullStatus] = useState<boolean>(false);
 
-    const onClickHandler = (filter: Filter) => {
-        setFilter(filter);
-        showMoreMovies()
-    }
+    const dispatch = useAppDispatch()
 
-    const showMoreMovies = () => {
-        allMoviesHandler()
-        setIsShowButton(false)
-    };
+    const movies = useAppSelector(nowMoviesSelector)
+    const isLoaded = useAppSelector(nowLoadedSelector)
+
+    useEffect(() => {
+        dispatch(fetchGenresTC())
+        dispatch(fetchMoviesTC())
+    }, []);
+
+    const onClickHandler = (filter: Filter) => setFilter(filter);
+    const showMoreMovies = () => setFullStatus(true);
 
 
     return (
@@ -58,20 +62,20 @@ export const NowInCinema = ({movies, loading, allMoviesHandler}: NowInCinemaProp
 
                 </SectionTitle>
 
-                {loading ? (
+                {!isLoaded ? (
                     <div className="mt-14 grid grid-cols-12 gap-[23px]">
                         {[...Array(8)].map((_, i) => (
                             <div key={i} className="col-span-3">
-                                <CardMovieSkeleton/>
+                                <CardMovieSkeleton />
                             </div>
                         ))}
                     </div>
                 ) : (
-                    <CinemaList movies={movies} filter={filter}/>
+                    <CinemaList movies={!fullStatus ? movies.slice(0, 8) : movies} filter={filter}/>
                 )}
 
 
-                {isShowButton && (
+                {!fullStatus && (
                     <div className="flex justify-center mt-14">
                         <ButtonBase title='Все новинки' style="border" onClick={() => showMoreMovies()}/>
                     </div>
