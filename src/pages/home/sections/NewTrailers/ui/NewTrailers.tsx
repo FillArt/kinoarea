@@ -7,19 +7,12 @@ import {MovieSlider} from "@/pages/home/sections/NewTrailers/ui/MovieSlider/Movi
 import {useAppDispatch} from "@/shared/hooks/useAppDispatch.ts";
 import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
 import {nowMoviesSelector} from "@/pages/home/sections/NowInCinema/model/NowInCinemaSlice.ts";
-import {
-    changeMovieInMain,
-    fetchAllMovieTrailers,
-    newTrailersSelector
-} from "@/pages/home/sections/NewTrailers/model/NewTrailersSlice.ts";
+import {changeMovieInMain, fetchAllMovieTrailers} from "@/pages/home/sections/NewTrailers/model/NewTrailersSlice.ts";
 
 
 export const NewTrailers = () => {
     const dispatch = useAppDispatch();
-
     const movies = useAppSelector(nowMoviesSelector)
-    const trailers = useAppSelector(newTrailersSelector)
-
     const [isVideoMode, setIsVideoMode] = useState(false)
 
     useEffect(() => {
@@ -45,7 +38,7 @@ export const NewTrailers = () => {
 
                 <div className="phone:mt-[32px] mt-[18px] grid">
                     <MainPreview videoMod={isVideoMode} setVideoMod={setIsVideoMode}/>
-                    <MovieSlider onClick={chooseNextMovie} movies={trailers}/>
+                    <MovieSlider onClick={chooseNextMovie} />
                 </div>
 
             </div>
