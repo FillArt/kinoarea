@@ -4,6 +4,7 @@ import {
     newTrailersMainSelector
 } from "@/pages/home/sections/NewTrailers/model/NewTrailersSlice.ts";
 import {YoutubePlayer} from "@/shared/ui/sections/YoutubePlayer/YoutubePlayer.tsx";
+import {YoutubePlayerSkeleton} from "@/shared/ui/sections/YoutubePlayer/YoutubePlayerSkeleton.tsx";
 
 
 type MainPreviewProps = {
@@ -16,7 +17,7 @@ export const MainPreview = ({videoMod, setVideoMod}: MainPreviewProps) => {
     const isLoaded = useAppSelector(newTrailersLoadedSelector)
 
     if (!isLoaded || !trailerMain) {
-        return <h1>Для скелета</h1>;
+        return <YoutubePlayerSkeleton />
     }
 
     return (
