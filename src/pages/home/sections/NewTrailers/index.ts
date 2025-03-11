@@ -1,1 +1,1 @@
-export {NewTrailers} from "@/pages/HomePage/sections/NewTrailers/ui/NewTrailers.tsx";
+export {NewTrailers} from "@/pages/home/sections/NewTrailers/ui/NewTrailers.tsx";

@@ -1,19 +1,22 @@
 import {useEffect, useState} from "react";
-import {SectionTitle} from "@/shared/ui/sections/SectionTitle.tsx";
-import {ButtonBase} from "@/shared/ui/buttons/ButtonBase.tsx";
-import {CardMovieSkeleton} from "@/shared/ui/cards";
-import Icon from "@/shared/ui/buttons/assets/burgerWhite.svg";
-import {ButtonIcon} from "@/shared/ui/buttons/ButtonIcon.tsx";
-import {categoriesList} from "@/pages/home/sections/NowInCinema/model/categoriesList.ts";
-import {CinemaList} from "@/pages/home/sections/NowInCinema/ui/CinemaList/CinemaList.tsx";
+import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
 import {useAppDispatch} from "@/shared/hooks/useAppDispatch.ts";
+
 import {
     fetchGenresTC,
     fetchMoviesTC,
     nowLoadedSelector,
     nowMoviesSelector
 } from "@/pages/home/sections/NowInCinema/model/NowInCinemaSlice.ts";
-import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
+
+import Icon from "@/shared/ui/buttons/assets/burgerWhite.svg";
+import {ButtonBase} from "@/shared/ui/buttons/ButtonBase.tsx";
+import {ButtonIcon} from "@/shared/ui/buttons/ButtonIcon.tsx";
+import {SectionTitle} from "@/shared/ui/sections/SectionTitle.tsx";
+import {CinemaList} from "@/pages/home/sections/NowInCinema/ui/CinemaList/CinemaList.tsx";
+import {CardMovieSkeleton} from "@/shared/ui/cards";
+
+import {categoriesList} from "@/pages/home/sections/NowInCinema/model/categoriesList.ts";
 
 export type Filter = "all" | "action" | "adventures" | "comedy" | "fantasy" | "thrillers" | "drama";
 

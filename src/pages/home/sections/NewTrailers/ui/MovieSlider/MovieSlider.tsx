@@ -1,11 +1,11 @@
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Scrollbar} from "swiper/modules";
-import {trailerType} from "@/pages/HomePage/sections/NewTrailers/ui/NewTrailers.tsx";
 
 import IconPlay from "../assets/play.svg"
+import {TrailerType} from "@/shared/types/MovieType.ts";
 
 type MovieSliderProps = {
-    movies: trailerType[];
+    movies: TrailerType[];
     onClick: (id: number) => void;
 };
 

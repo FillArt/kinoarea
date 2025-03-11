@@ -1,91 +1,40 @@
 import {SectionTitle} from "@/shared/ui/sections/SectionTitle.tsx";
 import {useEffect, useState} from "react";
 
-
 import ArrowIcon from '../assets/arrow.svg'
 import {MainPreview} from "@/pages/home/sections/NewTrailers/ui/MainPreview/MainPreview.tsx";
 import {MovieSlider} from "@/pages/home/sections/NewTrailers/ui/MovieSlider/MovieSlider.tsx";
-import {movieAPI} from "@/shared/api/MovieAPI.ts";
-import {MovieType} from "@/shared/types/MovieType.ts";
+import {useAppDispatch} from "@/shared/hooks/useAppDispatch.ts";
+import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
+import {nowMoviesSelector} from "@/pages/home/sections/NowInCinema/model/NowInCinemaSlice.ts";
+import {
+    changeMovieInMain,
+    fetchAllMovieTrailers,
+    newTrailersLoadedSelector,
+    newTrailersSelector
+} from "@/pages/home/sections/NewTrailers/model/NewTrailersSlice.ts";
 
-type NewTrailersProps = {
-    movies: MovieType[];
-}
 
-export type trailerType = {
-    id: number,
-    posterUrl: string,
-    trailer: {
-        name: string,
-        url: string,
-    }
-}
+export const NewTrailers = () => {
+    const dispatch = useAppDispatch();
 
-export const NewTrailers = ({movies}: NewTrailersProps) => {
+    const movies = useAppSelector(nowMoviesSelector)
+    const trailers = useAppSelector(newTrailersSelector)
+    const isLoaded = useAppSelector(newTrailersLoadedSelector)
 
-    const [trailerMain, setTrailerMain] = useState<trailerType>()
-    const [trailers, setTrailers] = useState<trailerType[]>([])
     const [isVideoMode, setIsVideoMode] = useState(false)
-
-
-    const fetchMovieDetails = async (id: number | undefined) => {
-        try {
-            if (!id) return;
-
-            const movieInfo = await movieAPI.getTrailer(id)
-            const trailer = movieInfo.data.results[0]
-            const posterUrl = `https://img.youtube.com/vi/${trailer.key}/maxresdefault.jpg`
-
-            return {
-                id,
-                posterUrl,
-                trailer: {
-                    name: trailer.name,
-                    url: trailer.key
-                }
-            }
-
-        } catch (e) {
-            console.error(`Ошибка загрузки данных о фильме: ${e}`);
-        }
-    }
-    const fetchAllTrailers = async () => {
-        try {
-            const movieDetailPromises = movies.map(movie => fetchMovieDetails(movie.id))
-            const results = await Promise.all(movieDetailPromises);
-
-            return results.filter((result): result is trailerType => result !== undefined);
-
-        } catch (e) {
-            console.error(`Ошибка загрузки всех трейлеров: ${e}`);
-            return [];
-        }
-    }
-
-    const chooseNextMovie = (idMovie: number) => {
-        const findMovie = trailers.find((trailer) => trailer.id === idMovie)
-
-        setTrailerMain(findMovie)
-        setIsVideoMode(false)
-    }
+    console.log(isLoaded)
 
     useEffect(() => {
-        if (!movies.length) return;
-
-        const fetchTrailers = async () => {
-            try {
-                const trailers = await fetchAllTrailers();
-                setTrailerMain(trailers[0]);
-                setTrailers(trailers.slice(1));
-
-            } catch (e) {
-                console.error(`Ошибка загрузки всех трейлеров: ${e}`);
-            }
+        if(movies.length) {
+            dispatch(fetchAllMovieTrailers(movies));
         }
-
-        fetchTrailers()
-
     }, [movies]);
+
+    const chooseNextMovie = (idMovie: number) => {
+        dispatch(changeMovieInMain({idMovie}))
+        setIsVideoMode(false)
+    }
 
     return (
         <section className="bg-backgroundColor text-white pt-6 mb-10 font-main ">
@@ -98,7 +47,7 @@ export const NewTrailers = ({movies}: NewTrailersProps) => {
                 </SectionTitle>
 
                 <div className="phone:mt-[32px] mt-[18px] grid">
-                    <MainPreview videoMod={isVideoMode} setVideoMod={setIsVideoMode} trailerMain={trailerMain}/>
+                    <MainPreview videoMod={isVideoMode} setVideoMod={setIsVideoMode}/>
                     <MovieSlider onClick={chooseNextMovie} movies={trailers}/>
                 </div>
 

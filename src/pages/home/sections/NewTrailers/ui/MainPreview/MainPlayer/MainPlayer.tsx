@@ -10,15 +10,14 @@ export const MainPlayer = ({stop, trailerUrl}: MainPlayerProps) => {
         height: '100%',
         width: '100%',
         playerVars: {
-            autoplay: 1,    // Автозапуск
-            // mute: 1,        // Отключить звук
-            controls: 1,    // Показывать элементы управления
-            modestbranding: 1, // Минимизировать логотип YouTube
+            autoplay: 1,
+            // mute: 1,
+            controls: 1,
+            modestbranding: 1,
         },
     };
     const handleVideoEnd = () => {
         stop(false)
-        // Ваш код для обработки окончания видео
     };
 
     return (

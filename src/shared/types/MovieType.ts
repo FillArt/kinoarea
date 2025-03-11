@@ -17,3 +17,12 @@ export type MovieType = {
 }
 
 export type GenreType = { id: number; name: string };
+
+export type TrailerType = {
+    id: number,
+    posterUrl: string,
+    trailer: {
+        name: string,
+        url: string,
+    }
+}
