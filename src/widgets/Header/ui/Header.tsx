@@ -4,11 +4,11 @@ import {Navigation} from "@/widgets/Header/ui/Navigation/Navigation.tsx";
 import {NavigationLinksType} from "@/widgets/Header/model/navigationLinks.ts";
 import {SocialLinksType} from "@/widgets/Header/model/social.ts";
 
-import SearchIcon from "@/common/components/buttons/assets/search.svg";
-import BurgerIcon from "@/common/components/buttons/assets/burger.svg";
+import SearchIcon from "@/shared/ui/buttons/assets/search.svg";
+import BurgerIcon from "@/shared/ui/buttons/assets/burger.svg";
 
-import {ButtonIcon} from "@/common/components/buttons/ButtonIcon.tsx";
-import {ButtonBase} from "@/common/components/buttons/ButtonBase.tsx";
+import {ButtonIcon} from "@/shared/ui/buttons/ButtonIcon.tsx";
+import {ButtonBase} from "@/shared/ui/buttons/ButtonBase.tsx";
 import Popup from "@/widgets/Header/ui/Popup/Popup.tsx";
 import {useState} from "react";
 

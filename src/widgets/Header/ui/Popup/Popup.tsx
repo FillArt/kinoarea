@@ -1,6 +1,6 @@
 import {Logo} from "@/widgets/Header/ui/Logo/Logo.tsx";
 import {ReactNode} from "react";
-import {ButtonIcon} from "@/common/components/buttons/ButtonIcon.tsx";
+import {ButtonIcon} from "@/shared/ui/buttons/ButtonIcon.tsx";
 import Icon from "./assets/close.svg"
 
 
