@@ -1,7 +1,7 @@
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Scrollbar} from "swiper/modules";
 
-import IconPlay from "../assets/play.svg"
+import IconPlay from "../../../../../../shared/ui/sections/YoutubePlayer/assets/play.svg"
 import {TrailerType} from "@/shared/types/MovieType.ts";
 
 type MovieSliderProps = {

@@ -1,8 +1,9 @@
-import {MainPlayer} from "@/pages/home/sections/NewTrailers/ui/MainPreview/MainPlayer/MainPlayer.tsx";
-import {MainPoster} from "@/pages/home/sections/NewTrailers/ui/MainPreview/MainPoster/MainPoster.tsx";
 import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
-import {newTrailersMainSelector} from "@/pages/home/sections/NewTrailers/model/NewTrailersSlice.ts";
-import {MainInfo} from "@/pages/home/sections/NewTrailers/ui/MainPreview/MainInfo/MainInfo.tsx";
+import {
+    newTrailersLoadedSelector,
+    newTrailersMainSelector
+} from "@/pages/home/sections/NewTrailers/model/NewTrailersSlice.ts";
+import {YoutubePlayer} from "@/shared/ui/sections/YoutubePlayer/YoutubePlayer.tsx";
 
 
 type MainPreviewProps = {
@@ -11,19 +12,16 @@ type MainPreviewProps = {
 }
 
 export const MainPreview = ({videoMod, setVideoMod}: MainPreviewProps) => {
-
     const trailerMain = useAppSelector(newTrailersMainSelector)
+    const isLoaded = useAppSelector(newTrailersLoadedSelector)
+
+    if (!isLoaded || !trailerMain) {
+        return <h1>Для скелета</h1>;
+    }
 
     return (
         <article className="mb-[-14px] ">
-
-            {videoMod ? (
-                <MainPlayer stop={setVideoMod} trailerUrl={trailerMain.trailer.url}/>
-            ) : (
-                <MainPoster posterUrl={trailerMain.posterUrl} setVideoMod={setVideoMod}/>
-            )}
-
-            <MainInfo title={trailerMain.trailer.name} likes={3245} dislikes={420}/>
+            <YoutubePlayer trailer={trailerMain} mode={videoMod} setMod={setVideoMod}  />
         </article>
     );
 };

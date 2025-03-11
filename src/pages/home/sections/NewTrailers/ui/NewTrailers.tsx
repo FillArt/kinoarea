@@ -10,7 +10,6 @@ import {nowMoviesSelector} from "@/pages/home/sections/NowInCinema/model/NowInCi
 import {
     changeMovieInMain,
     fetchAllMovieTrailers,
-    newTrailersLoadedSelector,
     newTrailersSelector
 } from "@/pages/home/sections/NewTrailers/model/NewTrailersSlice.ts";
 
@@ -20,10 +19,8 @@ export const NewTrailers = () => {
 
     const movies = useAppSelector(nowMoviesSelector)
     const trailers = useAppSelector(newTrailersSelector)
-    const isLoaded = useAppSelector(newTrailersLoadedSelector)
 
     const [isVideoMode, setIsVideoMode] = useState(false)
-    console.log(isLoaded)
 
     useEffect(() => {
         if(movies.length) {
