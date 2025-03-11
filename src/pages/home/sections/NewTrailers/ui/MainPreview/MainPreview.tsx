@@ -3,8 +3,9 @@ import {
     newTrailersLoadedSelector,
     newTrailersMainSelector
 } from "@/pages/home/sections/NewTrailers/model/NewTrailersSlice.ts";
-import {YoutubePlayer} from "@/shared/ui/sections/YoutubePlayer/YoutubePlayer.tsx";
-import {YoutubePlayerSkeleton} from "@/shared/ui/sections/YoutubePlayer/YoutubePlayerSkeleton.tsx";
+import {YoutubePlayerSkeleton} from "@/widgets/YoutubePlayer/YoutubePlayerSkeleton.tsx";
+import {YoutubePlayer} from "@/widgets/YoutubePlayer/YoutubePlayer.tsx";
+
 
 
 type MainPreviewProps = {

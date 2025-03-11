@@ -1,8 +1,6 @@
 import {useState} from "react";
-import {
-    LikesOrDislikes
-} from "@/shared/ui/sections/YoutubePlayer/LikesOrDislikes.tsx";
 import {TrailerType} from "@/shared/types/MovieType.ts";
+import {LikesOrDislikes} from "@/widgets/YoutubePlayer/LikesOrDislikes.tsx";
 
 type YouTubeInfoProps = {
     trailer: TrailerType
