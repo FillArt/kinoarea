@@ -7,7 +7,7 @@ import {MovieSlider} from "@/pages/home/sections/NewTrailers/ui/MovieSlider/Movi
 import {useAppDispatch} from "@/shared/hooks/useAppDispatch.ts";
 import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
 import {nowMoviesSelector} from "@/pages/home/sections/NowInCinema/model/NowInCinemaSlice.ts";
-import {changeMovieInMain, fetchAllMovieTrailers} from "@/pages/home/sections/NewTrailers/model/NewTrailersSlice.ts";
+import {changeMovieInMainAC, fetchAllMovieTrailersTC} from "@/pages/home/sections/NewTrailers/model/NewTrailersSlice.ts";
 
 
 export const NewTrailers = () => {
@@ -17,12 +17,12 @@ export const NewTrailers = () => {
 
     useEffect(() => {
         if(movies.length) {
-            dispatch(fetchAllMovieTrailers(movies));
+            dispatch(fetchAllMovieTrailersTC(movies));
         }
     }, [movies]);
 
     const chooseNextMovie = (idMovie: number) => {
-        dispatch(changeMovieInMain({idMovie}))
+        dispatch(changeMovieInMainAC({idMovie}))
         setIsVideoMode(false)
     }
 

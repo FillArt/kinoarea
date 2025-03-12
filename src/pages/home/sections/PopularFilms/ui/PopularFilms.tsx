@@ -1,32 +1,49 @@
 import {SectionTitle} from "@/shared/ui/sections/SectionTitle.tsx";
 import {ButtonIcon} from "@/shared/ui/buttons/ButtonIcon.tsx";
 import Icon from "@/shared/ui/buttons/assets/burgerWhite.svg";
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {yearsList} from "@/pages/home/sections/PopularFilms/model/yearsList.ts";
 import {PopularSlider} from "@/pages/home/sections/PopularFilms/ui/PopularSlider/PopularSlider.tsx";
-import {MovieType} from "@/shared/types/MovieType.ts";
+import {
+    fetchPopularMoviesTC,
+    PopularFilmsSelector
+} from "@/pages/home/sections/PopularFilms/model/PopularFilmsSlice.ts";
+import {useAppDispatch} from "@/shared/hooks/useAppDispatch.ts";
+import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
+import {nowGenreSelector} from "@/pages/home/sections/NowInCinema/model/NowInCinemaSlice.ts";
 
 
-type PopularFilmsProps = {
-    movies: MovieType[]
-}
-
-export const PopularFilms = ({movies}: PopularFilmsProps) => {
+export const PopularFilms = () => {
     const [filter, setFilter] = useState("All");
-    const [filteredMovies, setFilteredMovies] = useState(movies);
+
+    const dispatch = useAppDispatch();
+    const popularFilms = useAppSelector(PopularFilmsSelector)
+    const genreMap = useAppSelector(nowGenreSelector)
+
+    const formatMovies = useMemo(() => {
+        return popularFilms.map((movie) => ({
+            ...movie,
+            genres: movie.genre_ids?.map((id: number) => genreMap[id]),
+        }));
+    }, [popularFilms, genreMap]);
+
+    const [filteredMovies, setFilteredMovies] = useState(formatMovies);
 
     useEffect(() => {
-        setFilteredMovies(movies);
-    }, [movies]);
+        dispatch(fetchPopularMoviesTC())
+    }, []);
+
+    useEffect(() => {
+        setFilteredMovies(formatMovies);
+    }, [formatMovies]);
 
 
     const onClickHandler = ((filter: string) => {
         setFilter(filter);
-
         if(filter !== "All"){
-            setFilteredMovies(movies.filter(movies => movies.release_date?.split('-')[0] === filter));
+            setFilteredMovies(formatMovies.filter(movies => movies.release_date?.split('-')[0] === filter));
         } else {
-            setFilteredMovies(movies)
+            setFilteredMovies(formatMovies)
         }
     })
 

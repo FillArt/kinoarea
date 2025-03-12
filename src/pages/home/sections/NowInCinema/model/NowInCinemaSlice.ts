@@ -12,6 +12,7 @@ export const NowInCinemaSlice = createAppSlice({
     },
     selectors: {
         nowMoviesSelector: (state) => state.movies,
+        nowGenreSelector: (state) => state.genres,
         nowLoadedSelector: (state) => state.isLoaded,
     },
     reducers: create => ({
@@ -58,5 +59,5 @@ export const NowInCinemaSlice = createAppSlice({
 })
 
 export const NowInCinemaReducer = NowInCinemaSlice.reducer;
-export const { nowMoviesSelector, nowLoadedSelector } = NowInCinemaSlice.selectors
+export const { nowMoviesSelector, nowLoadedSelector, nowGenreSelector } = NowInCinemaSlice.selectors
 export const {fetchGenresTC, fetchMoviesTC} = NowInCinemaSlice.actions;
