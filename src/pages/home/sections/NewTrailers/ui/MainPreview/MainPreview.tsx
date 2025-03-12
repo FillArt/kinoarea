@@ -1,26 +1,29 @@
-import {trailerType} from "@/pages/home/sections/NewTrailers/ui/NewTrailers.tsx";
-import {MainPlayer} from "@/pages/home/sections/NewTrailers/ui/MainPreview/MainPlayer/MainPlayer.tsx";
-import {MainPoster} from "@/pages/home/sections/NewTrailers/ui/MainPreview/MainPoster/MainPoster.tsx";
-import {MainInfo} from "@/pages/home/sections/NewTrailers/ui/MainPreview/MainInfo/MainInfo.tsx";
+import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
+import {
+    newTrailersLoadedSelector,
+    newTrailersMainSelector
+} from "@/pages/home/sections/NewTrailers/model/NewTrailersSlice.ts";
+import {YoutubePlayerSkeleton} from "@/widgets/YoutubePlayer/YoutubePlayerSkeleton.tsx";
+import {YoutubePlayer} from "@/widgets/YoutubePlayer/YoutubePlayer.tsx";
+
 
 
 type MainPreviewProps = {
-    trailerMain: trailerType | undefined;
     videoMod: boolean;
     setVideoMod: (status: boolean) => void;
 }
 
-export const MainPreview = ({trailerMain, videoMod, setVideoMod}: MainPreviewProps) => {
+export const MainPreview = ({videoMod, setVideoMod}: MainPreviewProps) => {
+    const trailerMain = useAppSelector(newTrailersMainSelector)
+    const isLoaded = useAppSelector(newTrailersLoadedSelector)
+
+    if (!isLoaded || !trailerMain) {
+        return <YoutubePlayerSkeleton />
+    }
+
     return (
         <article className="mb-[-14px] ">
-
-            {videoMod ? (
-                <MainPlayer stop={setVideoMod} trailerUrl={trailerMain?.trailer.url}/>
-            ) : (
-                <MainPoster posterUrl={trailerMain?.posterUrl} setVideoMod={setVideoMod}/>
-            )}
-
-            <MainInfo title={trailerMain?.trailer.name} likes={3245} dislikes={420}/>
+            <YoutubePlayer trailer={trailerMain} mode={videoMod} setMod={setVideoMod}  />
         </article>
     );
 };

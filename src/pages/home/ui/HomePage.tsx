@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {HomePageLayout} from "@/shared/layouts";
 import {NowInCinema} from "@/pages/home/sections/NowInCinema/ui/NowInCinema.tsx";
 import {NewTrailers} from "@/pages/home/sections/NewTrailers/ui/NewTrailers.tsx";
@@ -8,28 +8,20 @@ import {GenreType, MovieType} from "@/shared/types/MovieType.ts";
 import {PeopleType} from "@/shared/types/PepoleType.ts";
 import {movieAPI} from "@/shared/api/MovieAPI.ts";
 import {peopleAPI} from "@/shared/api/PeopleAPI.ts";
-import {useAppDispatch} from "@/shared/hooks/useAppDispatch.ts";
-import {fetchGenresTC, fetchMoviesTC} from "@/pages/home/sections/NowInCinema/model/NowInCinemaSlice.ts";
 
 export const HomePage = () => {
 
-    const [movies, setMovies] = useState<MovieType[]>([]);
-    const [allMovies, setAllMovies] = useState<MovieType[]>([]);
     const [popularMovies, setPopularMovies] = useState<MovieType[]>([]);
     const [genres, setGenres] = useState<GenreType[]>([]);
     const [popularPersonDay, setPopularPersonDay] = useState<PeopleType[]>([]);
     const [popularPersonWeek, setPopularPersonWeek] = useState<PeopleType[]>([]);
 
-    const [loading, setLoading] = useState<boolean>(true);
 
     const genreMap: Record<number, string> = genres.reduce((acc, genre) => {
         acc[genre.id] = genre.name;
         return acc;
     }, {} as Record<number, string>);
 
-    const allMoviesHandler = useCallback(() => {
-        setMovies(allMovies)
-    },[allMovies])
 
     useEffect(() => {
         const fetchGeneres = async () => {
@@ -44,32 +36,7 @@ export const HomePage = () => {
     }, []);
 
 
-    // !!!!!!!!!!!!!!!!!!!!!
-    const dispatch = useAppDispatch()
     useEffect(() => {
-        dispatch(fetchGenresTC())
-        dispatch(fetchMoviesTC())
-    }, []);
-    // !!!!!!!!!!!!!!!!!!!!!!
-
-    useEffect(() => {
-        if (genres.length === 0) return;
-
-        const fetchMoviesNow = async () => {
-            try {
-                const response = await movieAPI.getNowPlaying()
-                const formatMovies = response.data.results.map((movie) => ({
-                    ...movie,
-                    genres: movie.genre_ids?.map((id: number) => genreMap[id]),
-                }))
-                setAllMovies(formatMovies);
-                setMovies(formatMovies.slice(0, 8));
-            } catch (e) {
-                console.error(`Ошибка загрузки фильмов: ${e}`)
-            } finally {
-                setLoading(false);
-            }
-        }
         const fetchPopularMovies = async () => {
             try {
                 const pages = [1, 2, 3, 4, 5];
@@ -95,12 +62,9 @@ export const HomePage = () => {
                 setPopularMovies(sortedMovies);
             } catch (e) {
                 console.error(`Ошибка загрузки 100 популярных фильмов: ${e}`);
-            } finally {
-                setLoading(false);
             }
         };
 
-        fetchMoviesNow()
         fetchPopularMovies()
 
     }, [genres]);
@@ -119,8 +83,8 @@ export const HomePage = () => {
 
     return (
         <HomePageLayout>
-            <NowInCinema allMoviesHandler={allMoviesHandler} />
-            <NewTrailers movies={movies} />
+            <NowInCinema />
+            <NewTrailers />
             <PopularFilms movies={popularMovies} />
             <PopularPeople popularDay={popularPersonDay} popularWeek={popularPersonWeek} />
         </HomePageLayout>

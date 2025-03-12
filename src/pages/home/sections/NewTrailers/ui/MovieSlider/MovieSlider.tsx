@@ -1,15 +1,18 @@
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Scrollbar} from "swiper/modules";
-import {trailerType} from "@/pages/HomePage/sections/NewTrailers/ui/NewTrailers.tsx";
 
-import IconPlay from "../assets/play.svg"
+import IconPlay from "@/widgets/YoutubePlayer/assets/play.svg"
+import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
+import {newTrailersSelector} from "@/pages/home/sections/NewTrailers/model/NewTrailersSlice.ts";
 
 type MovieSliderProps = {
-    movies: trailerType[];
     onClick: (id: number) => void;
 };
 
-export const MovieSlider = ({movies, onClick}: MovieSliderProps) => {
+export const MovieSlider = ({onClick}: MovieSliderProps) => {
+
+    const movies = useAppSelector(newTrailersSelector)
+
     return (
         <div className="relative overflow-hidden">
             <Swiper
