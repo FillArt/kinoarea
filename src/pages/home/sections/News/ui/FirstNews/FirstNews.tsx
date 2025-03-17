@@ -10,7 +10,10 @@ export const FirstNews = ({item}: FirstNewsProps) => {
     console.log(item)
 
     return (
-        <div style={{ background: `url(${item?.img})` }} className="h-[772px] rounded-[10px] px-[37px] pt-[37px] pb-[50px] flex justify-between flex-col">
+        <div style={{ backgroundImage: `url(${item?.img})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'}} className="h-[772px] rounded-[10px] px-[37px] pt-[37px] pb-[50px] flex justify-between flex-col">
             <FirstNewsInfo date={item?.date} view={item?.view} commentsCount={item?.commentsCount} />
 
             <div className="max-w-[906px] ">

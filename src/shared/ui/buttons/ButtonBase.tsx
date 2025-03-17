@@ -3,9 +3,10 @@ type ButtonPropsType = {
     onClick: () => void;
     disable?: boolean;
     style?: 'primary' | 'secondary' | 'card' | 'border'; // Если есть другие стили, добавляем их
+    className?: string;
 };
 
-export const ButtonBase = ({title, onClick, disable = false, style = 'primary'}: ButtonPropsType) => {
+export const ButtonBase = ({title, onClick, disable = false, style = 'primary', className=''}: ButtonPropsType) => {
 
     const onClickHandler = () => {
         if (!disable) {
@@ -21,7 +22,7 @@ export const ButtonBase = ({title, onClick, disable = false, style = 'primary'}:
     return (
         <button
             disabled={disable}
-            className={`${classNamePrepare}  tabletLg:py-[13px] tabletLg:px-[47px] phone:py-[10px] phone:px-[30px] px-[27px] py-[9px] transition-opacity font-bold tabletLg:text-[16px] text-smallFontSizeTabletLg duration-300 rounded-[10px]`}
+            className={`${classNamePrepare} ${className}  tabletLg:py-[13px] tabletLg:px-[47px] phone:py-[10px] phone:px-[30px] px-[27px] py-[9px] transition-opacity font-bold tabletLg:text-[16px] text-smallFontSizeTabletLg duration-300 rounded-[10px]`}
             onClick={onClickHandler}>
             {title}
         </button>

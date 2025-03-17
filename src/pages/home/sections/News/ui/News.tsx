@@ -3,6 +3,7 @@ import {NewsSelector, NewsType} from "@/pages/home/sections/News/model/NewsSlice
 import {useEffect, useState} from "react";
 import {SectionTitle} from "@/shared/ui/sections/SectionTitle.tsx";
 import {FirstNews} from "@/pages/home/sections/News/ui/FirstNews/FirstNews.tsx";
+import {RestNewsList} from "@/pages/home/sections/News/ui/RestNews/RestNewsList.tsx";
 
 
 export const News = () => {
@@ -31,11 +32,11 @@ export const News = () => {
 
                 <div className="grid grid-cols-12 gap-[23px] tabletLg:mt-[63px] mt-[30px]">
                     <div className="tablet:col-span-10">
-                        <FirstNews item={firstNews} />
+                        <FirstNews item={firstNews}/>
                     </div>
 
                     <div className="tablet:col-span-2">
-                        <div className="outline outline-amber-700"></div>
+                        <RestNewsList items={restNews} />
                     </div>
 
                 </div>
