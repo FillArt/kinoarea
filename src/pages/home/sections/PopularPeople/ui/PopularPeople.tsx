@@ -37,9 +37,7 @@ export const PopularPeople = () => {
         setRestPersons(rest || []);
     };
 
-    const onClickHandler = (value: 'day' | 'week') => {
-        setFilterPopularTime(value)
-    }
+    const onClickHandler = (value: 'day' | 'week') => setFilterPopularTime(value)
 
     useEffect(() => {
         distributorPerson(filterPopularTime === 'day' ? popularDay : popularWeek);

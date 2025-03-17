@@ -1,0 +1,1 @@
+export {News} from "@/pages/home/sections/News/ui/News.tsx";
