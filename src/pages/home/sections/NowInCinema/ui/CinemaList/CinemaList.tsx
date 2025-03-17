@@ -1,15 +1,17 @@
 import {CardMovie} from "@/shared/ui/cards";
 import {Filter} from "@/pages/home/sections/NowInCinema/ui/NowInCinema.tsx"
 import {MovieType} from "@/shared/types/MovieType.ts";
+import {EmptyCinemaList} from "@/shared/ui/sections/EmptyCinemaList.tsx";
 
 
 type CinemaListProps = {
     movies: MovieType[],
     filter: Filter,
+    setFullStatus: (value: boolean) => void,
 }
 
 
-export const CinemaList = ({movies, filter}: CinemaListProps) => {
+export const CinemaList = ({movies, filter, setFullStatus}: CinemaListProps) => {
 
     let filteredMovies: MovieType[] = movies;
 
@@ -39,15 +41,25 @@ export const CinemaList = ({movies, filter}: CinemaListProps) => {
             break;
     }
 
+    if(filteredMovies.length === 0) setFullStatus(true);
+
 
     return (
         <div className="tabletLg:mt-14 mt-[28px] grid grid-cols-12 gap-[23px]">
 
-            {filteredMovies.map((movie: MovieType) => (
-                <div className="tablet:col-span-3 phone:col-span-4 col-span-6" key={movie.id}>
-                    <CardMovie movie={movie} />
+            {filteredMovies.length > 0 ? (
+                filteredMovies.map((movie: MovieType) => (
+                    <div className="tablet:col-span-3 phone:col-span-4 col-span-6" key={movie.id}>
+                        <CardMovie movie={movie}/>
+                    </div>
+                ))
+            ) : (
+
+                <div className="tablet:col-span-12">
+                    <EmptyCinemaList/>
                 </div>
-            ))}
+
+            )}
 
         </div>
     );

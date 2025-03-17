@@ -74,7 +74,7 @@ export const NowInCinema = () => {
                         ))}
                     </div>
                 ) : (
-                    <CinemaList movies={!fullStatus ? movies.slice(0, 8) : movies} filter={filter}/>
+                    <CinemaList movies={!fullStatus ? movies.slice(0, 8) : movies} filter={filter} setFullStatus={setFullStatus} />
                 )}
 
 
