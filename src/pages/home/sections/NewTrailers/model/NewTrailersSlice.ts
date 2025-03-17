@@ -17,7 +17,7 @@ export const NewTrailersSlice = createAppSlice({
     },
     extraReducers: builder => {
         builder
-            .addCase(fetchAllMovieTrailers.fulfilled, (state, action) => {
+            .addCase(fetchAllMovieTrailersTC.fulfilled, (state, action) => {
                 if (action.payload.length > 0) {
                     state.main = action.payload[0];
                     state.trailers = action.payload.slice(1);
@@ -27,13 +27,13 @@ export const NewTrailersSlice = createAppSlice({
                 }
                 state.isLoaded = true;
             })
-            .addCase(fetchAllMovieTrailers.rejected, (state, action) => {
+            .addCase(fetchAllMovieTrailersTC.rejected, (state, action) => {
                 console.error(action.payload);
                 state.isLoaded = true;
             });
     },
     reducers: create => ({
-        changeMovieInMain: create.reducer<{idMovie: number}>((state, action) => {
+        changeMovieInMainAC: create.reducer<{idMovie: number}>((state, action) => {
             const foundTrailer = state.trailers.find((trailer) => trailer.id === action.payload.idMovie);
             if (foundTrailer) {
                 state.main = foundTrailer;
@@ -43,7 +43,7 @@ export const NewTrailersSlice = createAppSlice({
 })
 
 
-export const fetchMovieDetails = createAsyncThunk<TrailerType | undefined, number>(
+export const fetchMovieDetailsTC = createAsyncThunk<TrailerType | undefined, number>(
     `${NewTrailersSlice.name}/fetchMovieDetails`,
     async (id, {rejectWithValue}) => {
         try {
@@ -68,12 +68,12 @@ export const fetchMovieDetails = createAsyncThunk<TrailerType | undefined, numbe
     }
 );
 
-export const fetchAllMovieTrailers = createAsyncThunk<TrailerType[], MovieType[]>(
+export const fetchAllMovieTrailersTC = createAsyncThunk<TrailerType[], MovieType[]>(
     `${NewTrailersSlice.name}/fetchAllMovieTrailers`,
     async (movies, {dispatch, rejectWithValue}) => {
         try {
             const results = await Promise.all(
-                movies.map((movie: MovieType) => dispatch(fetchMovieDetails(movie.id!)).unwrap())
+                movies.map((movie: MovieType) => dispatch(fetchMovieDetailsTC(movie.id!)).unwrap())
             );
             return results.filter((result): result is TrailerType => result !== undefined);
         } catch (error) {
@@ -84,5 +84,5 @@ export const fetchAllMovieTrailers = createAsyncThunk<TrailerType[], MovieType[]
 
 
 export const NewTrailersReducer = NewTrailersSlice.reducer;
-export const { changeMovieInMain } = NewTrailersSlice.actions;
+export const { changeMovieInMainAC } = NewTrailersSlice.actions;
 export const { newTrailersMainSelector, newTrailersLoadedSelector, newTrailersSelector } = NewTrailersSlice.selectors;

@@ -6,13 +6,23 @@ import {timeList} from "@/pages/home/sections/PopularPeople/model/timeList.ts";
 import {PopularPhotoInfo} from "@/pages/home/sections/PopularPeople/ui/PopularPhotoInfo/PopularPhotoInfo.tsx";
 import {PopularListInfo} from "@/pages/home/sections/PopularPeople/ui/PopularListInfo/PopularListInfo.tsx";
 import {PeopleType} from "@/shared/types/PepoleType.ts";
+import {useAppDispatch} from "@/shared/hooks/useAppDispatch.ts";
+import {
+    fetchPopularPersonTC,
+    PopularPersonSelector
+} from "@/pages/home/sections/PopularPeople/model/PopularPeopleSlice.ts";
+import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
 
-type PopularPeopleProps = {
-    popularDay: PeopleType[],
-    popularWeek: PeopleType[],
-}
 
-export const PopularPeople = ({popularDay, popularWeek}: PopularPeopleProps) => {
+export const PopularPeople = () => {
+    const dispatch = useAppDispatch();
+    useEffect(() => {
+        dispatch(fetchPopularPersonTC('day'));
+        dispatch(fetchPopularPersonTC('week'));
+    }, [dispatch]);
+
+    const popularDay = useAppSelector((state) => PopularPersonSelector(state, 'day'));
+    const popularWeek = useAppSelector((state) => PopularPersonSelector(state, 'week'));
 
     const [filterPopularTime, setFilterPopularTime] = useState<'day' | 'week'>('day');
 
