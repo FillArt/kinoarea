@@ -5,6 +5,7 @@ import {NewTrailersSlice} from "@/pages/home/sections/NewTrailers/model/NewTrail
 import {PopularFilmsSlice} from "@/pages/home/sections/PopularFilms/model/PopularFilmsSlice.ts";
 import {PopularPeopleSlice} from "@/pages/home/sections/PopularPeople/model/PopularPeopleSlice.ts";
 import {NewsSlice} from "@/pages/home/sections/News/model/NewsSlice.ts";
+import {ExpectedProductsSlice} from "@/pages/home/sections/ExpectedProducts/model/ExpectedProductsSlice.ts";
 
 export const store = configureStore({
    reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
        [PopularFilmsSlice.name]: PopularFilmsSlice.reducer,
        [PopularPeopleSlice.name]: PopularPeopleSlice.reducer,
        [NewsSlice.name]: NewsSlice.reducer,
+       [ExpectedProductsSlice.name]: ExpectedProductsSlice.reducer,
    }
 })
 

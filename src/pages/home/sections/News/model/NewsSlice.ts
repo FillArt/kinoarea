@@ -77,8 +77,7 @@ export const NewsSlice = createAppSlice({
         NewsSelector: state => state.news
     },
     reducers: create => ({
-        test: create.reducer(() => {
-        })
+        test: create.reducer(() => {})
     }),
 })
 
