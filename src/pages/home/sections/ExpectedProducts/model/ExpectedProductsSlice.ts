@@ -1,16 +1,34 @@
 import {createAppSlice} from "@/shared/hooks/createAppSlice.ts";
+import {MovieType} from "@/shared/types/MovieType.ts";
+import {movieAPI} from "@/shared/api/MovieAPI.ts";
 
 export const ExpectedProductsSlice = createAppSlice({
     name: 'ExpectedProducts',
-    initialState: {},
+    initialState: {
+        isLoaded: false,
+        moviesList: [] as MovieType[]
+    },
     selectors: {
-        ExpectedProductsSelector: state => state
+        MoviesSelector: state => state.moviesList,
+        ExpectedProductsLoadedSelector: state => state.isLoaded
     },
     reducers: create => ({
-        test: create.reducer(() => {})
+        fetchMovies: create.asyncThunk( async (_,thunkAPI) => {
+            try {
+                const res = await movieAPI.getUpcomingMovie()
+                console.log(res.data.results)
+                return {results: res.data.results}
+            } catch (error) {
+                return thunkAPI.rejectWithValue(error);
+            }
+        }, {
+            fulfilled: (state, action) => {
+                state.moviesList = action.payload.results
+            }
+        })
     })
 })
 
 export const ExpectedProductsSliceReducer = ExpectedProductsSlice.reducer
-export const {test} = ExpectedProductsSlice.actions
-export const {ExpectedProductsSelector} = ExpectedProductsSlice.selectors
+export const {fetchMovies} = ExpectedProductsSlice.actions
+export const {MoviesSelector, ExpectedProductsLoadedSelector} = ExpectedProductsSlice.selectors

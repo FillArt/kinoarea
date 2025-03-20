@@ -11,6 +11,7 @@ import {
 import {useAppDispatch} from "@/shared/hooks/useAppDispatch.ts";
 import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
 import {nowGenreSelector} from "@/pages/home/sections/NowInCinema/model/NowInCinemaSlice.ts";
+import {EmptyCinemaList} from "@/shared/ui/sections/EmptyCinemaList.tsx";
 
 
 export const PopularFilms = () => {
@@ -79,9 +80,8 @@ export const PopularFilms = () => {
                     <div className="tabletLg:m-0 mt-[-35px]">
                         <PopularSlider movies={filteredMovies}/>
                     </div>
-
                 ) : (
-                    <p className="text-center text-gray-400">Фильмов нет</p>
+                    <EmptyCinemaList/>
                 )}
 
             </div>
