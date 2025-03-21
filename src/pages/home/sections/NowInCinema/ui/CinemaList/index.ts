@@ -1,1 +1,2 @@
-export {CinemaList} from "@/pages/HomePage/sections/NowInCinema/ui/CinemaList/CinemaList.tsx";
+export {CinemaList} from "../CinemaList/CinemaList"
+export {EmptyCinemaList} from "@/shared/ui/sections/EmptyCinemaList.tsx"

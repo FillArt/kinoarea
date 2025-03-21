@@ -26,9 +26,12 @@ export const CardMovie = (item: CardMovieProps) => {
                 className="bg-emptyColor tabletLg:h-[470px] h-[286px] relative flex justify-center items-center rounded-[10px]">
 
                 <div
-                    className="absolute w-full h-full duration-300 bg-formElementColor bg-opacity-65 hidden group-hover:flex items-center justify-center rounded-[10px]">
+                    className="absolute inset-0 bg-formElementColor bg-opacity-0 group-hover:bg-opacity-65
+                    flex items-center justify-center rounded-[10px] transition-all duration-300 ease-in-out">
                     <ButtonBase title="Карточка фильма" onClick={() => alert('Переход на страницу...')}
-                                style="card"/>
+                                style="card"
+                                className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"
+                    />
                 </div>
 
                 <Rating rating={rounded(vote_average, 1)}/>
