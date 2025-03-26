@@ -10,6 +10,10 @@ import nowInCinemaRu from "./locales/ru/nowInCinema.json";
 import newTrailersEn from "./locales/en/newTrailers.json"
 import newTrailersRu from "./locales/ru/newTrailers.json";
 
+// Popular Films
+import popularFilmsEn from "./locales/en/popularFilms.json"
+import popularFilmsRu from "./locales/ru/popularFilms.json";
+
 
 const defaultLanguage = import.meta.env.VITE_APP_LANGUAGE || "en"; // Язык по умолчанию
 
@@ -20,11 +24,13 @@ await i18n
         resources: {
             ru: {
                 nowInCinema: nowInCinemaRu,
-                newTrailers: newTrailersRu
+                newTrailers: newTrailersRu,
+                popularFilms: popularFilmsRu,
             },
             en: {
                 nowInCinema: nowInCinemaEn,
-                newTrailers: newTrailersEn
+                newTrailers: newTrailersEn,
+                popularFilms: popularFilmsEn,
             },
         },
         fallbackLng: defaultLanguage,
