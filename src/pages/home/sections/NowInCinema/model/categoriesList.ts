@@ -3,6 +3,7 @@ type CategoriesList = {
     title: string;
 }
 
+
 export const categoriesList: CategoriesList[] = [
     {key: 'all', title: 'Все'},
     {key: 'action', title: 'Боевики'},
