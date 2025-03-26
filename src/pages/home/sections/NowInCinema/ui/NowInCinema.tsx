@@ -15,14 +15,28 @@ import {ButtonIcon} from "@/shared/ui/buttons/ButtonIcon.tsx";
 import {SectionTitle} from "@/shared/ui/sections/SectionTitle.tsx";
 import {CinemaList} from "@/pages/home/sections/NowInCinema/ui/CinemaList/CinemaList.tsx";
 import {CardMovieSkeleton} from "@/shared/ui/cards";
+import {useTranslation} from "react-i18next";
 
-import {categoriesList} from "@/pages/home/sections/NowInCinema/model/categoriesList.ts";
-
+type CategoriesList = {
+    key: string;
+    title: string;
+}
 export type Filter = "all" | "action" | "adventures" | "comedy" | "fantasy" | "thrillers" | "drama";
 
 export const NowInCinema = () => {
     const [filter, setFilter] = useState<Filter>("all");
     const [fullStatus, setFullStatus] = useState<boolean>(false);
+    const { t } = useTranslation("nowInCinema");
+
+    const categoriesList: CategoriesList[] = [
+        { key: "all", title: t("all") },
+        { key: "action", title: t("action") },
+        { key: "adventures", title: t("adventures") },
+        { key: "comedy", title: t("comedy") },
+        { key: "fantasy", title: t("fantasy") },
+        { key: "thrillers", title: t("thrillers") },
+        { key: "drama", title: t("drama") },
+    ]
 
     const dispatch = useAppDispatch()
 
@@ -34,15 +48,14 @@ export const NowInCinema = () => {
         dispatch(fetchMoviesTC())
     }, []);
 
+
     const onClickHandler = (filter: Filter) => setFilter(filter);
     const showMoreMovies = () => setFullStatus(true);
-
 
     return (
         <section className="font-main  pt-6 mb-10 text-white">
             <div className="container max-w-container mx-auto">
-
-                <SectionTitle title={"Сейчас в кино"}>
+                <SectionTitle title={t("now_in_cinema_title")}>
                     <div className="tabletLg:max-w-[765px] max-w-[615px] w-full phone:flex hidden justify-between">
                         {categoriesList.map((item) => (
                             <button
