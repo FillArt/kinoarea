@@ -12,6 +12,7 @@ import {useAppDispatch} from "@/shared/hooks/useAppDispatch.ts";
 import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
 import {nowGenreSelector} from "@/pages/home/sections/NowInCinema/model/NowInCinemaSlice.ts";
 import {EmptyCinemaList} from "@/shared/ui/sections/EmptyCinemaList.tsx";
+import {useTranslation} from "react-i18next";
 
 
 export const PopularFilms = () => {
@@ -20,6 +21,7 @@ export const PopularFilms = () => {
     const dispatch = useAppDispatch();
     const popularFilms = useAppSelector(PopularFilmsSelector)
     const genreMap = useAppSelector(nowGenreSelector)
+    const {t} = useTranslation("popularFilms");
 
     const formatMovies = useMemo(() => {
         return popularFilms.map((movie) => ({
@@ -48,12 +50,12 @@ export const PopularFilms = () => {
         }
     })
 
-    const prepareYearsList = ['All', ...yearsList];
+    const prepareYearsList = [t('all'), ...yearsList];
 
     return (
         <section className="font-main bg-backgroundColor pt-6 mb-10 text-white">
             <div className="container max-w-container mx-auto">
-                <SectionTitle title={"Популярные фильмы"}>
+                <SectionTitle title={t('title')}>
                     <div className="tabletLg:max-w-[490px] max-w-[408px] w-full phone:flex hidden justify-between z-10">
                         {prepareYearsList.map((item) => (
                             <button

@@ -7,13 +7,18 @@ import {MovieSlider} from "@/pages/home/sections/NewTrailers/ui/MovieSlider/Movi
 import {useAppDispatch} from "@/shared/hooks/useAppDispatch.ts";
 import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
 import {nowMoviesSelector} from "@/pages/home/sections/NowInCinema/model/NowInCinemaSlice.ts";
-import {changeMovieInMainAC, fetchAllMovieTrailersTC} from "@/pages/home/sections/NewTrailers/model/NewTrailersSlice.ts";
+import {
+    changeMovieInMainAC,
+    fetchAllMovieTrailersTC
+} from "@/pages/home/sections/NewTrailers/model/NewTrailersSlice.ts";
+import {useTranslation} from "react-i18next";
 
 
 export const NewTrailers = () => {
     const dispatch = useAppDispatch();
     const movies = useAppSelector(nowMoviesSelector)
     const [isVideoMode, setIsVideoMode] = useState(false)
+    const {t} = useTranslation("newTrailers")
 
     useEffect(() => {
         if(movies.length) {
@@ -29,9 +34,9 @@ export const NewTrailers = () => {
     return (
         <section className="bg-backgroundColor text-white pt-6 mb-10 font-main ">
             <div className="container max-w-container mx-auto">
-                <SectionTitle line={false} title="Новые трейлеры" sectionVersion="two">
+                <SectionTitle line={false} title={t('title')} sectionVersion="two">
                     <a className="tabletLg:text-[22px] text-[18px] flex items-center" href="/">
-                        Все трейлеры
+                        {t('button_title')}
                         <img src={ArrowIcon} alt="Стрелка" className="tabletLg:ml-[27px] ml-[14px] w-6 h-6"/>
                     </a>
                 </SectionTitle>
