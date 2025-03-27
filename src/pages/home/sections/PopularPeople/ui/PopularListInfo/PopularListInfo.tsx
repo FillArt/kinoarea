@@ -1,10 +1,20 @@
 import {PeopleType} from "@/shared/types/PepoleType.ts";
+import {useTranslation} from "react-i18next";
 
 type PopularListInfoProps = {
     data: PeopleType[]
 }
 
 export const PopularListInfo = ({data}: PopularListInfoProps) => {
+    const {t} = useTranslation('popularPeople')
+
+    const indexPlace: Record<string, string> = {
+        '0': t('third'),
+        '1': t('fourth'),
+        '2': t('fifth'),
+        '3': t('sixth')
+    }
+
     return (
         <div className="bg-[#1B2133] h-full rounded-[10px] tabletLg:py-[15px] py-[5px] tabletLg:pl-[33px] pl-[20px] tabletLg:pr-[29px] pr-[17px]">
             {data.map((person, index) => (
@@ -15,7 +25,7 @@ export const PopularListInfo = ({data}: PopularListInfoProps) => {
                         <h4 className="tabletLg:text-[15px] text-[11px] opacity-50 text-[#3B486B]">{person.original_name}</h4>
                         <span className="text-decorTextColor tabletLg:text-[14px] text-[11px]">87 лет</span>
                     </div>
-                    <span className="text-[15px] text-decorTextColor font-bold">{index + 3}-е место</span>
+                    <span className="text-[15px] text-decorTextColor font-bold">{indexPlace[index]}</span>
                 </div>
             ))}
         </div>
