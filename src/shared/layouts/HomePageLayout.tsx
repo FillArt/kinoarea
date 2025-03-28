@@ -1,17 +1,25 @@
 import {ReactNode} from "react";
 import {Header} from "@/widgets/Header";
-
-import {navigationLinks} from "@/widgets/Header/model/navigationLinks.ts";
 import {SocialLinks} from "@/widgets/Header/model/social.ts";
 
 import BgImg from '@/shared/layouts/assets/bg.png'
+import {NavigationLinksType} from "@/widgets/Header/ui/Header.tsx";
 
 interface HomeLayoutProps {
     children: ReactNode;
 }
 
+
 export const HomePageLayout = ({children}: HomeLayoutProps) => {
 
+    const navigationLinks: NavigationLinksType[] = [
+        {title: 'Афиша', link: '/poster'},
+        {title: 'Фильмы', link: '/movies'},
+        {title: 'Актёры', link : '/actors'},
+        {title: 'Новости', link: '/news'},
+        {title: 'Подборки', link: '/collections'},
+        {title: 'Категории', link: '/categories'}
+    ]
 
     const imgStyle = {
         backgroundImage: `url(${BgImg})`,

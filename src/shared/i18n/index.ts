@@ -2,19 +2,19 @@ import i18n from "i18next";
 import {initReactI18next} from "react-i18next";
 // import LanguageDetector from "i18next-browser-languagedetector"; // Автоопределение языка браузера
 
-// Now in Cinema
+// Now in Cinema | Home Page
 import nowInCinemaEn from "./locales/en/home/nowInCinema.json"
 import nowInCinemaRu from "./locales/ru/home/nowInCinema.json";
 
-// New Trailers
+// New Trailers | Home Page
 import newTrailersEn from "./locales/en/home/newTrailers.json"
 import newTrailersRu from "./locales/ru/home/newTrailers.json";
 
-// Popular Films
+// Popular Films | Home Page
 import popularFilmsEn from "./locales/en/home/popularFilms.json"
 import popularFilmsRu from "./locales/ru/home/popularFilms.json";
 
-// Popular People
+// Popular People | Home Page
 import popularPeopleEn from "./locales/en/home/popularPeople.json"
 import popularPeopleRu from "./locales/ru/home/popularPeople.json";
 

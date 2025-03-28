@@ -1,7 +1,5 @@
 import {Logo} from "@/widgets/Header/ui/Logo/Logo.tsx";
 import {Navigation} from "@/widgets/Header/ui/Navigation/Navigation.tsx";
-
-import {NavigationLinksType} from "@/widgets/Header/model/navigationLinks.ts";
 import {SocialLinksType} from "@/widgets/Header/model/social.ts";
 
 import SearchIcon from "@/shared/ui/buttons/assets/search.svg";
@@ -11,6 +9,11 @@ import {ButtonIcon} from "@/shared/ui/buttons/ButtonIcon.tsx";
 import {ButtonBase} from "@/shared/ui/buttons/ButtonBase.tsx";
 import Popup from "@/widgets/Header/ui/Popup/Popup.tsx";
 import {useState} from "react";
+
+export type NavigationLinksType = {
+    title: string,
+    link: string,
+}
 
 export type HeaderProps = {
     navigation: NavigationLinksType[];
