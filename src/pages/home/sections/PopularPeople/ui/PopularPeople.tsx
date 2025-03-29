@@ -2,7 +2,6 @@ import {SectionTitle} from "@/shared/ui/sections/SectionTitle.tsx";
 import {useEffect, useState} from "react";
 import {ButtonIcon} from "@/shared/ui/buttons/ButtonIcon.tsx";
 import Icon from "@/shared/ui/buttons/assets/burgerWhite.svg";
-import {timeList} from "@/pages/home/sections/PopularPeople/model/timeList.ts";
 import {PopularPhotoInfo} from "@/pages/home/sections/PopularPeople/ui/PopularPhotoInfo/PopularPhotoInfo.tsx";
 import {PopularListInfo} from "@/pages/home/sections/PopularPeople/ui/PopularListInfo/PopularListInfo.tsx";
 import {PeopleType} from "@/shared/types/PepoleType.ts";
@@ -12,10 +11,13 @@ import {
     PopularPersonSelector
 } from "@/pages/home/sections/PopularPeople/model/PopularPeopleSlice.ts";
 import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
+import {useTranslation} from "react-i18next";
 
 
 export const PopularPeople = () => {
     const dispatch = useAppDispatch();
+    const {t} = useTranslation("popularPeople");
+
     useEffect(() => {
         dispatch(fetchPopularPersonTC('day'));
         dispatch(fetchPopularPersonTC('week'));
@@ -37,6 +39,11 @@ export const PopularPeople = () => {
         setRestPersons(rest || []);
     };
 
+    const timeList: { label: string, value: string }[] = [
+        { label: t('week'), value: 'week' },
+        { label: t('day'), value: 'day' },
+    ];
+
     const onClickHandler = (value: 'day' | 'week') => setFilterPopularTime(value)
 
     useEffect(() => {
@@ -47,7 +54,7 @@ export const PopularPeople = () => {
     return (
         <section className="font-main bg-backgroundColor pt-6 mb-10 text-white">
             <div className="container max-w-container mx-auto">
-                <SectionTitle title={'Популярные персоны'} line={false}>
+                <SectionTitle title={t('title')} line={false}>
                     <div className="phone:flex hidden justify-between tabletLg:max-w-[180px] max-w-[150px] w-full">
                         {timeList.map((item) => (
                             <button
@@ -70,10 +77,10 @@ export const PopularPeople = () => {
 
                 <div className="grid grid-cols-12 gap-[23px] tabletLg:mt-[63px] mt-[30px]">
                     <div className="tablet:col-span-4 col-span-6">
-                        <PopularPhotoInfo data={firstPerson} place={1}/>
+                        <PopularPhotoInfo data={firstPerson} place={t('first')}/>
                     </div>
                     <div className="tablet:col-span-4 col-span-6">
-                        <PopularPhotoInfo data={secondPerson} place={2}/>
+                        <PopularPhotoInfo data={secondPerson} place={t('second')}/>
                     </div>
                     <div className="tablet:col-span-4 col-span-12">
                         <PopularListInfo data={restPersons}/>
