@@ -2,6 +2,10 @@ import i18n from "i18next";
 import {initReactI18next} from "react-i18next";
 // import LanguageDetector from "i18next-browser-languagedetector"; // Автоопределение языка браузера
 
+// Header | Common
+import headerEn from "./locales/en/common/header.json"
+import headerRu from "./locales/ru/common/header.json";
+
 // Now in Cinema | Home Page
 import nowInCinemaEn from "./locales/en/home/nowInCinema.json"
 import nowInCinemaRu from "./locales/ru/home/nowInCinema.json";
@@ -18,6 +22,10 @@ import popularFilmsRu from "./locales/ru/home/popularFilms.json";
 import popularPeopleEn from "./locales/en/home/popularPeople.json"
 import popularPeopleRu from "./locales/ru/home/popularPeople.json";
 
+// News | Home page
+import newsEn from "./locales/en/home/news.json"
+import newsRu from "./locales/ru/home/news.json";
+
 
 const defaultLanguage = import.meta.env.VITE_APP_LANGUAGE || "en"; // Язык по умолчанию
 
@@ -27,16 +35,20 @@ await i18n
     .init({
         resources: {
             ru: {
+                header: headerRu,
                 nowInCinema: nowInCinemaRu,
                 newTrailers: newTrailersRu,
                 popularFilms: popularFilmsRu,
                 popularPeople: popularPeopleRu,
+                news: newsRu
             },
             en: {
+                header: headerEn,
                 nowInCinema: nowInCinemaEn,
                 newTrailers: newTrailersEn,
                 popularFilms: popularFilmsEn,
                 popularPeople: popularPeopleEn,
+                news: newsEn
             },
         },
         fallbackLng: defaultLanguage,

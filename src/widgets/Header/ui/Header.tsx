@@ -9,6 +9,7 @@ import {ButtonIcon} from "@/shared/ui/buttons/ButtonIcon.tsx";
 import {ButtonBase} from "@/shared/ui/buttons/ButtonBase.tsx";
 import Popup from "@/widgets/Header/ui/Popup/Popup.tsx";
 import {useState} from "react";
+import {useTranslation} from "react-i18next";
 
 export type NavigationLinksType = {
     title: string,
@@ -25,6 +26,7 @@ export type HeaderProps = {
 export const Header = ({navigation, socialLinks, authFunc, searchFunc}: HeaderProps) => {
 
     const [isShowPopup, setShowPopup] = useState(false);
+    const {t} = useTranslation('header');
 
     return (
         <>
@@ -65,7 +67,7 @@ export const Header = ({navigation, socialLinks, authFunc, searchFunc}: HeaderPr
                             <img src={SearchIcon} className="" width="17px" height="17px" alt=""/>
                         </ButtonIcon>
 
-                        <ButtonBase title='Войти' onClick={authFunc}/>
+                        <ButtonBase title={t('sing_in')} onClick={authFunc}/>
                     </div>
                 </div>
             </header>

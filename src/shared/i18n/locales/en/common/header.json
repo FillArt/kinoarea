@@ -1,3 +1,9 @@
 {
-
+  "poster": "Poster",
+  "movies": "Movies",
+  "actors" : "Actors",
+  "news": "News",
+  "collections": "Collections",
+  "categories": "Categories",
+  "sing_in": "Sign in"
 }

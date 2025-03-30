@@ -4,6 +4,7 @@ import {SocialLinks} from "@/widgets/Header/model/social.ts";
 
 import BgImg from '@/shared/layouts/assets/bg.png'
 import {NavigationLinksType} from "@/widgets/Header/ui/Header.tsx";
+import {useTranslation} from "react-i18next";
 
 interface HomeLayoutProps {
     children: ReactNode;
@@ -12,13 +13,15 @@ interface HomeLayoutProps {
 
 export const HomePageLayout = ({children}: HomeLayoutProps) => {
 
+    const {t} = useTranslation('header');
+
     const navigationLinks: NavigationLinksType[] = [
-        {title: 'Афиша', link: '/poster'},
-        {title: 'Фильмы', link: '/movies'},
-        {title: 'Актёры', link : '/actors'},
-        {title: 'Новости', link: '/news'},
-        {title: 'Подборки', link: '/collections'},
-        {title: 'Категории', link: '/categories'}
+        {title: t('poster'), link: '/poster'},
+        {title: t('movies'), link: '/movies'},
+        {title: t('actors'), link : '/actors'},
+        {title: t('news'), link: '/news'},
+        {title: t('collections'), link: '/collections'},
+        {title: t('categories'), link: '/categories'}
     ]
 
     const imgStyle = {

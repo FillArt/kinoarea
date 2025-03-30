@@ -1,4 +1,5 @@
-import {NavigationLinksType} from "@/widgets/Header/model/navigationLinks.ts";
+import {NavigationLinksType} from "@/widgets/Header/ui/Header.tsx";
+
 
 type NavigationProps = {
     links: NavigationLinksType[],
