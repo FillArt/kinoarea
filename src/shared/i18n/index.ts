@@ -22,6 +22,10 @@ import popularFilmsRu from "./locales/ru/home/popularFilms.json";
 import popularPeopleEn from "./locales/en/home/popularPeople.json"
 import popularPeopleRu from "./locales/ru/home/popularPeople.json";
 
+// News | Home page
+import newsEn from "./locales/en/home/news.json"
+import newsRu from "./locales/ru/home/news.json";
+
 
 const defaultLanguage = import.meta.env.VITE_APP_LANGUAGE || "en"; // Язык по умолчанию
 
@@ -36,6 +40,7 @@ await i18n
                 newTrailers: newTrailersRu,
                 popularFilms: popularFilmsRu,
                 popularPeople: popularPeopleRu,
+                news: newsRu
             },
             en: {
                 header: headerEn,
@@ -43,6 +48,7 @@ await i18n
                 newTrailers: newTrailersEn,
                 popularFilms: popularFilmsEn,
                 popularPeople: popularPeopleEn,
+                news: newsEn
             },
         },
         fallbackLng: defaultLanguage,

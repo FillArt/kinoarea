@@ -4,11 +4,13 @@ import {useEffect, useState} from "react";
 import {SectionTitle} from "@/shared/ui/sections/SectionTitle.tsx";
 import {FirstNews} from "@/pages/home/sections/News/ui/FirstNews/FirstNews.tsx";
 import {RestNewsList} from "@/pages/home/sections/News/ui/RestNews/RestNewsList.tsx";
+import {useTranslation} from "react-i18next";
+import ArrowIcon from "@/pages/home/sections/NewTrailers/assets/arrow.svg";
 
 
 export const News = () => {
-
     const news = useAppSelector(NewsSelector)
+    const {t} = useTranslation('news');
 
     const [firstNews, setFirstNews] = useState<NewsType>()
     const [restNews, setRestNews] = useState<NewsType[]>([])
@@ -26,8 +28,11 @@ export const News = () => {
     return (
         <section className="font-main bg-backgroundColor pt-6 mb-10 text-white">
             <div className="container max-w-container mx-auto">
-                <SectionTitle title="Последние новости" line={false}>
-                    Все новости
+                <SectionTitle title={t('title')} line={false}>
+                    <a className="tabletLg:text-[22px] text-[18px] flex items-center" href="/">
+                        {t('title_all')}
+                        <img src={ArrowIcon} alt="Стрелка" className="tabletLg:ml-[27px] ml-[14px] w-6 h-6"/>
+                    </a>
                 </SectionTitle>
 
                 <div className="grid grid-cols-12 gap-[23px] tabletLg:mt-[63px] mt-[30px]">
