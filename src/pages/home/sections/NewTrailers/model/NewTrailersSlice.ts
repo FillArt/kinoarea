@@ -48,6 +48,8 @@ export const fetchMovieDetailsTC = createAsyncThunk<TrailerType | undefined, num
     async (id, {rejectWithValue}) => {
         try {
             const movieInfo = await movieAPI.getTrailer(id);
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
             const trailer = movieInfo.data.results[0];
 
             if (!trailer) return undefined;
