@@ -13,11 +13,6 @@ export const CardMovie = ({movie, release_date}: CardMovieProps) => {
 
     const {title, vote_average, poster_path, genres} = movie;
 
-    if(release_date) {
-        console.log(formatDate(release_date), 'Вот дата выпуска');
-    }
-
-
     const rounded = (num: number, decimals: number) => Number(num.toFixed(decimals));
 
     const imgStyle = poster_path ? {
@@ -41,7 +36,9 @@ export const CardMovie = ({movie, release_date}: CardMovieProps) => {
                     />
                 </div>
 
-                <Rating rating={rounded(vote_average, 1)}/>
+
+                {!release_date && <Rating rating={rounded(vote_average, 1)}/>}
+
                 {!poster_path && <Empty/>}
             </div>
 

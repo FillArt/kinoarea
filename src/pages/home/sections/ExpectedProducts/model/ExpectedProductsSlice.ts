@@ -22,7 +22,15 @@ export const ExpectedProductsSlice = createAppSlice({
             }
         }, {
             fulfilled: (state, action) => {
-                state.moviesList = action.payload.results
+
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                state.moviesList = action.payload.results.filter((movie) => {
+                    if (!movie.release_date) return false; // Если даты нет, исключаем фильм
+                    const movieDate = new Date(movie.release_date);
+                    return movieDate >= today; // Оставляем только сегодняшние и будущие
+                })
             }
         })
     })

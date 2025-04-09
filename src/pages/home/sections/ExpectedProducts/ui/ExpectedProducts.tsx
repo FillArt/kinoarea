@@ -11,6 +11,9 @@ export const ExpectedProducts = () => {
     const dispatch = useAppDispatch();
     const movies = useAppSelector(MoviesSelector)
 
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
     const [currentSliderIndex, setCurrentSliderIndex] = useState<number>(0)
 
     useEffect(() => {
