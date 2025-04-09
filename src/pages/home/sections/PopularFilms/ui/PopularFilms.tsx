@@ -3,7 +3,6 @@ import {ButtonIcon} from "@/shared/ui/buttons/ButtonIcon.tsx";
 import Icon from "@/shared/ui/buttons/assets/burgerWhite.svg";
 import {useEffect, useMemo, useState} from "react";
 import {yearsList} from "@/pages/home/sections/PopularFilms/model/yearsList.ts";
-import {PopularSlider} from "@/pages/home/sections/PopularFilms/ui/PopularSlider/PopularSlider.tsx";
 import {
     fetchPopularMoviesTC,
     PopularFilmsSelector
@@ -13,6 +12,7 @@ import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
 import {nowGenreSelector} from "@/pages/home/sections/NowInCinema/model/NowInCinemaSlice.ts";
 import {EmptyCinemaList} from "@/shared/ui/sections/EmptyCinemaList.tsx";
 import {useTranslation} from "react-i18next";
+import {Slider} from "@/widgets/Slider/ui/Slider.tsx";
 
 
 export const PopularFilms = () => {
@@ -80,7 +80,7 @@ export const PopularFilms = () => {
 
                 {filteredMovies.length > 0 ? (
                     <div className="tabletLg:m-0 mt-[-35px]">
-                        <PopularSlider movies={filteredMovies}/>
+                        <Slider movies={filteredMovies} />
                     </div>
                 ) : (
                     <EmptyCinemaList/>

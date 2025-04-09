@@ -1,18 +1,30 @@
 import {Swiper, SwiperSlide} from "swiper/react";
 import {CardMovie} from "@/shared/ui/cards";
-import {useCallback, useRef, useState} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import {Navigation} from "swiper/modules";
 
-import Arrow from '../PopularSlider/assets/arrow.svg'
+import Arrow from "../assets/arrow.svg"
 import {MovieType} from "@/shared/types/MovieType.ts";
 
 type PopularSliderProps = {
-    movies: MovieType[]
+    movies: MovieType[],
+    prevButton?: string
+    nextButton?: string,
+    setIndex?: (index: number) => void,
+    release?: boolean
 }
 
-export const PopularSlider = ({movies}: PopularSliderProps ) => {
+export const Slider = ({movies, prevButton, nextButton, setIndex, release = false}: PopularSliderProps ) => {
     const [activeIndex, setActiveIndex] = useState(4);
     const sliderRef = useRef(null);
+
+    useEffect(() => {
+        if(setIndex) {
+            setIndex(activeIndex)
+        }
+    }, [activeIndex]);
+
+    const hiddenDefaultControl = prevButton ? 'hidden' : 'flex'
 
     /* TODO - need fixed type Swiper */
 
@@ -42,8 +54,8 @@ export const PopularSlider = ({movies}: PopularSliderProps ) => {
                 className="mt-4 w-full max-w-[1451px] mx-auto"
                 modules={[Navigation]}
                 navigation={{
-                    prevEl: ".custom-prev",
-                    nextEl: ".custom-next",
+                    prevEl: prevButton ? prevButton : ".custom-prev",
+                    nextEl: nextButton? nextButton : ".custom-next",
                 }}
                 breakpoints={{
                     996: {
@@ -59,13 +71,13 @@ export const PopularSlider = ({movies}: PopularSliderProps ) => {
             >
                 {movies.map(movie => (
                     <SwiperSlide key={movie.id}>
-                        <CardMovie movie={movie}/>
+                        <CardMovie movie={movie} release_date={release ? movie.release_date : null}/>
                     </SwiperSlide>
                 ))}
             </Swiper>
 
             <div
-                className="flex items-center gap-[20px] justify-center">
+                className={` ${hiddenDefaultControl} items-center gap-[20px] justify-center`}>
                 <button className="custom-prev text-lg"  onClick={handlePrev}>
                     <img src={Arrow} alt=""/>
                 </button>

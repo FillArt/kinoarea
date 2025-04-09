@@ -2,14 +2,16 @@ import {Empty} from "@/shared/ui/cards/CardMovie/Empty/Empty.tsx";
 import {Rating} from "@/shared/ui/cards/CardMovie/Rating/Rating.tsx";
 import {ButtonBase} from "@/shared/ui/buttons/ButtonBase.tsx";
 import {MovieType} from "@/shared/types/MovieType.ts";
+import {formatDate} from "@/shared/helpers/formatDate.ts";
 
 export type CardMovieProps = {
-    movie: MovieType
+    movie: MovieType,
+    release_date?: string | null
 }
 
-export const CardMovie = (item: CardMovieProps) => {
+export const CardMovie = ({movie, release_date}: CardMovieProps) => {
 
-    const {title, vote_average, poster_path, genres} = item.movie;
+    const {title, vote_average, poster_path, genres} = movie;
 
     const rounded = (num: number, decimals: number) => Number(num.toFixed(decimals));
 
@@ -34,7 +36,9 @@ export const CardMovie = (item: CardMovieProps) => {
                     />
                 </div>
 
-                <Rating rating={rounded(vote_average, 1)}/>
+
+                {!release_date && <Rating rating={rounded(vote_average, 1)}/>}
+
                 {!poster_path && <Empty/>}
             </div>
 
@@ -46,6 +50,10 @@ export const CardMovie = (item: CardMovieProps) => {
                     {index < genres.length - 1 && <span>,  </span>}
                 </span>
             ))}
+
+            {release_date && (
+                <p className="text-[15px] text-[#F2F60F]">{formatDate(release_date)}</p>
+            )}
         </div>
     );
 };

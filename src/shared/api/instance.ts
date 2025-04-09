@@ -6,6 +6,7 @@ export const instance = axios.create({
         Authorization: `Bearer ${import.meta.env.VITE_AUTH_TOKEN}`
     },
     params: {
-        language: import.meta.env.VITE_APP_LANGUAGE // Подставляем текущий язык
+        language: import.meta.env.VITE_APP_LANGUAGE,
+        region: "US"
     }
 })

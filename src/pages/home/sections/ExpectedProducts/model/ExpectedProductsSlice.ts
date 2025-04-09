@@ -16,14 +16,21 @@ export const ExpectedProductsSlice = createAppSlice({
         fetchMovies: create.asyncThunk( async (_,thunkAPI) => {
             try {
                 const res = await movieAPI.getUpcomingMovie()
-                console.log(res.data.results)
                 return {results: res.data.results}
             } catch (error) {
                 return thunkAPI.rejectWithValue(error);
             }
         }, {
             fulfilled: (state, action) => {
-                state.moviesList = action.payload.results
+
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                state.moviesList = action.payload.results.filter((movie) => {
+                    if (!movie.release_date) return false; // Если даты нет, исключаем фильм
+                    const movieDate = new Date(movie.release_date);
+                    return movieDate >= today; // Оставляем только сегодняшние и будущие
+                })
             }
         })
     })
