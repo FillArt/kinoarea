@@ -12,6 +12,7 @@ import {
     fetchAllMovieTrailersTC
 } from "@/pages/home/sections/NewTrailers/model/NewTrailersSlice.ts";
 import {useTranslation} from "react-i18next";
+import {Section} from "@/shared/ui/sections/Section.tsx";
 
 
 export const NewTrailers = () => {
@@ -21,7 +22,7 @@ export const NewTrailers = () => {
     const {t} = useTranslation("newTrailers")
 
     useEffect(() => {
-        if(movies.length) {
+        if (movies.length) {
             dispatch(fetchAllMovieTrailersTC(movies));
         }
     }, [movies]);
@@ -32,21 +33,18 @@ export const NewTrailers = () => {
     }
 
     return (
-        <section className="bg-backgroundColor text-white pt-6 mb-10 font-main ">
-            <div className="container max-w-container mx-auto">
-                <SectionTitle line={false} title={t('title')} sectionVersion="two">
-                    <a className="tabletLg:text-[22px] text-[18px] flex items-center" href="/">
-                        {t('button_title')}
-                        <img src={ArrowIcon} alt="Стрелка" className="tabletLg:ml-[27px] ml-[14px] w-6 h-6"/>
-                    </a>
-                </SectionTitle>
+        <Section>
+            <SectionTitle line={false} title={t('title')} sectionVersion="two">
+                <a className="tabletLg:text-[22px] text-[18px] flex items-center" href="/">
+                    {t('button_title')}
+                    <img src={ArrowIcon} alt="Стрелка" className="tabletLg:ml-[27px] ml-[14px] w-6 h-6"/>
+                </a>
+            </SectionTitle>
 
-                <div className="phone:mt-[32px] mt-[18px] grid">
-                    <MainPreview videoMod={isVideoMode} setVideoMod={setIsVideoMode}/>
-                    <MovieSlider onClick={chooseNextMovie} />
-                </div>
-
+            <div className="phone:mt-[32px] mt-[18px] grid">
+                <MainPreview videoMod={isVideoMode} setVideoMod={setIsVideoMode}/>
+                <MovieSlider onClick={chooseNextMovie}/>
             </div>
-        </section>
+        </Section>
     );
 };

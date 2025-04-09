@@ -13,6 +13,7 @@ import {nowGenreSelector} from "@/pages/home/sections/NowInCinema/model/NowInCin
 import {EmptyCinemaList} from "@/shared/ui/sections/EmptyCinemaList.tsx";
 import {useTranslation} from "react-i18next";
 import {Slider} from "@/widgets/Slider/ui/Slider.tsx";
+import {Section} from "@/shared/ui/sections/Section.tsx";
 
 
 export const PopularFilms = () => {
@@ -43,7 +44,7 @@ export const PopularFilms = () => {
 
     const onClickHandler = ((filter: string) => {
         setFilter(filter);
-        if(filter !== "All"){
+        if (filter !== "All") {
             setFilteredMovies(formatMovies.filter(movies => movies.release_date?.split('-')[0] === filter));
         } else {
             setFilteredMovies(formatMovies)
@@ -53,40 +54,38 @@ export const PopularFilms = () => {
     const prepareYearsList = [t('all'), ...yearsList];
 
     return (
-        <section className="font-main bg-backgroundColor pt-6 mb-10 text-white">
-            <div className="container max-w-container mx-auto">
-                <SectionTitle title={t('title')}>
-                    <div className="tabletLg:max-w-[490px] max-w-[408px] w-full phone:flex hidden justify-between z-10">
-                        {prepareYearsList.map((item) => (
-                            <button
-                                key={item}
-                                onClick={() => onClickHandler(item as string)}
-                                className={`${
-                                    filter === item ? "opacity-100" : "opacity-50"
-                                } tabletLg:text-smallFontSize text-[15px]`}
-                            >
-                                {item}
-                            </button>
-                        ))}
-                    </div>
+        <Section>
+            <SectionTitle title={t('title')}>
+                <div className="tabletLg:max-w-[490px] max-w-[408px] w-full phone:flex hidden justify-between z-10">
+                    {prepareYearsList.map((item) => (
+                        <button
+                            key={item}
+                            onClick={() => onClickHandler(item as string)}
+                            className={`${
+                                filter === item ? "opacity-100" : "opacity-50"
+                            } tabletLg:text-smallFontSize text-[15px]`}
+                        >
+                            {item}
+                        </button>
+                    ))}
+                </div>
 
-                    <div className="phone:hidden block mt-[8px]">
-                        <ButtonIcon onClick={() => alert('Заглушка')} style="secondary">
-                            <img src={Icon} width="12px" height="12px" alt="Close Popup"/>
-                        </ButtonIcon>
-                    </div>
+                <div className="phone:hidden block mt-[8px]">
+                    <ButtonIcon onClick={() => alert('Заглушка')} style="secondary">
+                        <img src={Icon} width="12px" height="12px" alt="Close Popup"/>
+                    </ButtonIcon>
+                </div>
 
-                </SectionTitle>
+            </SectionTitle>
 
-                {filteredMovies.length > 0 ? (
-                    <div className="tabletLg:m-0 mt-[-35px]">
-                        <Slider movies={filteredMovies} />
-                    </div>
-                ) : (
-                    <EmptyCinemaList/>
-                )}
+            {filteredMovies.length > 0 ? (
+                <div className="tabletLg:m-0 mt-[-35px]">
+                    <Slider movies={filteredMovies}/>
+                </div>
+            ) : (
+                <EmptyCinemaList/>
+            )}
 
-            </div>
-        </section>
+        </Section>
     );
 };
