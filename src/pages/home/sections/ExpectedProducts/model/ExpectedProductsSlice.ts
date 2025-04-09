@@ -16,7 +16,6 @@ export const ExpectedProductsSlice = createAppSlice({
         fetchMovies: create.asyncThunk( async (_,thunkAPI) => {
             try {
                 const res = await movieAPI.getUpcomingMovie()
-                console.log(res.data.results)
                 return {results: res.data.results}
             } catch (error) {
                 return thunkAPI.rejectWithValue(error);

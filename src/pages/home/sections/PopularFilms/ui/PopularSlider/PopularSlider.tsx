@@ -59,7 +59,7 @@ export const PopularSlider = ({movies}: PopularSliderProps ) => {
             >
                 {movies.map(movie => (
                     <SwiperSlide key={movie.id}>
-                        <CardMovie movie={movie}/>
+                        <CardMovie movie={movie} release_date={movie.release_date}/>
                     </SwiperSlide>
                 ))}
             </Swiper>
