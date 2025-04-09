@@ -1,1 +1,1 @@
-export {PopularFilms} from "@/pages/HomePage/sections/PopularFilms/ui/PopularFilms.tsx";
+export {PopularFilms} from "@/pages/home/sections/PopularFilms/ui/PopularFilms.tsx";

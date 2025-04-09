@@ -29,31 +29,38 @@ import newsRu from "./locales/ru/home/news.json";
 
 const defaultLanguage = import.meta.env.VITE_APP_LANGUAGE || "en"; // Язык по умолчанию
 
-await i18n
-    //.use(LanguageDetector)
-    .use(initReactI18next)
-    .init({
-        resources: {
-            ru: {
-                header: headerRu,
-                nowInCinema: nowInCinemaRu,
-                newTrailers: newTrailersRu,
-                popularFilms: popularFilmsRu,
-                popularPeople: popularPeopleRu,
-                news: newsRu
+
+const initI18n = async () => {
+    await i18n
+        //.use(LanguageDetector)
+        .use(initReactI18next)
+        .init({
+            resources: {
+                ru: {
+                    header: headerRu,
+                    nowInCinema: nowInCinemaRu,
+                    newTrailers: newTrailersRu,
+                    popularFilms: popularFilmsRu,
+                    popularPeople: popularPeopleRu,
+                    news: newsRu
+                },
+                en: {
+                    header: headerEn,
+                    nowInCinema: nowInCinemaEn,
+                    newTrailers: newTrailersEn,
+                    popularFilms: popularFilmsEn,
+                    popularPeople: popularPeopleEn,
+                    news: newsEn
+                },
             },
-            en: {
-                header: headerEn,
-                nowInCinema: nowInCinemaEn,
-                newTrailers: newTrailersEn,
-                popularFilms: popularFilmsEn,
-                popularPeople: popularPeopleEn,
-                news: newsEn
-            },
-        },
-        fallbackLng: defaultLanguage,
-        interpolation: {escapeValue: false},
-        debug: true, // Включить логи в консоли
-    });
+            fallbackLng: defaultLanguage,
+            interpolation: {escapeValue: false},
+            debug: true, // Включить логи в консоли
+        });
+}
+
+initI18n();
+
+
 
 export default i18n;
