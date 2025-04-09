@@ -6,13 +6,12 @@ import {fetchMovies, MoviesSelector} from "@/pages/home/sections/ExpectedProduct
 import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
 import {Slider} from "@/widgets/Slider/ui/Slider.tsx";
 import Arrow from "@/widgets/Slider/assets/arrow.svg";
+import {useTranslation} from "react-i18next";
 
 export const ExpectedProducts = () => {
     const dispatch = useAppDispatch();
     const movies = useAppSelector(MoviesSelector)
-
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const {t} = useTranslation('expectedProducts')
 
     const [currentSliderIndex, setCurrentSliderIndex] = useState<number>(0)
 
@@ -20,14 +19,11 @@ export const ExpectedProducts = () => {
         dispatch(fetchMovies())
     }, []);
 
-    useEffect(() => {
-        console.log(movies);
-    }, [movies]);
 
     return (
         <section className="font-main bg-backgroundColor pt-6 mb-10 text-white">
             <div className="container max-w-container mx-auto">
-                <SectionTitle title="Ожидаемые новинки" line={false}>
+                <SectionTitle title={t('title')} line={false}>
                     <div
                         className="flex items-center gap-[20px] justify-center">
                         <button className="expected-prev text-lg" onClick={() => {}}>

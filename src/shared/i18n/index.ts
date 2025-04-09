@@ -26,6 +26,9 @@ import popularPeopleRu from "./locales/ru/home/popularPeople.json";
 import newsEn from "./locales/en/home/news.json"
 import newsRu from "./locales/ru/home/news.json";
 
+// Expected Products | Home page
+import expectedProductsEn from "./locales/en/home/expectedProducts.json"
+import expectedProductsRu from "./locales/ru/home/expectedProducts.json";
 
 const defaultLanguage = import.meta.env.VITE_APP_LANGUAGE || "en"; // Язык по умолчанию
 
@@ -42,7 +45,8 @@ const initI18n = async () => {
                     newTrailers: newTrailersRu,
                     popularFilms: popularFilmsRu,
                     popularPeople: popularPeopleRu,
-                    news: newsRu
+                    news: newsRu,
+                    expectedProducts: expectedProductsRu
                 },
                 en: {
                     header: headerEn,
@@ -50,7 +54,8 @@ const initI18n = async () => {
                     newTrailers: newTrailersEn,
                     popularFilms: popularFilmsEn,
                     popularPeople: popularPeopleEn,
-                    news: newsEn
+                    news: newsEn,
+                    expectedProducts: expectedProductsEn
                 },
             },
             fallbackLng: defaultLanguage,
