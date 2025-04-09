@@ -6,7 +6,7 @@ import {formatDate} from "@/shared/helpers/formatDate.ts";
 
 export type CardMovieProps = {
     movie: MovieType,
-    release_date?: string
+    release_date?: string | null
 }
 
 export const CardMovie = ({movie, release_date}: CardMovieProps) => {
