@@ -32,7 +32,7 @@ export const BoxOfficeSlice = createAppSlice({
                         return {
                             title: item.title,
                             revenue: details.data.revenue,
-                            img: details.data.backdrop_path,
+                            img: `https://image.tmdb.org/t/p/w500/${details.data.backdrop_path}`,
                             budget: details.data.budget,
                         };
                     })
