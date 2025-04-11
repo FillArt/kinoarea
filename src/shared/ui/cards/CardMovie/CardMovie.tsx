@@ -3,6 +3,7 @@ import {Rating} from "@/shared/ui/cards/CardMovie/Rating/Rating.tsx";
 import {ButtonBase} from "@/shared/ui/buttons/ButtonBase.tsx";
 import {MovieType} from "@/shared/types/MovieType.ts";
 import {formatDate} from "@/shared/helpers/formatDate.ts";
+import {useTranslation} from "react-i18next";
 
 export type CardMovieProps = {
     movie: MovieType,
@@ -12,6 +13,7 @@ export type CardMovieProps = {
 export const CardMovie = ({movie, release_date}: CardMovieProps) => {
 
     const {title, vote_average, poster_path, genres} = movie;
+    const {t} = useTranslation('cards');
 
     const rounded = (num: number, decimals: number) => Number(num.toFixed(decimals));
 
@@ -22,7 +24,7 @@ export const CardMovie = ({movie, release_date}: CardMovieProps) => {
     } : {}
 
     return (
-        <div className="group relative max-w-[340px] ">
+        <div className="group relative max-w-[340px] cursor-pointer ">
             <div
                 style={imgStyle}
                 className="bg-emptyColor tabletLg:h-[470px] h-[286px] relative flex justify-center items-center rounded-[10px]">
@@ -30,7 +32,7 @@ export const CardMovie = ({movie, release_date}: CardMovieProps) => {
                 <div
                     className="absolute inset-0 bg-formElementColor bg-opacity-0 group-hover:bg-opacity-65
                     flex items-center justify-center rounded-[10px] transition-all duration-300 ease-in-out">
-                    <ButtonBase title="Карточка фильма" onClick={() => alert('Переход на страницу...')}
+                    <ButtonBase title={t('cards_movie_button')} onClick={() => alert('Переход на страницу...')}
                                 style="card"
                                 className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"
                     />

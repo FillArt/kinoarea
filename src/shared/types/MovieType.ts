@@ -26,3 +26,10 @@ export type TrailerType = {
         url: string,
     }
 }
+
+export type BoxOfficeType = {
+    title: string,
+    revenue: string,
+    img: string,
+    budget: string,
+}

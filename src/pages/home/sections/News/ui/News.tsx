@@ -6,6 +6,7 @@ import {FirstNews} from "@/pages/home/sections/News/ui/FirstNews/FirstNews.tsx";
 import {RestNewsList} from "@/pages/home/sections/News/ui/RestNews/RestNewsList.tsx";
 import {useTranslation} from "react-i18next";
 import ArrowIcon from "@/pages/home/sections/NewTrailers/assets/arrow.svg";
+import {Section} from "@/shared/ui/sections/Section.tsx";
 
 
 export const News = () => {
@@ -24,26 +25,23 @@ export const News = () => {
     }, [news]);
 
     return (
-        <section className="font-main bg-backgroundColor pt-6 mb-10 text-white">
-            <div className="container max-w-container mx-auto">
-                <SectionTitle title={t('title')} line={false}>
-                    <a className="tabletLg:text-[22px] text-[18px] flex items-center" href="/">
-                        {t('title_all')}
-                        <img src={ArrowIcon} alt="Стрелка" className="tabletLg:ml-[27px] ml-[14px] w-6 h-6"/>
-                    </a>
-                </SectionTitle>
+        <Section>
+            <SectionTitle title={t('title')} line={false}>
+                <a className="tabletLg:text-[22px] text-[18px] flex items-center" href="/">
+                    {t('title_all')}
+                    <img src={ArrowIcon} alt="Стрелка" className="tabletLg:ml-[27px] ml-[14px] w-6 h-6"/>
+                </a>
+            </SectionTitle>
 
-                <div className="grid grid-cols-12 gap-[23px] tabletLg:mt-[63px] mt-[30px]">
-                    <div className="tablet:col-span-10">
-                        <FirstNews item={firstNews}/>
-                    </div>
+            <div className="grid grid-cols-12 gap-[23px] tabletLg:mt-[63px] mt-[30px]">
+                <div className="tablet:col-span-10">
+                    <FirstNews item={firstNews}/>
+                </div>
 
-                    <div className="tablet:col-span-2">
-                        <RestNewsList items={restNews} />
-                    </div>
-
+                <div className="tablet:col-span-2">
+                    <RestNewsList items={restNews}/>
                 </div>
             </div>
-        </section>
+        </Section>
     );
 };

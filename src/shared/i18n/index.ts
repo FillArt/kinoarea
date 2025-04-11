@@ -6,6 +6,10 @@ import {initReactI18next} from "react-i18next";
 import headerEn from "./locales/en/common/header.json"
 import headerRu from "./locales/ru/common/header.json";
 
+// Cards | Common
+import cardsEn from "./locales/en/common/cards.json"
+import cardsRu from "./locales/ru/common/cards.json";
+
 // Now in Cinema | Home Page
 import nowInCinemaEn from "./locales/en/home/nowInCinema.json"
 import nowInCinemaRu from "./locales/ru/home/nowInCinema.json";
@@ -40,7 +44,10 @@ const initI18n = async () => {
         .init({
             resources: {
                 ru: {
+                    // common
                     header: headerRu,
+                    cards: cardsRu,
+                    // home
                     nowInCinema: nowInCinemaRu,
                     newTrailers: newTrailersRu,
                     popularFilms: popularFilmsRu,
@@ -49,7 +56,10 @@ const initI18n = async () => {
                     expectedProducts: expectedProductsRu
                 },
                 en: {
+                    // common
                     header: headerEn,
+                    cards: cardsEn,
+                    // home
                     nowInCinema: nowInCinemaEn,
                     newTrailers: newTrailersEn,
                     popularFilms: popularFilmsEn,

@@ -12,6 +12,7 @@ import {
 } from "@/pages/home/sections/PopularPeople/model/PopularPeopleSlice.ts";
 import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
 import {useTranslation} from "react-i18next";
+import {Section} from "@/shared/ui/sections/Section.tsx";
 
 
 export const PopularPeople = () => {
@@ -40,8 +41,8 @@ export const PopularPeople = () => {
     };
 
     const timeList: { label: string, value: string }[] = [
-        { label: t('week'), value: 'week' },
-        { label: t('day'), value: 'day' },
+        {label: t('week'), value: 'week'},
+        {label: t('day'), value: 'day'},
     ];
 
     const onClickHandler = (value: 'day' | 'week') => setFilterPopularTime(value)
@@ -52,41 +53,39 @@ export const PopularPeople = () => {
 
 
     return (
-        <section className="font-main bg-backgroundColor pt-6 mb-10 text-white">
-            <div className="container max-w-container mx-auto">
-                <SectionTitle title={t('title')} line={false}>
-                    <div className="phone:flex hidden justify-between tabletLg:max-w-[180px] max-w-[150px] w-full">
-                        {timeList.map((item) => (
-                            <button
-                                key={item.value}
-                                onClick={() => onClickHandler(item.value as 'day' | 'week')}
-                                className={`${
-                                    filterPopularTime === item.value ? "opacity-100" : "opacity-50"
-                                } tabletLg:text-smallFontSize text-[15px]`}
-                            >
-                                {item.label}
-                            </button>
-                        ))}
-                    </div>
-                    <div className="phone:hidden block mt-[8px]">
-                        <ButtonIcon onClick={() => alert('Заглушка')} style="secondary">
-                            <img src={Icon} width="12px" height="12px" alt="Close Popup"/>
-                        </ButtonIcon>
-                    </div>
-                </SectionTitle>
+        <Section>
+            <SectionTitle title={t('title')} line={false}>
+                <div className="phone:flex hidden justify-between tabletLg:max-w-[180px] max-w-[150px] w-full">
+                    {timeList.map((item) => (
+                        <button
+                            key={item.value}
+                            onClick={() => onClickHandler(item.value as 'day' | 'week')}
+                            className={`${
+                                filterPopularTime === item.value ? "opacity-100" : "opacity-50"
+                            } tabletLg:text-smallFontSize text-[15px]`}
+                        >
+                            {item.label}
+                        </button>
+                    ))}
+                </div>
+                <div className="phone:hidden block mt-[8px]">
+                    <ButtonIcon onClick={() => alert('Заглушка')} style="secondary">
+                        <img src={Icon} width="12px" height="12px" alt="Close Popup"/>
+                    </ButtonIcon>
+                </div>
+            </SectionTitle>
 
-                <div className="grid grid-cols-12 gap-[23px] tabletLg:mt-[63px] mt-[30px]">
-                    <div className="tablet:col-span-4 col-span-6">
-                        <PopularPhotoInfo data={firstPerson} place={t('first')}/>
-                    </div>
-                    <div className="tablet:col-span-4 col-span-6">
-                        <PopularPhotoInfo data={secondPerson} place={t('second')}/>
-                    </div>
-                    <div className="tablet:col-span-4 col-span-12">
-                        <PopularListInfo data={restPersons}/>
-                    </div>
+            <div className="grid grid-cols-12 gap-[23px] tabletLg:mt-[63px] mt-[30px]">
+                <div className="tablet:col-span-4 col-span-6">
+                    <PopularPhotoInfo data={firstPerson} place={t('first')}/>
+                </div>
+                <div className="tablet:col-span-4 col-span-6">
+                    <PopularPhotoInfo data={secondPerson} place={t('second')}/>
+                </div>
+                <div className="tablet:col-span-4 col-span-12">
+                    <PopularListInfo data={restPersons}/>
                 </div>
             </div>
-        </section>
+        </Section>
     );
 };
