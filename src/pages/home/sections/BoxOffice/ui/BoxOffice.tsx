@@ -1,46 +1,39 @@
 import {Section} from "@/shared/ui/sections/Section.tsx";
 import {SectionTitle} from "@/shared/ui/sections/SectionTitle.tsx";
+import {formatDate} from "@/shared/helpers/formatDate.ts";
+import {useAppDispatch} from "@/shared/hooks/useAppDispatch.ts";
 import {useEffect} from "react";
-import {movieAPI} from "@/shared/api/MovieAPI.ts";
+import {
+    // BoxOfficeLoadedSelector,
+    BoxOfficeSelector,
+    fetchBoxOfficeTC
+} from "@/pages/home/sections/BoxOffice/model/BoxOfficeSlice.ts";
+import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
 
 export const BoxOffice = () => {
+    const today = new Date();
+    const lastWeek = new Date();
+    lastWeek.setDate(today.getDate() - 7);
+
+    const dispatch = useAppDispatch();
+    const infoMovies = useAppSelector(BoxOfficeSelector)
+    // const isLoading = useAppSelector(BoxOfficeLoadedSelector)
 
     useEffect(() => {
-        const test = async () => {
-            const today = new Date();
-            const lastWeek = new Date();
+        dispatch(fetchBoxOfficeTC())
 
-            lastWeek.setDate(today.getDate() - 7);
-
-            const res = await movieAPI.getDiscoverMovies({
-                startDate: lastWeek.toISOString().split("T")[0],
-                endDate: today.toISOString().split("T")[0],
-            })
-
-            const boxOfficeData = await Promise.all(
-                res.data.results.map(async (item) => {
-                    const details = await movieAPI.getInfoMovie(item.id);
-                    return {
-                        title: item.title,
-                        revenue: details.data.revenue,
-                        img: details.data.backdrop_path,
-                    };
-                })
-            );
-
-            console.log(boxOfficeData);
-        }
-
-        test()
     }, []);
+
 
     return (
         <Section>
             <SectionTitle title="Кассовые сборы">
-                13 марта — 15 марта
+                {formatDate(lastWeek.toISOString().split("T")[0])} — {formatDate(today.toISOString().split("T")[0])}
             </SectionTitle>
 
-            <h1>Hello World</h1>
+            {infoMovies ? infoMovies.map((item) => (
+                <span>{item.title}</span>
+            )) : null}
 
         </Section>
     );
