@@ -5,6 +5,7 @@ import {SocialLinks} from "@/widgets/Header/model/social.ts";
 import BgImg from '@/shared/layouts/assets/bg.png'
 import {NavigationLinksType} from "@/widgets/Header/ui/Header.tsx";
 import {useTranslation} from "react-i18next";
+import {Subscription} from "@/widgets/Subscription/ui/Subscription.tsx";
 
 interface HomeLayoutProps {
     children: ReactNode;
@@ -40,6 +41,9 @@ export const HomePageLayout = ({children}: HomeLayoutProps) => {
                 searchFunc={() => alert('Открываю форму поиска ...')}
             />
             {children}
+
+            <Subscription />
+
             <div>Footer</div>
         </div>
     );
