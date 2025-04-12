@@ -13,12 +13,12 @@ export const RestNewsItem = ({item}: RestNewsItemProps) => {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'}}
-            className="rounder-[10px] h-[175px] px-[18px] pt-[11px] pb-[26px] rounded-[10px] flex flex-col justify-between">
+            className="rounder-[10px] h-[175px] tabletLg:px-[18px] px-[15px] tabletLg:pt-[11px] pt-[9px] tabletLg:pb-[26px] pb-[15px] rounded-[10px] flex flex-col justify-between w-full">
             <div>
                 <span className="text-[15px] font-bold">{item && t(item.date)}</span>
             </div>
             <div>
-                <h3 className="text-[18px] font-bold">{item && t(item.title)}</h3>
+                <h3 className="tabletLg:text-[18px] text-[15px] font-bold">{item && t(item.title)}</h3>
             </div>
         </div>
     );

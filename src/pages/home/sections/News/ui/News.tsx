@@ -7,26 +7,33 @@ import {RestNewsList} from "@/pages/home/sections/News/ui/RestNews/RestNewsList.
 import {useTranslation} from "react-i18next";
 import ArrowIcon from "@/pages/home/sections/NewTrailers/assets/arrow.svg";
 import {Section} from "@/shared/ui/sections/Section.tsx";
+import {useBreakpoint} from "@/shared/hooks/useBreakpoint.ts";
 
 
 export const News = () => {
     const news = useAppSelector(NewsSelector)
     const {t} = useTranslation('news');
+    const breakpoint = useBreakpoint()
 
     const [firstNews, setFirstNews] = useState<NewsType>()
     const [restNews, setRestNews] = useState<NewsType[]>([])
 
     useEffect(() => {
         const first = news[0];
-        const rest = news.slice(1);
+        let count = 4
+
+        if (breakpoint === "phone") count = 2
+        else if (breakpoint === "tablet") count = 3
+
+        const rest = news.slice(1, count + 1)
 
         setFirstNews(first);
         setRestNews(rest);
-    }, [news]);
+    }, [news, breakpoint]);
 
     return (
         <Section>
-            <SectionTitle title={t('title')} line={false}>
+            <SectionTitle title={t('title')} line={false} sectionVersion="two">
                 <a className="tabletLg:text-[22px] text-[18px] flex items-center" href="/">
                     {t('title_all')}
                     <img src={ArrowIcon} alt="Стрелка" className="tabletLg:ml-[27px] ml-[14px] w-6 h-6"/>
@@ -34,11 +41,11 @@ export const News = () => {
             </SectionTitle>
 
             <div className="grid grid-cols-12 gap-[23px] tabletLg:mt-[63px] mt-[30px]">
-                <div className="tablet:col-span-10">
+                <div className="tabletLg:col-span-10 col-span-12">
                     <FirstNews item={firstNews}/>
                 </div>
 
-                <div className="tablet:col-span-2">
+                <div className="tabletLg:col-span-2 col-span-12">
                     <RestNewsList items={restNews}/>
                 </div>
             </div>
