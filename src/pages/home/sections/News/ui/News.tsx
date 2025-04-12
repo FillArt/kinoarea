@@ -26,7 +26,7 @@ export const News = () => {
 
     return (
         <Section>
-            <SectionTitle title={t('title')} line={false}>
+            <SectionTitle title={t('title')} line={false} sectionVersion="two">
                 <a className="tabletLg:text-[22px] text-[18px] flex items-center" href="/">
                     {t('title_all')}
                     <img src={ArrowIcon} alt="Стрелка" className="tabletLg:ml-[27px] ml-[14px] w-6 h-6"/>
@@ -34,11 +34,11 @@ export const News = () => {
             </SectionTitle>
 
             <div className="grid grid-cols-12 gap-[23px] tabletLg:mt-[63px] mt-[30px]">
-                <div className="tablet:col-span-10">
+                <div className="tabletLg:col-span-10 col-span-12">
                     <FirstNews item={firstNews}/>
                 </div>
 
-                <div className="tablet:col-span-2">
+                <div className="tabletLg:col-span-2 col-span-12">
                     <RestNewsList items={restNews}/>
                 </div>
             </div>

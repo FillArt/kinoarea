@@ -7,7 +7,7 @@ type RestNewsItemProps = {
 
 export const RestNewsList = ({ items }: RestNewsItemProps) => {
     return (
-        <div className="flex flex-col gap-[23px]">
+        <div className="flex tabletLg:flex-col tabletLg:gap-[23px] gap-[9px]">
             {items.map((item, index) => (
                 <RestNewsItem item={item} key={index} />
             ))}
