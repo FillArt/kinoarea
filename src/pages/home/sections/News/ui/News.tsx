@@ -7,22 +7,29 @@ import {RestNewsList} from "@/pages/home/sections/News/ui/RestNews/RestNewsList.
 import {useTranslation} from "react-i18next";
 import ArrowIcon from "@/pages/home/sections/NewTrailers/assets/arrow.svg";
 import {Section} from "@/shared/ui/sections/Section.tsx";
+import {useBreakpoint} from "@/shared/hooks/useBreakpoint.ts";
 
 
 export const News = () => {
     const news = useAppSelector(NewsSelector)
     const {t} = useTranslation('news');
+    const breakpoint = useBreakpoint()
 
     const [firstNews, setFirstNews] = useState<NewsType>()
     const [restNews, setRestNews] = useState<NewsType[]>([])
 
     useEffect(() => {
         const first = news[0];
-        const rest = news.slice(1);
+        let count = 4
+
+        if (breakpoint === "phone") count = 2
+        else if (breakpoint === "tablet") count = 3
+
+        const rest = news.slice(1, count + 1)
 
         setFirstNews(first);
         setRestNews(rest);
-    }, [news]);
+    }, [news, breakpoint]);
 
     return (
         <Section>
