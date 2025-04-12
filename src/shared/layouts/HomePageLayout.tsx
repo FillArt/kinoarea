@@ -40,7 +40,9 @@ export const HomePageLayout = ({children}: HomeLayoutProps) => {
                 authFunc={() => alert('Открываю форму входа ...')}
                 searchFunc={() => alert('Открываю форму поиска ...')}
             />
-            {children}
+            <main>
+                {children}
+            </main>
 
             <Subscription />
 
