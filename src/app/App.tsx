@@ -10,6 +10,7 @@ export const App = () => {
     return (
         <>
             <HomePage />
+
         </>
     )
 }

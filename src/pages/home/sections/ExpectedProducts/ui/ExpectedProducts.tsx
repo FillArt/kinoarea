@@ -23,9 +23,9 @@ export const ExpectedProducts = () => {
 
     return (
         <Section>
-            <SectionTitle title={t('title')} line={false}>
+            <SectionTitle title={t('title')} line={false} sectionVersion="two">
                 <div
-                    className="flex items-center gap-[20px] justify-center">
+                    className="phone:flex hidden items-center gap-[20px] justify-center">
                     <button className="expected-prev text-lg" onClick={() => {
                     }}>
                         <img src={Arrow} alt=""/>

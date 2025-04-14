@@ -24,7 +24,7 @@ export const Slider = ({movies, prevButton, nextButton, setIndex, release = fals
         }
     }, [activeIndex]);
 
-    const hiddenDefaultControl = prevButton ? 'hidden' : 'flex'
+    const hiddenDefaultControl = prevButton ? 'phone:hidden flex' : 'flex'
 
     /* TODO - need fixed type Swiper */
 

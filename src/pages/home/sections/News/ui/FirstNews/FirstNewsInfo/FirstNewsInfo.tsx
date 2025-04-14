@@ -9,7 +9,7 @@ type FirstNewsInfo = {
 
 export const FirstNewsInfo = ({ date, view, commentsCount }: FirstNewsInfo) => {
     return (
-        <div className="text-[15px] flex gap-[15px]">
+        <div className="phone:text-[15px] text-[12px] items-center flex gap-[15px]">
             <span>{date}</span>
             <div className="flex gap-[7px] items-center">
                 <img src={EyeIcon} alt=""/>
