@@ -9,7 +9,8 @@
 - 📦 **Axios** – API requests (TMDb)  
 - 📺 **React-Youtube** – embedded trailers  
 - 🏗 **Vite** – fast development and build  
-- 📖 **Storybook** – UI component documentation  
+- 📖 **Storybook** – UI component documentation
+- 🐳 **Docker** – containerization for easy development and deployment  
 
 ## 🔗[Live Demo](https://fillart.github.io/kinoarea/)  
 
