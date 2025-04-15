@@ -39,7 +39,7 @@ export const BoxOffice = () => {
 
     return (
         <Section>
-            <SectionTitle title={t('title')}>
+            <SectionTitle title={t('title')} sectionVersion="two">
                 {formatDate(lastWeek.toISOString().split("T")[0])} — {formatDate(today.toISOString().split("T")[0])}
             </SectionTitle>
 

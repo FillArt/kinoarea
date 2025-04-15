@@ -7,16 +7,21 @@ import {SubscriptionForm} from "@/widgets/Subscription/ui/SubscriptionForm.tsx";
 export const Subscription = () => {
 
     return (
-        <section>
+        <section className="mt-[95px]">
             <div
-                style={{backgroundImage: `linear-gradient(rgba(29, 58, 160, 0.9), rgba(29, 58, 160, 0.9)), url(${BgImage})`}}
-                className="container max-w-container mx-auto mt-[95px] pt-[75px] pb-[105px] rounded-[10px]">
 
-                <div className=" w-full flex items-center flex-col mx-auto text-white">
-                    <SubscriptionTitle/>
-                    <SubscriptionDescription/>
-                    <SubscriptionForm/>
+                className="container max-w-container mx-auto">
+
+                <div
+                    className="tabletLg:pt-[75px] pt-[51px] tabletLg:pb-[105px] pb-[50px] rounded-[10px]"
+                    style={{backgroundImage: `linear-gradient(rgba(29, 58, 160, 0.9), rgba(29, 58, 160, 0.9)), url(${BgImage})`}}>
+                    <div className=" w-full flex items-center flex-col mx-auto text-white">
+                        <SubscriptionTitle/>
+                        <SubscriptionDescription/>
+                        <SubscriptionForm/>
+                    </div>
                 </div>
+
 
             </div>
         </section>

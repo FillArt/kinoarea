@@ -10,8 +10,6 @@ type SubscriptionFormType = {
 
 export const SubscriptionForm = () => {
 
-
-
     const {
         register,
         handleSubmit,
