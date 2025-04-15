@@ -16,7 +16,7 @@ export const InputText = ({register, error, placeholder = 'Default', type = 'tex
     return (
 
         <input type={type}
-               className={`py-[14px] w-full px-[27px] rounded-[10px] text-black min-w-[425px]  ${errorStyle}`}
+               className={`phone:py-[14px] py-[9px] w-full px-[27px] rounded-[10px] text-black phone:min-w-[425px]  ${errorStyle}`}
                placeholder={placeholder}
                {...register}
         />

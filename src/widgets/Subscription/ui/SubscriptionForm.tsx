@@ -26,7 +26,7 @@ export const SubscriptionForm = () => {
 
     return (
         <form method="post" onSubmit={(e) => e.preventDefault()}>
-            <div className="flex gap-[8px]">
+            <div className="flex phone:flex-row flex-col gap-[8px]">
                 <InputText register={register('email', validateEmail)} error={errors.email} />
                 <ButtonBase disable={isSubmitted && !isValid} onClick={handleSubmit(onSubmit)} title="Подписаться" style="secondary"/>
             </div>
@@ -35,7 +35,7 @@ export const SubscriptionForm = () => {
 
             <div className="justify-center flex gap-[10px] mt-[22px]">
                 <Checkbox>
-                    <span className="text-white text-[17px]">Соглашаюсь на условия  <a
+                    <span className="text-white phone:text-[17px] text-[14px]">Соглашаюсь на условия  <a
                         className="text-[#F2F60F] hover:underline" href="/">политики конфиденциальности</a></span>
                 </Checkbox>
             </div>
