@@ -2,11 +2,12 @@ import {Section} from "@/shared/ui/sections/Section.tsx";
 import {SectionTitle} from "@/shared/ui/sections/SectionTitle.tsx";
 import {formatDate} from "@/shared/helpers/formatDate.ts";
 import {useAppDispatch} from "@/shared/hooks/useAppDispatch.ts";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {BoxOfficeSelector, fetchBoxOfficeTC} from "@/pages/home/sections/BoxOffice/model/BoxOfficeSlice.ts";
 import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
 import {BoxOfficeType} from "@/shared/types/MovieType.ts";
 import {ItemMovie} from "@/pages/home/sections/BoxOffice/ui/ItemMovie.tsx";
+import {useBreakpoint} from "@/shared/hooks/useBreakpoint.ts";
 
 export const BoxOffice = () => {
     const today = new Date();
@@ -15,11 +16,23 @@ export const BoxOffice = () => {
 
     const dispatch = useAppDispatch();
     const infoMovies: BoxOfficeType[] = useAppSelector(BoxOfficeSelector)
+    const breakpoint = useBreakpoint()
+
+    const [prepareMovies, setPrepareMovies] = useState<BoxOfficeType[]>([])
+
     // const isLoading = useAppSelector(BoxOfficeLoadedSelector)
 
     useEffect(() => {
-        dispatch(fetchBoxOfficeTC())
+        if (breakpoint === "phone") {
+            setPrepareMovies(infoMovies.slice(0, 4));
+        } else {
+            setPrepareMovies(infoMovies.slice(0, 5));
+        }
+    }, [infoMovies, breakpoint]);
 
+
+    useEffect(() => {
+        dispatch(fetchBoxOfficeTC())
     }, []);
 
 
@@ -29,9 +42,9 @@ export const BoxOffice = () => {
                 {formatDate(lastWeek.toISOString().split("T")[0])} — {formatDate(today.toISOString().split("T")[0])}
             </SectionTitle>
 
-            <div className="grid grid-cols-10 gap-[42px] tabletLg:mt-[63px] mt-[30px]">
-                {infoMovies && infoMovies.slice(0, 5).map((item, index) => (
-                    <div className="col-span-2">
+            <div className="grid tabletLg:grid-cols-10 grid-cols-12 gap-[42px] tabletLg:mt-[63px] mt-[30px]">
+                {prepareMovies.map((item, index) => (
+                    <div className="tabletLg:col-span-2 tablet:col-span-4 col-span-6">
                         <ItemMovie item={item} index={index} />
                     </div>
                 ))}
