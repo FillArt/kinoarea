@@ -1,14 +1,17 @@
 import {ButtonBase} from "@/shared/ui/buttons/ButtonBase.tsx";
+import LogoIcon from "../assets/logo.svg"
+import BgImage from "../assets/bg.png"
 
 export const Subscription = () => {
     return (
         <section>
-            <div style={{background: `rgba(29, 58, 160, 0.9)`}}
+            <div style={{ backgroundImage: `linear-gradient(rgba(29, 58, 160, 0.7), rgba(29, 58, 160, 0.9)), url(${BgImage})`  }}
                  className="container max-w-container mx-auto mt-[95px] pt-[75px] pb-[105px] rounded-[10px]">
 
                 <div className=" w-full flex items-center flex-col mx-auto text-white">
 
-                    <div className="text-center mb-[25px]">
+                    <div className="text-center mb-[25px] flex gap-[13px]">
+                        <img src={LogoIcon} alt=""/>
                         <strong className="text-[25px]">Kinoarea</strong>
                     </div>
 

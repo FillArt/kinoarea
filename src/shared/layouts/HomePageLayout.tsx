@@ -32,6 +32,7 @@ export const HomePageLayout = ({children}: HomeLayoutProps) => {
         backgroundRepeat: "no-repeat",
         // backgroundBlendMode: 'overlay',
     }
+
     return (
         <div style={imgStyle}>
             <Header
