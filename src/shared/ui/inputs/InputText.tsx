@@ -11,12 +11,12 @@ export const InputText = ({register, error, placeholder = 'Default', type = 'tex
 
     console.log(error)
 
-    const errorStyle = error ? 'outline outline-2 text-red-500 outline-red-500' : 'text-black';
+    const errorStyle = error ? 'outline outline-2 outline-red-500' : '';
 
     return (
 
         <input type={type}
-               className={`py-[14px] w-full px-[27px] rounded-[10px] min-w-[425px]  ${errorStyle}`}
+               className={`py-[14px] w-full px-[27px] rounded-[10px] text-black min-w-[425px]  ${errorStyle}`}
                placeholder={placeholder}
                {...register}
         />

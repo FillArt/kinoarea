@@ -4,14 +4,20 @@ import {Checkbox} from "@/shared/ui/inputs/Checkbox.tsx";
 import {useForm} from "react-hook-form";
 import {validateEmail} from "@/widgets/Subscription/model/validate.ts";
 
+type SubscriptionFormType = {
+    email: string;
+}
+
 export const SubscriptionForm = () => {
+
+
 
     const {
         register,
         handleSubmit,
         reset,
-        formState: {errors},
-    } = useForm<SubscriptionFormType>({defaultValues: {email: ''}})
+        formState: {errors, isValid, isSubmitted},
+    } = useForm<SubscriptionFormType>({defaultValues: {email: ''}, mode: 'onChange'})
 
 
     const onSubmit = (data: SubscriptionFormType) => {
@@ -20,16 +26,11 @@ export const SubscriptionForm = () => {
     }
 
 
-    type SubscriptionFormType = {
-        email: string;
-    }
-
-
     return (
         <form method="post" onSubmit={(e) => e.preventDefault()}>
             <div className="flex gap-[8px]">
                 <InputText register={register('email', validateEmail)} error={errors.email} />
-                <ButtonBase onClick={handleSubmit(onSubmit)} title="Подписаться" style="secondary"/>
+                <ButtonBase disable={isSubmitted && !isValid} onClick={handleSubmit(onSubmit)} title="Подписаться" style="secondary"/>
             </div>
 
             {errors.email && <span className="text-red-700 block font-bold mt-[10px]">{errors.email.message}</span>}
