@@ -8,6 +8,7 @@ import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
 import {BoxOfficeType} from "@/shared/types/MovieType.ts";
 import {ItemMovie} from "@/pages/home/sections/BoxOffice/ui/ItemMovie.tsx";
 import {useBreakpoint} from "@/shared/hooks/useBreakpoint.ts";
+import {useTranslation} from "react-i18next";
 
 export const BoxOffice = () => {
     const today = new Date();
@@ -17,7 +18,7 @@ export const BoxOffice = () => {
     const dispatch = useAppDispatch();
     const infoMovies: BoxOfficeType[] = useAppSelector(BoxOfficeSelector)
     const breakpoint = useBreakpoint()
-
+    const {t} = useTranslation('boxOffice');
     const [prepareMovies, setPrepareMovies] = useState<BoxOfficeType[]>([])
 
     // const isLoading = useAppSelector(BoxOfficeLoadedSelector)
@@ -38,7 +39,7 @@ export const BoxOffice = () => {
 
     return (
         <Section>
-            <SectionTitle title="Кассовые сборы">
+            <SectionTitle title={t('title')}>
                 {formatDate(lastWeek.toISOString().split("T")[0])} — {formatDate(today.toISOString().split("T")[0])}
             </SectionTitle>
 

@@ -34,6 +34,10 @@ import newsRu from "./locales/ru/home/news.json";
 import expectedProductsEn from "./locales/en/home/expectedProducts.json"
 import expectedProductsRu from "./locales/ru/home/expectedProducts.json";
 
+// Box Office | Home page
+import boxOfficeEn from "./locales/en/home/ boxOffice.json"
+import boxOfficeRu from "./locales/ru/home/boxOffice.json";
+
 const defaultLanguage = import.meta.env.VITE_APP_LANGUAGE || "en"; // Язык по умолчанию
 
 
@@ -53,7 +57,8 @@ const initI18n = async () => {
                     popularFilms: popularFilmsRu,
                     popularPeople: popularPeopleRu,
                     news: newsRu,
-                    expectedProducts: expectedProductsRu
+                    expectedProducts: expectedProductsRu,
+                    boxOffice: boxOfficeRu,
                 },
                 en: {
                     // common
@@ -65,7 +70,9 @@ const initI18n = async () => {
                     popularFilms: popularFilmsEn,
                     popularPeople: popularPeopleEn,
                     news: newsEn,
-                    expectedProducts: expectedProductsEn
+                    expectedProducts: expectedProductsEn,
+                    boxOffice: boxOfficeEn,
+
                 },
             },
             fallbackLng: defaultLanguage,
