@@ -23,6 +23,7 @@
     "i18next-browser-languagedetector": "^8.0.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.55.0",
     "react-i18next": "^15.4.1",
     "react-loading-skeleton": "^3.5.0",
     "react-redux": "^9.2.0",
