@@ -14,9 +14,9 @@ import {ButtonBase} from "@/shared/ui/buttons/ButtonBase.tsx";
 import {ButtonIcon} from "@/shared/ui/buttons/ButtonIcon.tsx";
 import {SectionTitle} from "@/shared/ui/sections/SectionTitle.tsx";
 import {CinemaList} from "@/pages/home/sections/NowInCinema/ui/CinemaList/CinemaList.tsx";
-import {CardMovieSkeleton} from "@/shared/ui/cards";
 import {useTranslation} from "react-i18next";
 import {useBreakpoint} from "@/shared/hooks/useBreakpoint.ts";
+import {CinemaListSkeleton} from "@/pages/home/sections/NowInCinema/ui/CinemaList/CinemaListSkeleton.tsx";
 
 type CategoriesList = {
     key: string;
@@ -27,11 +27,14 @@ export type Filter = "all" | "action" | "adventures" | "comedy" | "fantasy" | "t
 export const NowInCinema = () => {
     const [filter, setFilter] = useState<Filter>("all");
     const [fullStatus, setFullStatus] = useState<boolean>(false);
-
-    const { t } = useTranslation("nowInCinema");
     const [numberOfFilms, setNumberOfFilms] = useState<number>(8)
+    const {t} = useTranslation("nowInCinema");
+    const breakpoint = useBreakpoint()
 
-    const breakpoint  = useBreakpoint()
+    const dispatch = useAppDispatch()
+
+    const movies = useAppSelector(nowMoviesSelector)
+    const isLoaded = useAppSelector(nowLoadedSelector)
 
     useEffect(() => {
         if (breakpoint === "phone") setNumberOfFilms(6)
@@ -40,19 +43,15 @@ export const NowInCinema = () => {
     }, [breakpoint]);
 
     const categoriesList: CategoriesList[] = [
-        { key: "all", title: t("all") },
-        { key: "action", title: t("action") },
-        { key: "adventures", title: t("adventures") },
-        { key: "comedy", title: t("comedy") },
-        { key: "fantasy", title: t("fantasy") },
-        { key: "thrillers", title: t("thrillers") },
-        { key: "drama", title: t("drama") },
+        {key: "all", title: t("all")},
+        {key: "action", title: t("action")},
+        {key: "adventures", title: t("adventures")},
+        {key: "comedy", title: t("comedy")},
+        {key: "fantasy", title: t("fantasy")},
+        {key: "thrillers", title: t("thrillers")},
+        {key: "drama", title: t("drama")},
     ]
 
-    const dispatch = useAppDispatch()
-
-    const movies = useAppSelector(nowMoviesSelector)
-    const isLoaded = useAppSelector(nowLoadedSelector)
 
     useEffect(() => {
         dispatch(fetchGenresTC())
@@ -93,22 +92,15 @@ export const NowInCinema = () => {
 
                 </SectionTitle>
 
-                {isLoaded ? (
-                    <div className="mt-14 grid grid-cols-12 gap-[23px]">
-                        {[...Array(numberOfFilms)].map((_, i) => (
-                            <div key={i} className="tablet:col-span-3 phone:col-span-4 col-span-6">
-                                <CardMovieSkeleton />
-                            </div>
-                        ))}
-                    </div>
-                ) : (
-                    <CinemaList movies={!fullStatus ? movies.slice(0, numberOfFilms) : movies} filter={filter} setFullStatus={setFullStatus} />
-                )}
+                {!isLoaded ? <CinemaListSkeleton numberOfFilms={numberOfFilms}/> :
+                    <CinemaList movies={!fullStatus ? movies.slice(0, numberOfFilms) : movies} filter={filter}
+                                setFullStatus={setFullStatus}/>}
 
 
                 {!fullStatus && (
                     <div className="flex justify-center mt-14">
-                        <ButtonBase title={t('button_all')} style="border" onClick={() => showMoreMovies()}/>
+                        <ButtonBase title={t('button_all')} style="border" disable={!isLoaded}
+                                    onClick={() => showMoreMovies()}/>
                     </div>
                 )}
             </div>
