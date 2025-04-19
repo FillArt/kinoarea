@@ -19,12 +19,12 @@ export const ButtonBase = ({title, onClick, disable = false, style = 'primary', 
     const classNamePrepare = style === 'primary'
         ? 'bg-formElementColor text-white hover:shadow-hoverDefaultButton'
         : style === 'secondary' ? 'bg-accentButtonColor text-black'
-            : style === 'card' ? 'bg-white text-formTextColor' : style === 'border' ? 'bg-transparent border-2' : '';
+            : style === 'card' ? 'bg-white text-formTextColor' : style === 'border' ? 'bg-transparent border-2 hover:border-[#3657CB] hover:bg-[#3657CB]' : '';
 
     return (
         <button
             disabled={disable}
-            className={`${classNamePrepare} ${className} ${disabledStyle}   tabletLg:py-[13px] tabletLg:px-[47px] phone:py-[10px] phone:px-[30px] px-[27px] py-[9px] transition-all ease-in-out font-bold tabletLg:text-[16px] text-smallFontSizeTabletLg duration-300 rounded-[10px]`}
+            className={`${classNamePrepare} ${className} ${disabledStyle}    tabletLg:py-[13px] tabletLg:px-[47px] phone:py-[10px] phone:px-[30px] px-[27px] py-[9px] transition-all ease-in-out font-bold tabletLg:text-[16px] text-smallFontSizeTabletLg duration-300 rounded-[10px]`}
             onClick={onClickHandler}>
             {title}
         </button>

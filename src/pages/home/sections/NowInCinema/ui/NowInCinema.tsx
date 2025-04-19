@@ -34,7 +34,6 @@ export const NowInCinema = () => {
 
 
     const dispatch = useAppDispatch()
-
     const movies = useAppSelector(nowMoviesSelector)
     const isLoaded = useAppSelector(nowLoadedSelector)
 
