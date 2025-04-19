@@ -49,7 +49,11 @@ export const NowInCinema = () => {
     }, []);
 
 
-    const onClickHandler = (filter: Filter) => setFilter(filter);
+    const onClickHandler = (filter: Filter) => {
+        setFullStatus(true)
+        setFilter(filter)
+    };
+
     const showMoreMovies = () => setFullStatus(true);
 
     return (
