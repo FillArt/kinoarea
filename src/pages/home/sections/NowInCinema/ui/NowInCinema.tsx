@@ -1,6 +1,9 @@
 import {useEffect, useState} from "react";
 import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
 import {useAppDispatch} from "@/shared/hooks/useAppDispatch.ts";
+import {useBreakpoint} from "@/shared/hooks/useBreakpoint.ts";
+import {Filter, useCategoriesList} from "@/pages/home/sections/NowInCinema/hooks/useCategoriesList.ts";
+import {useTranslation} from "react-i18next";
 
 import {
     fetchGenresTC,
@@ -10,26 +13,25 @@ import {
 } from "@/pages/home/sections/NowInCinema/model/NowInCinemaSlice.ts";
 
 import Icon from "@/shared/ui/buttons/assets/burgerWhite.svg";
+
 import {ButtonBase} from "@/shared/ui/buttons/ButtonBase.tsx";
 import {ButtonIcon} from "@/shared/ui/buttons/ButtonIcon.tsx";
 import {SectionTitle} from "@/shared/ui/sections/SectionTitle.tsx";
 import {CinemaList} from "@/pages/home/sections/NowInCinema/ui/CinemaList/CinemaList.tsx";
-import {useTranslation} from "react-i18next";
-import {useBreakpoint} from "@/shared/hooks/useBreakpoint.ts";
+
 import {CinemaListSkeleton} from "@/pages/home/sections/NowInCinema/ui/CinemaList/CinemaListSkeleton.tsx";
 
-type CategoriesList = {
-    key: string;
-    title: string;
-}
-export type Filter = "all" | "action" | "adventures" | "comedy" | "fantasy" | "thrillers" | "drama";
+
 
 export const NowInCinema = () => {
     const [filter, setFilter] = useState<Filter>("all");
     const [fullStatus, setFullStatus] = useState<boolean>(false);
     const [numberOfFilms, setNumberOfFilms] = useState<number>(8)
     const {t} = useTranslation("nowInCinema");
+
     const breakpoint = useBreakpoint()
+    const categoriesList = useCategoriesList();
+
 
     const dispatch = useAppDispatch()
 
@@ -41,16 +43,6 @@ export const NowInCinema = () => {
         else if (breakpoint === "tablet") setNumberOfFilms(9)
         else setNumberOfFilms(8)
     }, [breakpoint]);
-
-    const categoriesList: CategoriesList[] = [
-        {key: "all", title: t("all")},
-        {key: "action", title: t("action")},
-        {key: "adventures", title: t("adventures")},
-        {key: "comedy", title: t("comedy")},
-        {key: "fantasy", title: t("fantasy")},
-        {key: "thrillers", title: t("thrillers")},
-        {key: "drama", title: t("drama")},
-    ]
 
 
     useEffect(() => {
