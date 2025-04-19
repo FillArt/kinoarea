@@ -6,6 +6,7 @@ import BgImg from '@/shared/layouts/assets/bg.png'
 import {NavigationLinksType} from "@/widgets/Header/ui/Header.tsx";
 import {useTranslation} from "react-i18next";
 import {Subscription} from "@/widgets/Subscription/ui/Subscription.tsx";
+import {Footer} from "@/widgets/Footer";
 
 interface HomeLayoutProps {
     children: ReactNode;
@@ -41,13 +42,16 @@ export const HomePageLayout = ({children}: HomeLayoutProps) => {
                 authFunc={() => alert('Открываю форму входа ...')}
                 searchFunc={() => alert('Открываю форму поиска ...')}
             />
+
             <main>
                 {children}
             </main>
 
             <Subscription />
-
-            <div>Footer</div>
+            <Footer
+                navigation={navigationLinks}
+                socialLinks={SocialLinks}
+            />
         </div>
     );
 };
