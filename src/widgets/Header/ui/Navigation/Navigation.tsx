@@ -14,7 +14,7 @@ export const Navigation = ({links, ulStyle}: NavigationProps) => {
                 return (
                     <li key={i} className='text-white
                                         tabletLg:text-smallFontSize
-                                        text-smallFontSizeTabletLg'>
+                                        text-smallFontSizeTabletLg hover:text-[#3657CB]'>
                         <a href={url}>{title}</a>
                     </li>
                 );
