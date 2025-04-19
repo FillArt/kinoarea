@@ -93,7 +93,7 @@ export const NowInCinema = () => {
 
                 </SectionTitle>
 
-                {!isLoaded ? (
+                {isLoaded ? (
                     <div className="mt-14 grid grid-cols-12 gap-[23px]">
                         {[...Array(numberOfFilms)].map((_, i) => (
                             <div key={i} className="tablet:col-span-3 phone:col-span-4 col-span-6">
