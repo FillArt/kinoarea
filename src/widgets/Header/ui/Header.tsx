@@ -7,7 +7,7 @@ import BurgerIcon from "@/shared/ui/buttons/assets/burger.svg";
 
 import {ButtonIcon} from "@/shared/ui/buttons/ButtonIcon.tsx";
 import {ButtonBase} from "@/shared/ui/buttons/ButtonBase.tsx";
-import Popup from "@/widgets/Header/ui/Popup/Popup.tsx";
+import {Popup} from "@/widgets/Popup/Popup.tsx";
 import {useState} from "react";
 import {useTranslation} from "react-i18next";
 

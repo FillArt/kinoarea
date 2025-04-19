@@ -47,5 +47,3 @@ export const Popup = ({isShow, setShow, children}: PopupProps) => {
         </div>
     );
 };
-
-export default Popup;
