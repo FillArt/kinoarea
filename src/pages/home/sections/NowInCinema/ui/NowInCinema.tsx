@@ -62,8 +62,8 @@ export const NowInCinema = () => {
                                 key={item.key}
                                 onClick={() => onClickHandler(item.key as Filter)}
                                 className={`${
-                                    filter === item.key ? "opacity-100" : "opacity-50"
-                                } tabletLg:text-smallFontSize text-[15px]`}
+                                    filter === item.key ? "opacity-100 hover:text-white" : "opacity-50"
+                                } tabletLg:text-smallFontSize text-[15px] hover:text-[#3657CB] hover:opacity-100`}
                             >
                                 {item.title}
                             </button>
