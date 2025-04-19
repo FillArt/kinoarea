@@ -1,6 +1,9 @@
 import {useEffect, useState} from "react";
 import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
 import {useAppDispatch} from "@/shared/hooks/useAppDispatch.ts";
+import {useBreakpoint} from "@/shared/hooks/useBreakpoint.ts";
+import {Filter, useCategoriesList} from "@/pages/home/sections/NowInCinema/hooks/useCategoriesList.ts";
+import {useTranslation} from "react-i18next";
 
 import {
     fetchGenresTC,
@@ -10,38 +13,36 @@ import {
 } from "@/pages/home/sections/NowInCinema/model/NowInCinemaSlice.ts";
 
 import Icon from "@/shared/ui/buttons/assets/burgerWhite.svg";
+
 import {ButtonBase} from "@/shared/ui/buttons/ButtonBase.tsx";
 import {ButtonIcon} from "@/shared/ui/buttons/ButtonIcon.tsx";
 import {SectionTitle} from "@/shared/ui/sections/SectionTitle.tsx";
 import {CinemaList} from "@/pages/home/sections/NowInCinema/ui/CinemaList/CinemaList.tsx";
-import {CardMovieSkeleton} from "@/shared/ui/cards";
-import {useTranslation} from "react-i18next";
 
-type CategoriesList = {
-    key: string;
-    title: string;
-}
-export type Filter = "all" | "action" | "adventures" | "comedy" | "fantasy" | "thrillers" | "drama";
+import {CinemaListSkeleton} from "@/pages/home/sections/NowInCinema/ui/CinemaList/CinemaListSkeleton.tsx";
+
+
 
 export const NowInCinema = () => {
     const [filter, setFilter] = useState<Filter>("all");
     const [fullStatus, setFullStatus] = useState<boolean>(false);
-    const { t } = useTranslation("nowInCinema");
+    const [numberOfFilms, setNumberOfFilms] = useState<number>(8)
+    const {t} = useTranslation("nowInCinema");
 
-    const categoriesList: CategoriesList[] = [
-        { key: "all", title: t("all") },
-        { key: "action", title: t("action") },
-        { key: "adventures", title: t("adventures") },
-        { key: "comedy", title: t("comedy") },
-        { key: "fantasy", title: t("fantasy") },
-        { key: "thrillers", title: t("thrillers") },
-        { key: "drama", title: t("drama") },
-    ]
+    const breakpoint = useBreakpoint()
+    const categoriesList = useCategoriesList();
+
 
     const dispatch = useAppDispatch()
-
     const movies = useAppSelector(nowMoviesSelector)
     const isLoaded = useAppSelector(nowLoadedSelector)
+
+    useEffect(() => {
+        if (breakpoint === "phone") setNumberOfFilms(6)
+        else if (breakpoint === "tablet") setNumberOfFilms(9)
+        else setNumberOfFilms(8)
+    }, [breakpoint]);
+
 
     useEffect(() => {
         dispatch(fetchGenresTC())
@@ -49,7 +50,11 @@ export const NowInCinema = () => {
     }, []);
 
 
-    const onClickHandler = (filter: Filter) => setFilter(filter);
+    const onClickHandler = (filter: Filter) => {
+        setFullStatus(true)
+        setFilter(filter)
+    };
+
     const showMoreMovies = () => setFullStatus(true);
 
     return (
@@ -62,8 +67,8 @@ export const NowInCinema = () => {
                                 key={item.key}
                                 onClick={() => onClickHandler(item.key as Filter)}
                                 className={`${
-                                    filter === item.key ? "opacity-100" : "opacity-50"
-                                } tabletLg:text-smallFontSize text-[15px]`}
+                                    filter === item.key ? "opacity-100 hover:text-white" : "opacity-50"
+                                } tabletLg:text-smallFontSize text-[15px] hover:text-[#3657CB] hover:opacity-100`}
                             >
                                 {item.title}
                             </button>
@@ -78,22 +83,15 @@ export const NowInCinema = () => {
 
                 </SectionTitle>
 
-                {!isLoaded ? (
-                    <div className="mt-14 grid grid-cols-12 gap-[23px]">
-                        {[...Array(8)].map((_, i) => (
-                            <div key={i} className="col-span-3">
-                                <CardMovieSkeleton />
-                            </div>
-                        ))}
-                    </div>
-                ) : (
-                    <CinemaList movies={!fullStatus ? movies.slice(0, 8) : movies} filter={filter} setFullStatus={setFullStatus} />
-                )}
+                {!isLoaded ? <CinemaListSkeleton numberOfFilms={numberOfFilms}/> :
+                    <CinemaList movies={!fullStatus ? movies.slice(0, numberOfFilms) : movies} filter={filter}
+                                setFullStatus={setFullStatus}/>}
 
 
                 {!fullStatus && (
                     <div className="flex justify-center mt-14">
-                        <ButtonBase title={t('button_all')} style="border" onClick={() => showMoreMovies()}/>
+                        <ButtonBase title={t('button_all')} style="border" disable={!isLoaded}
+                                    onClick={() => showMoreMovies()}/>
                     </div>
                 )}
             </div>

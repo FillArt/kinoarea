@@ -1,5 +1,5 @@
 import {Logo} from "@/widgets/Header/ui/Logo/Logo.tsx";
-import {ReactNode} from "react";
+import {ReactNode, useEffect} from "react";
 import {ButtonIcon} from "@/shared/ui/buttons/ButtonIcon.tsx";
 import Icon from "./assets/close.svg"
 
@@ -14,8 +14,22 @@ export const Popup = ({isShow, setShow, children}: PopupProps) => {
 
     const styleHidden = isShow ? "block" : "hidden"
 
+    useEffect(() => {
+        if (isShow) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [isShow]);
+
+    if (!isShow) return null;
+
     return (
-        <div onClick={() => setShow(false)} className={`${styleHidden} z-10 bg-backgroundColor bg-opacity-95 h-screen w-screen py-[32px] tabletLg:py-8 absolute`}>
+        <div onClick={() => setShow(false)} className={`${styleHidden} z-10 bg-backgroundColor bg-opacity-95 h-screen w-screen min-w-full min-h-full py-[32px] tabletLg:py-8 absolute`}>
             <div className="container mx-auto ">
                 <div className="flex justify-center relative">
                     <Logo />
@@ -33,5 +47,3 @@ export const Popup = ({isShow, setShow, children}: PopupProps) => {
         </div>
     );
 };
-
-export default Popup;

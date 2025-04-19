@@ -54,7 +54,6 @@ export const CinemaList = ({movies, filter, setFullStatus}: CinemaListProps) => 
                     </div>
                 ))
             ) : (
-
                 <div className="tablet:col-span-12">
                     <EmptyCinemaList/>
                 </div>
