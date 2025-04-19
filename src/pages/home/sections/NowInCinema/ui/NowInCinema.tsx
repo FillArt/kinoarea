@@ -16,6 +16,7 @@ import {SectionTitle} from "@/shared/ui/sections/SectionTitle.tsx";
 import {CinemaList} from "@/pages/home/sections/NowInCinema/ui/CinemaList/CinemaList.tsx";
 import {CardMovieSkeleton} from "@/shared/ui/cards";
 import {useTranslation} from "react-i18next";
+import {useBreakpoint} from "@/shared/hooks/useBreakpoint.ts";
 
 type CategoriesList = {
     key: string;
@@ -26,7 +27,17 @@ export type Filter = "all" | "action" | "adventures" | "comedy" | "fantasy" | "t
 export const NowInCinema = () => {
     const [filter, setFilter] = useState<Filter>("all");
     const [fullStatus, setFullStatus] = useState<boolean>(false);
+
     const { t } = useTranslation("nowInCinema");
+    const [numberOfFilms, setNumberOfFilms] = useState<number>(8)
+
+    const breakpoint  = useBreakpoint()
+
+    useEffect(() => {
+        if (breakpoint === "phone") setNumberOfFilms(6)
+        else if (breakpoint === "tablet") setNumberOfFilms(9)
+        else setNumberOfFilms(8)
+    }, [breakpoint]);
 
     const categoriesList: CategoriesList[] = [
         { key: "all", title: t("all") },
@@ -84,14 +95,14 @@ export const NowInCinema = () => {
 
                 {!isLoaded ? (
                     <div className="mt-14 grid grid-cols-12 gap-[23px]">
-                        {[...Array(8)].map((_, i) => (
-                            <div key={i} className="col-span-3">
+                        {[...Array(numberOfFilms)].map((_, i) => (
+                            <div key={i} className="tablet:col-span-3 phone:col-span-4 col-span-6">
                                 <CardMovieSkeleton />
                             </div>
                         ))}
                     </div>
                 ) : (
-                    <CinemaList movies={!fullStatus ? movies.slice(0, 8) : movies} filter={filter} setFullStatus={setFullStatus} />
+                    <CinemaList movies={!fullStatus ? movies.slice(0, numberOfFilms) : movies} filter={filter} setFullStatus={setFullStatus} />
                 )}
 
 
