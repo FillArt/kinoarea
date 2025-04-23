@@ -8,8 +8,9 @@ import BurgerIcon from "@/shared/ui/buttons/assets/burger.svg";
 import {ButtonIcon} from "@/shared/ui/buttons/ButtonIcon.tsx";
 import {ButtonBase} from "@/shared/ui/buttons/ButtonBase.tsx";
 import {Popup} from "@/widgets/Popup/Popup.tsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
+import {useBreakpoint} from "@/shared/hooks/useBreakpoint.ts";
 
 export type NavigationLinksType = {
     title: string,
@@ -26,7 +27,12 @@ export type HeaderProps = {
 export const Header = ({navigation, socialLinks, authFunc, searchFunc}: HeaderProps) => {
 
     const [isShowPopup, setShowPopup] = useState(false);
+    const breakpoint = useBreakpoint()
     const {t} = useTranslation('header');
+
+    useEffect(() => {
+        if(breakpoint === 'desktop') setShowPopup(false);
+    }, [breakpoint]);
 
     return (
         <>
