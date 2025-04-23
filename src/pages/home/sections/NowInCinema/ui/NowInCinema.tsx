@@ -28,8 +28,8 @@ export const NowInCinema = () => {
     const [isShow, setIsShow] = useState<boolean>(false)
     const [fullStatus, setFullStatus] = useState<boolean>(false);
     const [numberOfFilms, setNumberOfFilms] = useState<number>(8)
-    const {t} = useTranslation("nowInCinema");
 
+    const {t} = useTranslation("nowInCinema");
     const breakpoint = useBreakpoint()
     const categoriesList = useCategoriesList();
 
@@ -41,7 +41,10 @@ export const NowInCinema = () => {
     useEffect(() => {
         if (breakpoint === "phone") setNumberOfFilms(6)
         else if (breakpoint === "tablet") setNumberOfFilms(9)
-        else setNumberOfFilms(8)
+        else {
+            setIsShow(false)
+            setNumberOfFilms(8)
+        }
     }, [breakpoint]);
 
 
@@ -61,7 +64,22 @@ export const NowInCinema = () => {
     return (
         <>
             <Popup isShow={isShow} setShow={setIsShow}>
-                <h1>112</h1>
+                <div className="flex flex-col items-center mt-5 gap-[20px]">
+                    {categoriesList.map((item) => (
+                        <button
+                            key={item.key}
+                            onClick={() => onClickHandler(item.key as Filter)}
+                            className={`${
+                                filter === item.key ? "opacity-100 text-[#3657CB]" : "opacity-50"
+                            } text-white
+                                        tabletLg:text-smallFontSize
+                                        text-smallFontSizeTabletLg hover:text-[#3657CB]`}
+                        >
+                            {item.title}
+                        </button>
+                    ))}
+                </div>
+
             </Popup>
 
             <section className="font-main  pt-6 mb-10 text-white">
@@ -82,7 +100,7 @@ export const NowInCinema = () => {
                         </div>
 
                         <div className="phone:hidden block mt-[8px]">
-                            <ButtonIcon onClick={() => alert('Заглушка')} style="secondary">
+                            <ButtonIcon onClick={() => setIsShow(true)} style="secondary">
                                 <img src={Icon} width="12px" height="12px" alt="Close Popup"/>
                             </ButtonIcon>
                         </div>
