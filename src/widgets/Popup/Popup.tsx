@@ -12,7 +12,7 @@ type PopupProps = {
 }
 
 export const Popup = ({isShow, setShow, children}: PopupProps) => {
-
+    console.log("Popup mounted:", isShow);
     const styleHidden = isShow ? "block" : "hidden"
 
     useEffect(() => {
@@ -32,7 +32,7 @@ export const Popup = ({isShow, setShow, children}: PopupProps) => {
     return (
         <Portal>
             <div onClick={() => setShow(false)}
-                 className={`${styleHidden} z-10 bg-backgroundColor bg-opacity-95 h-screen w-screen min-w-full min-h-full py-[32px] tabletLg:py-8 absolute`}>
+                 className={`${styleHidden} z-50 bg-backgroundColor bg-opacity-95 h-screen w-screen min-w-full min-h-full py-[32px] tabletLg:py-8 fixed`}>
                 <div className="container mx-auto ">
                     <div className="flex justify-center relative">
                         <Logo/>

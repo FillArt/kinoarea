@@ -79,7 +79,6 @@ export const NowInCinema = () => {
                         </button>
                     ))}
                 </div>
-
             </Popup>
 
             <section className="font-main  pt-6 mb-10 text-white">
