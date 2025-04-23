@@ -12,7 +12,6 @@ type PopupProps = {
 }
 
 export const Popup = ({isShow, setShow, children}: PopupProps) => {
-    console.log("Popup mounted:", isShow);
     const styleHidden = isShow ? "block" : "hidden"
 
     useEffect(() => {
