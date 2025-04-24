@@ -99,7 +99,7 @@ export const PopularFilms = () => {
                                 key={item}
                                 onClick={() => onClickHandler(item as string)}
                                 className={`${
-                                    filter === item ? "opacity-100" : "opacity-50"
+                                    filter === item ? "opacity-100" : "opacity-50 hover:text-[#3657CB] hover:opacity-100"
                                 } tabletLg:text-smallFontSize text-[15px]`}
                             >
                                 {item}
