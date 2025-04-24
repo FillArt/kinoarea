@@ -4,9 +4,13 @@ import {movieAPI} from "@/shared/api/MovieAPI.ts";
 
 export const PopularFilmsSlice = createAppSlice({
     name: 'PopularFilms',
-    initialState: [] as MovieType[] ,
+    initialState: {
+        movies: [] as MovieType[],
+        isLoaded: false,
+    },
     selectors: {
-        PopularFilmsSelector: (state) => state,
+        PopularFilmsSelector: (state) => state.movies,
+        PopularFilmsLoadingSelector: (state) => state.isLoaded,
     },
     reducers: create => ({
         fetchPopularMoviesTC: create.asyncThunk(
@@ -22,13 +26,14 @@ export const PopularFilmsSlice = createAppSlice({
                 }
             },
             {
-                fulfilled: (_,action) => {
+                fulfilled: (state, action) => {
                     const allMovies: MovieType[] = action.payload.flatMap(data => data.results);
                     const uniqueMovies = allMovies
                         .filter((movie, index, self) => index === self.findIndex((m) => m.id === movie.id))
                         .slice(0, 100);
 
-                    return uniqueMovies.sort((a, b) => b.vote_average - a.vote_average);
+                    state.movies = uniqueMovies.sort((a, b) => b.vote_average - a.vote_average);
+                    state.isLoaded = true
                 },
             }
         )
@@ -38,4 +43,4 @@ export const PopularFilmsSlice = createAppSlice({
 
 export const PopularFilmsReducer = PopularFilmsSlice.reducer
 export const {fetchPopularMoviesTC} = PopularFilmsSlice.actions;
-export const {PopularFilmsSelector} = PopularFilmsSlice.selectors
+export const {PopularFilmsSelector, PopularFilmsLoadingSelector} = PopularFilmsSlice.selectors

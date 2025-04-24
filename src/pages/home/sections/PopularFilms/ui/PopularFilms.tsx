@@ -4,7 +4,7 @@ import Icon from "@/shared/ui/buttons/assets/burgerWhite.svg";
 import {useEffect, useMemo, useState} from "react";
 import {yearsList} from "@/pages/home/sections/PopularFilms/model/yearsList.ts";
 import {
-    fetchPopularMoviesTC,
+    fetchPopularMoviesTC, PopularFilmsLoadingSelector,
     PopularFilmsSelector
 } from "@/pages/home/sections/PopularFilms/model/PopularFilmsSlice.ts";
 import {useAppDispatch} from "@/shared/hooks/useAppDispatch.ts";
@@ -16,15 +16,18 @@ import {Slider} from "@/widgets/Slider/ui/Slider.tsx";
 import {Section} from "@/shared/ui/sections/Section.tsx";
 import {Popup} from "@/widgets/Popup/Popup.tsx";
 import {useBreakpoint} from "@/shared/hooks/useBreakpoint.ts";
+import {CinemaListSkeleton} from "@/pages/home/sections/NowInCinema/ui/CinemaList/CinemaListSkeleton.tsx";
 
 
 export const PopularFilms = () => {
     const [filter, setFilter] = useState("All");
     const [isShow, setIsShow] = useState<boolean>(false)
+    const [numberOfFilms, setNumberOfFilms] = useState<number>(4)
 
     const dispatch = useAppDispatch();
     const popularFilms = useAppSelector(PopularFilmsSelector)
     const genreMap = useAppSelector(nowGenreSelector)
+    const isLoaded = useAppSelector(PopularFilmsLoadingSelector)
 
     const breakpoint = useBreakpoint()
     const {t} = useTranslation("popularFilms");
@@ -47,7 +50,11 @@ export const PopularFilms = () => {
     }, [formatMovies]);
 
     useEffect(() => {
-        if (breakpoint === "desktop") setIsShow(false);
+        if (breakpoint === "desktop") {
+            setIsShow(false)
+            setNumberOfFilms(4)
+        } else if (breakpoint === "phone") setNumberOfFilms(2)
+        else if (breakpoint === "tablet") setNumberOfFilms(3)
     }, [breakpoint]);
 
 
@@ -76,6 +83,7 @@ export const PopularFilms = () => {
                                         tabletLg:text-smallFontSize
                                         text-smallFontSizeTabletLg hover:text-[#3657CB]`}
                         >
+
                             {item}
                         </button>
                     ))}
@@ -109,7 +117,9 @@ export const PopularFilms = () => {
 
                 {filteredMovies.length > 0 ? (
                     <div className="tabletLg:m-0 mt-[-35px]">
-                        <Slider movies={filteredMovies}/>
+                        {!isLoaded ?
+                            <CinemaListSkeleton numberOfFilms={numberOfFilms}/> : <Slider movies={filteredMovies}/>
+                        }
                     </div>
                 ) : (
                     <EmptyCinemaList/>
