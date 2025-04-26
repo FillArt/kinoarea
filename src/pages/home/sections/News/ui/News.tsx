@@ -34,9 +34,9 @@ export const News = () => {
     return (
         <Section>
             <SectionTitle title={t('title')} line={false} sectionVersion="two">
-                <a className="tabletLg:text-[22px] text-[18px] flex items-center" href="/">
+                <a className="group  hover:text-[#3657CB] tabletLg:text-[22px] text-[18px] flex items-center" href="/">
                     {t('title_all')}
-                    <img src={ArrowIcon} alt="Стрелка" className="tabletLg:ml-[27px] ml-[14px] w-6 h-6"/>
+                    <img src={ArrowIcon} alt="Стрелка" className="group-hover:animate-bounce-x tabletLg:ml-[27px] ml-[14px] w-6 h-6"/>
                 </a>
             </SectionTitle>
 
