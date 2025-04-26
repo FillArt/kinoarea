@@ -60,7 +60,6 @@ export const ExpectedProducts = () => {
                         </button>
                     </div>
                 )}
-
             </SectionTitle>
 
             {movies.length > 0 ? (
@@ -80,7 +79,7 @@ export const ExpectedProducts = () => {
                     )}
                 </div>
             ) : (
-                <EmptyCinemaList/>
+                <EmptyCinemaList />
             )}
 
 
