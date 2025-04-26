@@ -14,6 +14,9 @@ export const ExpectedProducts = () => {
     const movies = useAppSelector(MoviesSelector)
     const {t} = useTranslation('expectedProducts')
 
+    const [isBeginningExpected, setIsBeginningExpected] = useState(true);
+    const [isEndExpected, setIsEndExpected] = useState(false);
+
     const [currentSliderIndex, setCurrentSliderIndex] = useState<number>(0)
 
     useEffect(() => {
@@ -26,14 +29,18 @@ export const ExpectedProducts = () => {
             <SectionTitle title={t('title')} line={false} sectionVersion="two">
                 <div
                     className="phone:flex hidden items-center gap-[20px] justify-center">
-                    <button className="expected-prev text-lg" onClick={() => {
-                    }}>
-                        <img src={Arrow} alt=""/>
+
+                    <button
+                        className={` ${isBeginningExpected ? "cursor-not-allowed" : "pointer"} expected-prev text-lg`}>
+
+                        <img className={`${isBeginningExpected ? "opacity-20" : "opacity-100"}`} src={Arrow} alt=""/>
+
                     </button>
+
                     <span className="text-sm">{currentSliderIndex}/{movies.length}</span>
-                    <button className="expected-next text-lg rotate-180" onClick={() => {
-                    }}>
-                        <img src={Arrow} alt=""/>
+
+                    <button className={`${isEndExpected ? "cursor-not-allowed" : "pointer"} expected-next text-lg rotate-180`}>
+                        <img className={`${isEndExpected ? "opacity-20" : "opacity-100"}`} src={Arrow} alt=""/>
                     </button>
                 </div>
             </SectionTitle>
@@ -45,6 +52,8 @@ export const ExpectedProducts = () => {
                         prevButton=".expected-prev"
                         nextButton=".expected-next"
                         setIndex={setCurrentSliderIndex}
+                        setBeginStatus={setIsBeginningExpected}
+                        setEndStatus={setIsEndExpected}
                         release={true}
                     />
                 </div>

@@ -11,10 +11,20 @@ type PopularSliderProps = {
     prevButton?: string
     nextButton?: string,
     setIndex?: (index: number) => void,
+    setBeginStatus?: (status: boolean) => void,
+    setEndStatus?: (status: boolean) => void,
     release?: boolean
 }
 
-export const Slider = ({movies, prevButton, nextButton, setIndex, release = false}: PopularSliderProps) => {
+export const Slider = ({
+                           movies,
+                           prevButton,
+                           nextButton,
+                           setIndex,
+                           setBeginStatus,
+                           setEndStatus,
+                           release = false
+                       }: PopularSliderProps) => {
     const [activeIndex, setActiveIndex] = useState(4);
     const sliderRef = useRef(null);
 
@@ -33,7 +43,11 @@ export const Slider = ({movies, prevButton, nextButton, setIndex, release = fals
             // @ts-expect-error - it`s normal for Swiper
             sliderRef.current.swiper.slideTo(0);
             setIsBeginning(true);
+            setBeginStatus?.(true)
+
+
             setIsEnd(false);
+            setEndStatus?.(false)
             setActiveIndex(1);
         }
     }, [movies]);
@@ -49,7 +63,9 @@ export const Slider = ({movies, prevButton, nextButton, setIndex, release = fals
         swiper.slidePrev();
 
         setIsBeginning(swiper.isBeginning);
+        setBeginStatus?.(swiper.isBeginning)
         setIsEnd(swiper.isEnd);
+        setEndStatus?.(swiper.isEnd)
     }, []);
 
     const handleNext = useCallback(() => {
@@ -60,7 +76,9 @@ export const Slider = ({movies, prevButton, nextButton, setIndex, release = fals
         swiper.slideNext();
 
         setIsBeginning(swiper.isBeginning);
+        setBeginStatus?.(swiper.isBeginning)
         setIsEnd(swiper.isEnd);
+        setEndStatus?.(swiper.isEnd)
 
     }, []);
 
@@ -74,11 +92,15 @@ export const Slider = ({movies, prevButton, nextButton, setIndex, release = fals
                 onSwiper={(swiper) => {
                     setActiveIndex(swiper.realIndex + 1)
                     setIsBeginning(swiper.isBeginning)
+                    setEndStatus?.(swiper.isEnd)
+                    setBeginStatus?.(swiper.isBeginning)
                     setIsEnd(swiper.isEnd)
                 }}
                 onSlideChange={(swiper) => {
                     setActiveIndex(swiper.realIndex + 1)
                     setIsBeginning(swiper.isBeginning)
+                    setEndStatus?.(swiper.isEnd)
+                    setBeginStatus?.(swiper.isBeginning)
                     setIsEnd(swiper.isEnd)
                 }}
                 className="mt-4 w-full max-w-[1451px] mx-auto"

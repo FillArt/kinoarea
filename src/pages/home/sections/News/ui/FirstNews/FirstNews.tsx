@@ -18,7 +18,7 @@ export const FirstNews = ({item}: FirstNewsProps) => {
             <FirstNewsInfo date={item && t(item.date)} view={item?.view} commentsCount={item?.commentsCount} />
 
             <div className="max-w-[906px] ">
-                <h3 className="tabletLg:text-[45px] tablet:text-[35px] phone:text-[30px] text-[20px] font-bold">{item && t(item.title)}</h3>
+                <h3 className="tabletLg:text-[45px] tablet:text-[35px] phone:text-[30px] text-[20px] font-bold hover:text-[#3657CB] cursor-pointer">{item && t(item.title)}</h3>
                 <p className="tabletLg:text-[20px] tablet:text-[18px] text-[16px] phone:block hidden">{item && t(item.description)}</p>
             </div>
         </div>
