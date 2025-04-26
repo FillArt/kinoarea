@@ -31,6 +31,9 @@ export const ExpectedProductsSlice = createAppSlice({
                     const movieDate = new Date(movie.release_date);
                     return movieDate >= today; // Оставляем только сегодняшние и будущие
                 })
+
+                state.isLoaded = true
+
             }
         })
     })
