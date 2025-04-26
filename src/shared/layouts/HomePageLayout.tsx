@@ -36,6 +36,7 @@ export const HomePageLayout = ({children}: HomeLayoutProps) => {
 
     return (
         <div style={imgStyle}>
+            <div id="modal-root"></div>
             <Header
                 navigation={navigationLinks}
                 socialLinks={SocialLinks}

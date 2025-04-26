@@ -13,11 +13,20 @@ import {
 import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
 import {useTranslation} from "react-i18next";
 import {Section} from "@/shared/ui/sections/Section.tsx";
+import {
+    PopularPhotoInfoSkeleton
+} from "@/pages/home/sections/PopularPeople/ui/PopularPhotoInfo/PopularPhotoInfoSkeleton.tsx";
+import {
+    PopularListInfoSkeleton
+} from "@/pages/home/sections/PopularPeople/ui/PopularListInfo/PopularListInfoSkeleton.tsx";
+import {PopularFilmsLoadingSelector} from "@/pages/home/sections/PopularFilms/model/PopularFilmsSlice.ts";
+import {Popup} from "@/widgets/Popup/Popup.tsx";
 
 
 export const PopularPeople = () => {
     const dispatch = useAppDispatch();
     const {t} = useTranslation("popularPeople");
+    const [isShow, setIsShow] = useState<boolean>(false)
 
     useEffect(() => {
         dispatch(fetchPopularPersonTC('day'));
@@ -26,6 +35,7 @@ export const PopularPeople = () => {
 
     const popularDay = useAppSelector((state) => PopularPersonSelector(state, 'day'));
     const popularWeek = useAppSelector((state) => PopularPersonSelector(state, 'week'));
+    const isLoaded = useAppSelector(PopularFilmsLoadingSelector);
 
     const [filterPopularTime, setFilterPopularTime] = useState<'day' | 'week'>('day');
 
@@ -53,39 +63,73 @@ export const PopularPeople = () => {
 
 
     return (
-        <Section>
-            <SectionTitle title={t('title')} line={false}>
-                <div className="phone:flex hidden justify-between tabletLg:max-w-[180px] max-w-[150px] w-full">
+        <>
+            <Popup isShow={isShow} setShow={setIsShow}>
+                <div className="flex flex-col items-center mt-5 gap-[20px]">
                     {timeList.map((item) => (
                         <button
-                            key={item.value}
+                            key={item.label}
                             onClick={() => onClickHandler(item.value as 'day' | 'week')}
                             className={`${
-                                filterPopularTime === item.value ? "opacity-100" : "opacity-50"
-                            } tabletLg:text-smallFontSize text-[15px]`}
+                                filterPopularTime === item.value ? "opacity-100 text-[#3657CB]" : "opacity-50"
+                            } text-white
+                                        tabletLg:text-smallFontSize
+                                        text-smallFontSizeTabletLg hover:text-[#3657CB]`}
                         >
+
                             {item.label}
                         </button>
                     ))}
                 </div>
-                <div className="phone:hidden block mt-[8px]">
-                    <ButtonIcon onClick={() => alert('Заглушка')} style="secondary">
-                        <img src={Icon} width="12px" height="12px" alt="Close Popup"/>
-                    </ButtonIcon>
-                </div>
-            </SectionTitle>
+            </Popup>
 
-            <div className="grid grid-cols-12 gap-[23px] tabletLg:mt-[63px] mt-[30px]">
-                <div className="tablet:col-span-4 col-span-6">
-                    <PopularPhotoInfo data={firstPerson} place={t('first')}/>
+            <Section>
+                <SectionTitle title={t('title')} line={false}>
+                    <div className="phone:flex hidden justify-between tabletLg:max-w-[180px] max-w-[150px] w-full">
+                        {timeList.map((item) => (
+                            <button
+                                key={item.value}
+                                onClick={() => onClickHandler(item.value as 'day' | 'week')}
+                                className={`${
+                                    filterPopularTime === item.value ? "opacity-100" : "opacity-50 hover:text-[#3657CB] hover:opacity-100"
+                                } tabletLg:text-smallFontSize text-[15px]`}
+                            >
+                                {item.label}
+                            </button>
+                        ))}
+                    </div>
+                    <div className="phone:hidden block mt-[8px]">
+                        <ButtonIcon onClick={() => setIsShow(true)} style="secondary">
+                            <img src={Icon} width="12px" height="12px" alt="Close Popup"/>
+                        </ButtonIcon>
+                    </div>
+                </SectionTitle>
+
+                <div className="grid grid-cols-12 gap-[23px] tabletLg:mt-[63px] mt-[30px]">
+                    <div className="tablet:col-span-4 col-span-6">
+                        {isLoaded ? (
+                            <PopularPhotoInfo data={firstPerson} place={t('first')}/>
+                        ) : (
+                            <PopularPhotoInfoSkeleton/>
+                        )}
+                    </div>
+                    <div className="tablet:col-span-4 col-span-6">
+                        {isLoaded ? (
+                            <PopularPhotoInfo data={secondPerson} place={t('second')}/>
+                        ) : (
+                            <PopularPhotoInfoSkeleton/>
+                        )}
+                    </div>
+                    <div className="tablet:col-span-4 col-span-12">
+                        {isLoaded ? (
+                            <PopularListInfo data={restPersons}/>
+                        ) : (
+                            <PopularListInfoSkeleton/>
+                        )}
+
+                    </div>
                 </div>
-                <div className="tablet:col-span-4 col-span-6">
-                    <PopularPhotoInfo data={secondPerson} place={t('second')}/>
-                </div>
-                <div className="tablet:col-span-4 col-span-12">
-                    <PopularListInfo data={restPersons}/>
-                </div>
-            </div>
-        </Section>
+            </Section>
+        </>
     );
 };

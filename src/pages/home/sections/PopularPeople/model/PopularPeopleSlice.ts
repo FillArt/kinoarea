@@ -9,10 +9,12 @@ export const PopularPeopleSlice = createAppSlice({
     initialState: {
         popularPersonDay: [] as PeopleType[],
         popularPersonWeek: [] as PeopleType[],
+        isLoaded: false,
     },
     selectors: {
         PopularPersonSelector: (state, period: PeriodType) =>
             period === 'day' ? state.popularPersonDay : state.popularPersonWeek,
+        PopularPersonLoadingSelector: state => state.isLoaded,
     },
     reducers: create => ({
         fetchPopularPersonTC: create.asyncThunk(
@@ -29,8 +31,10 @@ export const PopularPeopleSlice = createAppSlice({
                     const { period, results } = action.payload;
                     if (period === 'day') {
                         state.popularPersonDay = results;
+                        state.isLoaded = true;
                     } else {
                         state.popularPersonWeek = results;
+                        state.isLoaded = true
                     }
                 },
             }
@@ -40,4 +44,4 @@ export const PopularPeopleSlice = createAppSlice({
 
 export const PopularPeopleReducer = PopularPeopleSlice.reducer;
 export const { fetchPopularPersonTC } = PopularPeopleSlice.actions;
-export const { PopularPersonSelector } = PopularPeopleSlice.selectors;
+export const { PopularPersonSelector, PopularPersonLoadingSelector } = PopularPeopleSlice.selectors;
