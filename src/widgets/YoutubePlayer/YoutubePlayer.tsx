@@ -1,6 +1,6 @@
 import YouTube from "react-youtube";
 import IconPlay from "@/widgets/YoutubePlayer/assets/play.svg"
-import {TrailerType} from "@/shared/types/MovieType.ts";
+import {TrailerType} from "@/shared/api/movies/movieType.ts";
 import {YoutubeInfo} from "@/widgets/YoutubePlayer/YoutubeInfo.tsx";
 
 type YoutubePlayerProps = {

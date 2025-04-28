@@ -16,7 +16,11 @@ export type MovieType = {
     vote_count?: number
 }
 
-export type GenreType = { id: number; name: string };
+export type GenreType = Record<number, string>;
+
+export type GenresResponseType = {
+    genres: { id: number, name: string }[]
+}
 
 export type TrailerType = {
     id: number,

@@ -1,6 +1,6 @@
 import {beforeEach, describe, expect, it, vi} from "vitest";
 import {changeMovieInMainAC, fetchAllMovieTrailersTC, NewTrailersReducer} from "./NewTrailersSlice";
-import {TrailerType} from "@/shared/types/MovieType";
+import {TrailerType} from "@/shared/api/movies/movieType.ts";
 
 // API
 vi.mock("@/shared/api/MovieAPI", () => ({

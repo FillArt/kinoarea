@@ -4,7 +4,7 @@ import {useCallback, useEffect, useRef, useState} from "react";
 import {Navigation} from "swiper/modules";
 
 import Arrow from "../assets/arrow.svg"
-import {MovieType} from "@/shared/types/MovieType.ts";
+import {MovieType} from "@/shared/api/movies/movieType.ts";
 
 type PopularSliderProps = {
     movies: MovieType[],

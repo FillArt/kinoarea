@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {TrailerType} from "@/shared/types/MovieType.ts";
+import {TrailerType} from "@/shared/api/movies/movieType.ts";
 import {LikesOrDislikes} from "@/widgets/YoutubePlayer/LikesOrDislikes.tsx";
 import {truncateString} from "@/shared/helpers/truncateString.ts";
 

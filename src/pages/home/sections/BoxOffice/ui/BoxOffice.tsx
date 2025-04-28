@@ -5,7 +5,7 @@ import {useAppDispatch} from "@/shared/hooks/useAppDispatch.ts";
 import {useEffect, useState} from "react";
 import {BoxOfficeSelector, fetchBoxOfficeTC} from "@/pages/home/sections/BoxOffice/model/BoxOfficeSlice.ts";
 import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
-import {BoxOfficeType} from "@/shared/types/MovieType.ts";
+import {BoxOfficeType} from "@/shared/api/movies/movieType.ts";
 import {ItemMovie} from "@/pages/home/sections/BoxOffice/ui/ItemMovie.tsx";
 import {useBreakpoint} from "@/shared/hooks/useBreakpoint.ts";
 import {useTranslation} from "react-i18next";

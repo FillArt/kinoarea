@@ -1,5 +1,5 @@
 import {createAppSlice} from "@/shared/hooks/createAppSlice.ts";
-import {MovieType} from "@/shared/types/MovieType.ts";
+import {MovieType} from "@/shared/api/movies/movieType.ts";
 import {movieAPI} from "@/shared/api/MovieAPI.ts";
 
 export const ExpectedProductsSlice = createAppSlice({

@@ -1,5 +1,5 @@
 import {formatCurrency} from "@/shared/helpers/formatCurrency.ts";
-import {BoxOfficeType} from "@/shared/types/MovieType.ts";
+import {BoxOfficeType} from "@/shared/api/movies/movieType.ts";
 import {useEffect, useState} from "react";
 import {Empty} from "@/shared/ui/cards/CardMovie/Empty/Empty.tsx";
 
