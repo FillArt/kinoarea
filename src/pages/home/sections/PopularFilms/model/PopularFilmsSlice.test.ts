@@ -10,10 +10,16 @@ vi.mock("@/shared/api/MovieAPI", () => ({
 }));
 
 describe("PopularFilmsSlice", () => {
-    let initialState: MovieType[];
+    let initialState: {
+        movies: MovieType[],
+        isLoaded: false
+    };
 
     beforeEach(() => {
-        initialState = [];
+        initialState = {
+            movies: [] as MovieType[],
+            isLoaded: false
+        };
     });
 
     // Тест на начальное состояние
@@ -49,6 +55,9 @@ describe("PopularFilmsSlice", () => {
             error: "Network error",
         });
 
-        expect(newState).toEqual([]);
+        expect(newState).toEqual({
+            movies: [],
+            isLoaded: false,
+        });
     });
 });
