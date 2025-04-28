@@ -4,6 +4,7 @@ import {Scrollbar} from "swiper/modules";
 import IconPlay from "@/widgets/YoutubePlayer/assets/play.svg"
 import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
 import {newTrailersSelector} from "@/pages/home/sections/NewTrailers/model/NewTrailersSlice.ts";
+import {truncateString} from "@/shared/helpers/truncateString.ts";
 
 type MovieSliderProps = {
     onClick: (id: number) => void;
@@ -41,12 +42,13 @@ export const MovieSlider = ({onClick}: MovieSliderProps) => {
                             <img  src={IconPlay} className="tabletLg:w-[35px] tabletLg:h-[35px] tablet:w-[20px] tablet:h-[20px] w-[16px] h-[16px] z-10" alt=""/>
 
                             <div
-                                className="absolute w-full h-full duration-300 bg-formElementColor bg-opacity-65 hidden group-hover:flex items-center justify-center rounded-[10px]">
+                                className="absolute inset-0 bg-formElementColor bg-opacity-0 group-hover:bg-opacity-65
+                    flex items-center justify-center rounded-[10px] transition-all duration-300 ease-in-out">
                             </div>
                         </div>
 
                         <div>
-                            <h5 className="tabletLg:text-[20px] text-[15px]">{movie.trailer.name}</h5>
+                            <h5 className="tabletLg:text-[20px] text-[15px]">{truncateString(movie.trailer.name, 70)}</h5>
                         </div>
                     </SwiperSlide>
                 ))}
