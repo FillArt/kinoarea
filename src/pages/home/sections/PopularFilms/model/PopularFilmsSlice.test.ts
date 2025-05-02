@@ -1,6 +1,6 @@
 import {beforeEach, describe, expect, it, vi} from "vitest";
 import {fetchPopularMoviesTC, PopularFilmsReducer} from "./PopularFilmsSlice";
-import {MovieType} from "@/shared/types/MovieType";
+import {MovieType} from "@/shared/api/movies/movieType.ts";
 
 // Мокаем API
 vi.mock("@/shared/api/MovieAPI", () => ({
@@ -10,10 +10,16 @@ vi.mock("@/shared/api/MovieAPI", () => ({
 }));
 
 describe("PopularFilmsSlice", () => {
-    let initialState: MovieType[];
+    let initialState: {
+        movies: MovieType[],
+        isLoaded: false
+    };
 
     beforeEach(() => {
-        initialState = [];
+        initialState = {
+            movies: [] as MovieType[],
+            isLoaded: false
+        };
     });
 
     // Тест на начальное состояние
@@ -49,6 +55,9 @@ describe("PopularFilmsSlice", () => {
             error: "Network error",
         });
 
-        expect(newState).toEqual([]);
+        expect(newState).toEqual({
+            movies: [],
+            isLoaded: false,
+        });
     });
 });

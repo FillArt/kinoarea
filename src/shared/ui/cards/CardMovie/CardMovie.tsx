@@ -1,7 +1,7 @@
 import {Empty} from "@/shared/ui/cards/CardMovie/Empty/Empty.tsx";
 import {Rating} from "@/shared/ui/cards/CardMovie/Rating/Rating.tsx";
 import {ButtonBase} from "@/shared/ui/buttons/ButtonBase.tsx";
-import {MovieType} from "@/shared/types/MovieType.ts";
+import {MovieType} from "@/shared/api/movies/movieType.ts";
 import {formatDate} from "@/shared/helpers/formatDate.ts";
 import {useTranslation} from "react-i18next";
 

@@ -1,6 +1,6 @@
 import {CardMovie} from "@/shared/ui/cards";
 import {Filter} from "@/pages/home/sections/NowInCinema/hooks/useCategoriesList.ts";
-import {MovieType} from "@/shared/types/MovieType.ts";
+import {MovieType} from "@/shared/api/movies/movieType.ts";
 import {EmptyCinemaList} from "@/shared/ui/sections/EmptyCinemaList.tsx";
 
 

@@ -1,5 +1,5 @@
 import {createAppSlice} from "@/shared/hooks/createAppSlice.ts";
-import {MovieType, TrailerType} from "@/shared/types/MovieType.ts";
+import {MovieType, TrailerType} from "@/shared/api/movies/movieType.ts";
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {movieAPI} from "@/shared/api/MovieAPI.ts";
 

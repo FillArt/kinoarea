@@ -35,9 +35,9 @@ export const NewTrailers = () => {
     return (
         <Section>
             <SectionTitle line={false} title={t('title')} sectionVersion="two">
-                <a className="tabletLg:text-[22px] text-[18px] flex items-center" href="/">
+                <a className="group  hover:text-[#3657CB] tabletLg:text-[22px] text-[18px] flex items-center" href="/">
                     {t('button_title')}
-                    <img src={ArrowIcon} alt="Стрелка" className="tabletLg:ml-[27px] ml-[14px] w-6 h-6"/>
+                    <img src={ArrowIcon} alt="Стрелка" className="group-hover:animate-bounce-x tabletLg:ml-[27px] ml-[14px] w-6 h-6"/>
                 </a>
             </SectionTitle>
 

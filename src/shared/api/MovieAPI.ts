@@ -1,5 +1,5 @@
 import {instance} from "@/shared/api/instance.ts";
-import {GenreType, MovieType, TrailerType} from "@/shared/types/MovieType.ts";
+import {GenreType, MovieType, TrailerType} from "@/shared/api/movies/movieType.ts";
 
 export const movieAPI = {
     getNowPlaying() {

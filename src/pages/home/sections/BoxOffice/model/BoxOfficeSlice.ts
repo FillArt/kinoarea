@@ -1,6 +1,6 @@
 import {createAppSlice} from "@/shared/hooks/createAppSlice.ts";
 import {movieAPI} from "@/shared/api/MovieAPI.ts";
-import {BoxOfficeType} from "@/shared/types/MovieType.ts";
+import {BoxOfficeType} from "@/shared/api/movies/movieType.ts";
 
 export const BoxOfficeSlice = createAppSlice({
     name: "BoxOffice",

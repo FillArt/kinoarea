@@ -1,6 +1,6 @@
 import YouTube from "react-youtube";
 import IconPlay from "@/widgets/YoutubePlayer/assets/play.svg"
-import {TrailerType} from "@/shared/types/MovieType.ts";
+import {TrailerType} from "@/shared/api/movies/movieType.ts";
 import {YoutubeInfo} from "@/widgets/YoutubePlayer/YoutubeInfo.tsx";
 
 type YoutubePlayerProps = {
@@ -38,7 +38,8 @@ export const YoutubePlayer = ({trailer, mode, setMod}: YoutubePlayerProps) => {
                     </div>
 
                     <div
-                        className="absolute w-full h-full duration-300 bg-formElementColor bg-opacity-65 hidden group-hover:flex items-center justify-center rounded-[10px]"></div>
+                        className="absolute inset-0 bg-formElementColor bg-opacity-0 group-hover:bg-opacity-65
+                    flex items-center justify-center rounded-[10px] transition-all duration-300 ease-in-out"></div>
 
                     <img className="w-full object-cover rounded-[10px] max-h-[760px]" src={trailer.posterUrl}
                          alt="trailerMain?.trailer.name"/>

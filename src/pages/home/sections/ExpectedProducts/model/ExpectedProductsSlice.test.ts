@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { ExpectedProductsSliceReducer, fetchMovies } from "./ExpectedProductsSlice";
-import { MovieType } from "@/shared/types/MovieType";
+import { MovieType } from "@/shared/api/movies/movieType.ts";
 
 // API
 vi.mock("@/shared/api/MovieAPI", () => ({
