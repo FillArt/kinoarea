@@ -1,3 +1,6 @@
+import {useNowPlayingWithGenres} from "@/shared/api/movies/hooks/useNowPlayingWithGenres.ts";
+
+
 import {SectionTitle} from "@/shared/ui/sections/SectionTitle.tsx";
 import {useEffect, useState} from "react";
 
@@ -5,27 +8,27 @@ import ArrowIcon from '../assets/arrow.svg'
 import {MainPreview} from "@/pages/home/sections/NewTrailers/ui/MainPreview/MainPreview.tsx";
 import {MovieSlider} from "@/pages/home/sections/NewTrailers/ui/MovieSlider/MovieSlider.tsx";
 import {useAppDispatch} from "@/shared/hooks/useAppDispatch.ts";
-import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
-import {nowMoviesSelector} from "@/pages/home/sections/NowInCinema/model/NowInCinemaSlice.ts";
-import {
-    changeMovieInMainAC,
-    fetchAllMovieTrailersTC
-} from "@/pages/home/sections/NewTrailers/model/NewTrailersSlice.ts";
+import {changeMovieInMainAC, initAllTrailersAC} from "@/pages/home/sections/NewTrailers/model/NewTrailersSlice.ts";
 import {useTranslation} from "react-i18next";
 import {Section} from "@/shared/ui/sections/Section.tsx";
+import {useGetMultipleTrailersQuery} from "@/shared/api/movies/movieApi.ts";
 
 
 export const NewTrailers = () => {
-    const dispatch = useAppDispatch();
-    const movies = useAppSelector(nowMoviesSelector)
-    const [isVideoMode, setIsVideoMode] = useState(false)
     const {t} = useTranslation("newTrailers")
+    const [isVideoMode, setIsVideoMode] = useState(false)
+    const dispatch = useAppDispatch();
+
+    const { movies } = useNowPlayingWithGenres();
+    const movieIds = movies.map(m => m.id!);
+    const { data: trailers, isLoading } = useGetMultipleTrailersQuery(movieIds);
+
 
     useEffect(() => {
-        if (movies.length) {
-            dispatch(fetchAllMovieTrailersTC(movies));
+        if(trailers !== undefined) {
+            dispatch(initAllTrailersAC({trailers: trailers}));
         }
-    }, [movies]);
+    }, [trailers]);
 
     const chooseNextMovie = (idMovie: number) => {
         dispatch(changeMovieInMainAC({idMovie}))
@@ -42,7 +45,7 @@ export const NewTrailers = () => {
             </SectionTitle>
 
             <div className="phone:mt-[32px] mt-[18px] grid">
-                <MainPreview videoMod={isVideoMode} setVideoMod={setIsVideoMode}/>
+                <MainPreview videoMod={isVideoMode} setVideoMod={setIsVideoMode} isLoading={isLoading} />
                 <MovieSlider onClick={chooseNextMovie}/>
             </div>
         </Section>

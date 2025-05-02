@@ -1,9 +1,9 @@
-import {useNowPlayingWithGenres} from "@/shared/api/movies/useNowPlayingWithGenres.ts";
+import {useNowPlayingWithGenres} from "@/shared/api/movies/hooks/useNowPlayingWithGenres.ts";
 
 import {useEffect, useState} from "react";
 import {useBreakpoint} from "@/shared/hooks/useBreakpoint.ts";
-import {Filter, useCategoriesList} from "@/pages/home/sections/NowInCinema/hooks/useCategoriesList.ts";
 import {useTranslation} from "react-i18next";
+import {Filter, useCategoriesList} from "@/pages/home/sections/NowInCinema/hooks/useCategoriesList.ts";
 
 import Icon from "@/shared/ui/buttons/assets/burgerWhite.svg";
 
@@ -18,7 +18,6 @@ import {CinemaList} from "@/pages/home/sections/NowInCinema/ui/CinemaList/Cinema
 import {CinemaListSkeleton} from "@/pages/home/sections/NowInCinema/ui/CinemaList/CinemaListSkeleton.tsx";
 
 
-
 export const NowInCinema = () => {
 
     const {t} = useTranslation("nowInCinema");
@@ -26,7 +25,6 @@ export const NowInCinema = () => {
 
     const breakpoint = useBreakpoint()
     const categoriesList = useCategoriesList();
-
 
     const [filter, setFilter] = useState<Filter>("all");
     const [isShow, setIsShow] = useState<boolean>(false)
