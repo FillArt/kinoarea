@@ -1,6 +1,5 @@
 import {createAppSlice} from "@/shared/hooks/createAppSlice.ts";
 import {TrailerType} from "@/shared/api/movies/movieType.ts";
-import {current} from "@reduxjs/toolkit";
 
 export const NewTrailersSlice = createAppSlice({
     name: 'NewTrailers',
@@ -16,8 +15,6 @@ export const NewTrailersSlice = createAppSlice({
 
     reducers: create => ({
         changeMovieInMainAC: create.reducer<{ idMovie: number }>((state, action) => {
-            console.log(action.payload.idMovie, 'Здесь происходят изменения');
-
             state.main = state.allTrailers.filter(trailer => trailer.id === action.payload.idMovie)[0]
             state.trailers = state.allTrailers.filter(trailer => trailer.id !== action.payload.idMovie)
         }),
@@ -29,10 +26,7 @@ export const NewTrailersSlice = createAppSlice({
 
             state.main = state.allTrailers[0];
             state.trailers = state.allTrailers.filter(trailer => trailer.id !== firstTrailer?.id);
-
-            console.log(current(state))
         })
-
 
     })
 })
