@@ -1,5 +1,3 @@
-import {useNowPlayingWithGenres} from "@/shared/api/movies/hooks/useNowPlayingWithGenres.ts";
-
 
 import {SectionTitle} from "@/shared/ui/sections/SectionTitle.tsx";
 import {useEffect, useState} from "react";
@@ -11,7 +9,8 @@ import {useAppDispatch} from "@/shared/hooks/useAppDispatch.ts";
 import {changeMovieInMainAC, initAllTrailersAC} from "@/pages/home/sections/NewTrailers/model/NewTrailersSlice.ts";
 import {useTranslation} from "react-i18next";
 import {Section} from "@/shared/ui/sections/Section.tsx";
-import {useGetMultipleTrailersQuery} from "@/shared/api/movies/movieApi.ts";
+import {useGetMultipleTrailersQuery, useGetNowPlayingQuery} from "@/shared/api/movies/movieApi.ts";
+import {useMoviesWithGenres} from "@/shared/api/movies/hooks/useMoviesWithGenres.ts";
 
 
 export const NewTrailers = () => {
@@ -19,7 +18,9 @@ export const NewTrailers = () => {
     const [isVideoMode, setIsVideoMode] = useState(false)
     const dispatch = useAppDispatch();
 
-    const { movies } = useNowPlayingWithGenres();
+    const { data: moviesNow} = useGetNowPlayingQuery();
+    const { movies } = useMoviesWithGenres({movies: moviesNow ?? []});
+
     const movieIds = movies.map(m => m.id!);
     const { data: trailers, isLoading } = useGetMultipleTrailersQuery(movieIds);
 

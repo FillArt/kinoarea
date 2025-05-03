@@ -1,4 +1,4 @@
-import {useNowPlayingWithGenres} from "@/shared/api/movies/hooks/useNowPlayingWithGenres.ts";
+import {useMoviesWithGenres} from "@/shared/api/movies/hooks/useMoviesWithGenres.ts";
 
 import {useEffect, useState} from "react";
 import {useBreakpoint} from "@/shared/hooks/useBreakpoint.ts";
@@ -16,19 +16,21 @@ import {Popup} from "@/widgets/Popup/Popup.tsx";
 
 import {CinemaList} from "@/pages/home/sections/NowInCinema/ui/CinemaList/CinemaList.tsx";
 import {CinemaListSkeleton} from "@/pages/home/sections/NowInCinema/ui/CinemaList/CinemaListSkeleton.tsx";
+import {useGetNowPlayingQuery} from "@/shared/api/movies/movieApi.ts";
 
 
 export const NowInCinema = () => {
 
     const {t} = useTranslation("nowInCinema");
-    const { movies, isLoading } = useNowPlayingWithGenres();
+    const { data: moviesNow} = useGetNowPlayingQuery();
+    const { movies, isLoading } = useMoviesWithGenres({movies: moviesNow ?? []});
 
     const breakpoint = useBreakpoint()
     const categoriesList = useCategoriesList();
 
     const [filter, setFilter] = useState<Filter>("all");
     const [isShow, setIsShow] = useState<boolean>(false)
-    const [fullStatus, setFullStatus] = useState<boolean>(false);
+    const [fullStatus, setFullStatus] = useState<boolean>(true);
     const [numberOfFilms, setNumberOfFilms] = useState<number>(8)
 
 
@@ -43,11 +45,11 @@ export const NowInCinema = () => {
 
 
     const onClickHandler = (filter: Filter) => {
-        setFullStatus(true)
+        setFullStatus(false)
         setFilter(filter)
     };
 
-    const showMoreMovies = () => setFullStatus(true);
+    const showMoreMovies = () => setFullStatus(false);
 
     return (
         <>
@@ -85,14 +87,14 @@ export const NowInCinema = () => {
                         </div>
                     </SectionTitle>
 
-                    {isLoading ?
+                    {!isLoading ?
                         <CinemaListSkeleton numberOfFilms={numberOfFilms}/> :
-                        <CinemaList movies={!fullStatus ? movies.slice(0, numberOfFilms) : movies} filter={filter}
+                        <CinemaList movies={fullStatus ? movies.slice(0, numberOfFilms) : movies} filter={filter}
                                     setFullStatus={setFullStatus}/>}
 
-                    {!fullStatus && (
+                    {fullStatus && (
                         <div className="flex justify-center mt-14">
-                            <ButtonBase title={t('button_all')} style="border" disable={isLoading}
+                            <ButtonBase title={t('button_all')} style="border" disable={Boolean(!isLoading)}
                                         onClick={() => showMoreMovies()}/>
                         </div>
                     )}

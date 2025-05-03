@@ -16,6 +16,13 @@ export type MovieType = {
     vote_count?: number
 }
 
+export type MoviesResponseType = {
+    page: number;
+    results: MovieType[];
+    total_pages: number;
+    total_results: number;
+};
+
 export type GenreType = Record<number, string>;
 
 export type GenresResponseType = {
