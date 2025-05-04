@@ -1,7 +1,7 @@
 import {baseApi} from "@/shared/api/baseApi.ts";
 import {
     GenresResponseType,
-    GenreType,
+    GenreType, MoviesResponseType,
     MovieType,
     TrailerResponseType,
     TrailerType
@@ -86,7 +86,7 @@ export const moviesApi = baseApi.injectEndpoints({
 
                         if (response.error) return undefined;
 
-                        const trailer = (response.data as {results: TrailerResponseType[]}).results?.[0];
+                        const trailer = (response.data as { results: TrailerResponseType[] }).results?.[0];
                         if (!trailer) return undefined;
 
                         return {
@@ -103,7 +103,32 @@ export const moviesApi = baseApi.injectEndpoints({
                 return {data: results.filter(Boolean) as TrailerType[]};
             },
         }),
+
+        getPopular100Movies: build.query<MovieType[], void>({
+            async queryFn(_arg, _api, _extraOptions, fetchWithBQ) {
+                const pages = [1, 2, 3, 4, 5];
+
+                const responses = await Promise.all(
+                    pages.map(async (page) => {
+                        const result = await fetchWithBQ(`/movie/popular?page=${page}`);
+                        if (result.error) throw result.error;
+                        return result.data as MoviesResponseType;
+                    })
+                );
+
+                const allMovies: MovieType[] = responses.flatMap((res: MoviesResponseType): MovieType[] => res.results);
+
+                const unique: MovieType[] = allMovies.filter((movie: MovieType, index: number, self: MovieType[]): boolean =>
+                    index === self.findIndex((m) => m.id === movie.id)
+                ).slice(0, 100);
+
+                return {
+                    data: unique.sort((a, b) => b.vote_average - a.vote_average),
+                };
+            }
+        })
+
     }),
 })
 
-export const {useGetGenresQuery, useGetNowPlayingQuery, useGetTrailerQuery, useGetMultipleTrailersQuery} = moviesApi;
+export const {useGetGenresQuery, useGetNowPlayingQuery, useGetTrailerQuery, useGetPopular100MoviesQuery, useGetMultipleTrailersQuery} = moviesApi;

@@ -1,53 +1,36 @@
 import {SectionTitle} from "@/shared/ui/sections/SectionTitle.tsx";
 import {ButtonIcon} from "@/shared/ui/buttons/ButtonIcon.tsx";
 import Icon from "@/shared/ui/buttons/assets/burgerWhite.svg";
-import {useEffect, useMemo, useState} from "react";
+import {useEffect, useState} from "react";
 import {yearsList} from "@/pages/home/sections/PopularFilms/model/yearsList.ts";
-import {
-    fetchPopularMoviesTC, PopularFilmsLoadingSelector,
-    PopularFilmsSelector
-} from "@/pages/home/sections/PopularFilms/model/PopularFilmsSlice.ts";
-import {useAppDispatch} from "@/shared/hooks/useAppDispatch.ts";
-import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
-import {nowGenreSelector} from "@/pages/home/sections/NowInCinema/model/NowInCinemaSlice.ts";
-import {EmptyCinemaList} from "@/shared/ui/sections/EmptyCinemaList.tsx";
+
 import {useTranslation} from "react-i18next";
-import {Slider} from "@/widgets/Slider/ui/Slider.tsx";
 import {Section} from "@/shared/ui/sections/Section.tsx";
 import {Popup} from "@/widgets/Popup/Popup.tsx";
 import {useBreakpoint} from "@/shared/hooks/useBreakpoint.ts";
+import {useGetPopular100MoviesQuery} from "@/shared/api/movies/movieApi.ts";
+import {useMoviesWithGenres} from "@/shared/api/movies/hooks/useMoviesWithGenres.ts";
 import {CinemaListSkeleton} from "@/pages/home/sections/NowInCinema/ui/CinemaList/CinemaListSkeleton.tsx";
+import {Slider} from "@/widgets/Slider/ui/Slider.tsx";
+import {EmptyCinemaList} from "@/shared/ui/sections/EmptyCinemaList.tsx";
 
 
 export const PopularFilms = () => {
+    const {t} = useTranslation("popularFilms");
+    const breakpoint = useBreakpoint()
+
+    const { data } = useGetPopular100MoviesQuery();
+    const { movies, isLoading } = useMoviesWithGenres({movies: data ?? []});
+
+    const [filteredMovies, setFilteredMovies] = useState(movies);
     const [filter, setFilter] = useState("All");
     const [isShow, setIsShow] = useState<boolean>(false)
     const [numberOfFilms, setNumberOfFilms] = useState<number>(4)
 
-    const dispatch = useAppDispatch();
-    const popularFilms = useAppSelector(PopularFilmsSelector)
-    const genreMap = useAppSelector(nowGenreSelector)
-    const isLoaded = useAppSelector(PopularFilmsLoadingSelector)
-
-    const breakpoint = useBreakpoint()
-    const {t} = useTranslation("popularFilms");
-
-    const formatMovies = useMemo(() => {
-        return popularFilms.map((movie) => ({
-            ...movie,
-            genres: movie.genre_ids?.map((id: number) => genreMap[id]),
-        }));
-    }, [popularFilms, genreMap]);
-
-    const [filteredMovies, setFilteredMovies] = useState(formatMovies);
 
     useEffect(() => {
-        dispatch(fetchPopularMoviesTC())
-    }, []);
-
-    useEffect(() => {
-        setFilteredMovies(formatMovies);
-    }, [formatMovies]);
+        setFilteredMovies(movies);
+    }, [movies]);
 
     useEffect(() => {
         if (breakpoint === "desktop") {
@@ -61,9 +44,9 @@ export const PopularFilms = () => {
     const onClickHandler = ((filter: string) => {
         setFilter(filter);
         if (filter !== "All") {
-            setFilteredMovies(formatMovies.filter(movies => movies.release_date?.split('-')[0] === filter));
+            setFilteredMovies(movies.filter(movies => movies.release_date?.split('-')[0] === filter));
         } else {
-            setFilteredMovies(formatMovies)
+            setFilteredMovies(movies)
         }
     })
 
@@ -117,7 +100,7 @@ export const PopularFilms = () => {
 
                 {filteredMovies.length > 0 ? (
                     <div className="tabletLg:m-0 mt-[-35px]">
-                        {!isLoaded ?
+                        {!isLoading ?
                             <CinemaListSkeleton numberOfFilms={numberOfFilms}/> : <Slider movies={filteredMovies}/>
                         }
                     </div>
