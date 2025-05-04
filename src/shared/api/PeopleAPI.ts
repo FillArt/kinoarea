@@ -1,5 +1,5 @@
 import {instance} from "@/shared/api/instance.ts";
-import {PeopleType} from "@/shared/types/PepoleType.ts";
+import {PeopleType} from "@/shared/api/people/peopleType.ts";
 
 export const peopleAPI = {
     getPopularPeople(timeWindow: "day" | "week") {

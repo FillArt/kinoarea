@@ -8,9 +8,6 @@ type InputTextProps = {
 }
 
 export const InputText = ({register, error, placeholder = 'Default', type = 'text'}: InputTextProps) => {
-
-    console.log(error)
-
     const errorStyle = error ? 'outline outline-2 outline-red-500' : '';
 
     return (
