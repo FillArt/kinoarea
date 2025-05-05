@@ -17,8 +17,6 @@ import {Popup} from "@/widgets/Popup/Popup.tsx";
 import {CinemaList} from "@/pages/home/sections/NowInCinema/ui/CinemaList/CinemaList.tsx";
 import {CinemaListSkeleton} from "@/pages/home/sections/NowInCinema/ui/CinemaList/CinemaListSkeleton.tsx";
 import {useGetNowPlayingQuery} from "@/shared/api/movies/movieApi.ts";
-import {Slider} from "@/widgets/Slider/ui/Slider.tsx";
-import {EmptyCinemaList} from "@/shared/ui/sections/EmptyCinemaList.tsx";
 
 
 export const NowInCinema = () => {

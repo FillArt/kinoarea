@@ -51,9 +51,29 @@ export const ExpectedProducts = () => {
                 )}
             </SectionTitle>
 
-            {movies && movies.length > 0 ? (
+            {/*{movies && movies.length > 0 ? (*/}
+            {/*    <div className="tabletLg:m-0 mt-[-35px]">*/}
+            {/*        {!isLoading ? (*/}
+            {/*            <Slider*/}
+            {/*                movies={movies}*/}
+            {/*                prevButton=".expected-prev"*/}
+            {/*                nextButton=".expected-next"*/}
+            {/*                setIndex={setCurrentSliderIndex}*/}
+            {/*                setBeginStatus={setIsBeginningExpected}*/}
+            {/*                setEndStatus={setIsEndExpected}*/}
+            {/*                release={true}*/}
+            {/*            />*/}
+            {/*        ) : (*/}
+            {/*            */}
+            {/*        )}*/}
+            {/*    </div>*/}
+            {/*) : (*/}
+            {/*    <EmptyCinemaList />*/}
+            {/*)}*/}
+
+            {isLoading ? (
                 <div className="tabletLg:m-0 mt-[-35px]">
-                    {!isLoading ? (
+                    {movies && movies.length > 0 ? (
                         <Slider
                             movies={movies}
                             prevButton=".expected-prev"
@@ -64,11 +84,11 @@ export const ExpectedProducts = () => {
                             release={true}
                         />
                     ) : (
-                        <CinemaListSkeleton numberOfFilms={numberOfFilms}/>
+                        <EmptyCinemaList />
                     )}
                 </div>
             ) : (
-                <EmptyCinemaList />
+                <CinemaListSkeleton numberOfFilms={numberOfFilms}/>
             )}
 
 
