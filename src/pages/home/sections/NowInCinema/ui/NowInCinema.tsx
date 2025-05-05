@@ -17,6 +17,8 @@ import {Popup} from "@/widgets/Popup/Popup.tsx";
 import {CinemaList} from "@/pages/home/sections/NowInCinema/ui/CinemaList/CinemaList.tsx";
 import {CinemaListSkeleton} from "@/pages/home/sections/NowInCinema/ui/CinemaList/CinemaListSkeleton.tsx";
 import {useGetNowPlayingQuery} from "@/shared/api/movies/movieApi.ts";
+import {Slider} from "@/widgets/Slider/ui/Slider.tsx";
+import {EmptyCinemaList} from "@/shared/ui/sections/EmptyCinemaList.tsx";
 
 
 export const NowInCinema = () => {
@@ -88,9 +90,13 @@ export const NowInCinema = () => {
                     </SectionTitle>
 
                     {!isLoading ?
-                        <CinemaListSkeleton numberOfFilms={numberOfFilms}/> :
-                        <CinemaList movies={fullStatus ? movies.slice(0, numberOfFilms) : movies} filter={filter}
-                                    setFullStatus={setFullStatus}/>}
+                        <CinemaList
+                            movies={fullStatus ? movies.slice(0, numberOfFilms) : movies}
+                            filter={filter}
+                            setFullStatus={setFullStatus}
+                            isLoading={isLoading}
+                        /> : <CinemaListSkeleton numberOfFilms={numberOfFilms}/>
+                    }
 
                     {fullStatus && (
                         <div className="flex justify-center mt-14">
