@@ -30,6 +30,8 @@ export const ExpectedProducts = () => {
         else if (breakpoint === "tablet") setNumberOfFilms(3)
     }, [breakpoint]);
 
+    // @ts-ignore
+    // @ts-ignore
     return (
         <Section>
             <SectionTitle title={t('title')} line={false} sectionVersion="two">
@@ -50,26 +52,6 @@ export const ExpectedProducts = () => {
                     </div>
                 )}
             </SectionTitle>
-
-            {/*{movies && movies.length > 0 ? (*/}
-            {/*    <div className="tabletLg:m-0 mt-[-35px]">*/}
-            {/*        {!isLoading ? (*/}
-            {/*            <Slider*/}
-            {/*                movies={movies}*/}
-            {/*                prevButton=".expected-prev"*/}
-            {/*                nextButton=".expected-next"*/}
-            {/*                setIndex={setCurrentSliderIndex}*/}
-            {/*                setBeginStatus={setIsBeginningExpected}*/}
-            {/*                setEndStatus={setIsEndExpected}*/}
-            {/*                release={true}*/}
-            {/*            />*/}
-            {/*        ) : (*/}
-            {/*            */}
-            {/*        )}*/}
-            {/*    </div>*/}
-            {/*) : (*/}
-            {/*    <EmptyCinemaList />*/}
-            {/*)}*/}
 
             {isLoading ? (
                 <div className="tabletLg:m-0 mt-[-35px]">
