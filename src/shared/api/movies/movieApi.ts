@@ -1,7 +1,8 @@
 import {baseApi} from "@/shared/api/baseApi.ts";
 import {
     GenresResponseType,
-    GenreType, MoviesResponseType,
+    GenreType,
+    MoviesResponseType,
     MovieType,
     TrailerResponseType,
     TrailerType
@@ -126,9 +127,38 @@ export const moviesApi = baseApi.injectEndpoints({
                     data: unique.sort((a, b) => b.vote_average - a.vote_average),
                 };
             }
+        }),
+
+        getUpcomingMovie: build.query<MovieType[], void>({
+            query: () => ({
+                url: "movie/upcoming",
+                method: "GET",
+                params: {
+                    language: import.meta.env.VITE_APP_LANGUAGE,
+                    region: "US",
+                },
+                
+            }),
+            transformResponse: (response: { results: MovieType[] }) => {
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                return response.results.filter((movie) => {
+                    if (!movie.release_date) return false; // Если даты нет, исключаем фильм
+                    const movieDate = new Date(movie.release_date);
+                    return movieDate >= today; // Оставляем только сегодняшние и будущие
+                })
+            }
         })
 
     }),
 })
 
-export const {useGetGenresQuery, useGetNowPlayingQuery, useGetTrailerQuery, useGetPopular100MoviesQuery, useGetMultipleTrailersQuery} = moviesApi;
+export const {
+    useGetGenresQuery, 
+    useGetNowPlayingQuery, 
+    useGetTrailerQuery, 
+    useGetPopular100MoviesQuery, 
+    useGetMultipleTrailersQuery,
+    useGetUpcomingMovieQuery
+} = moviesApi;

@@ -4,13 +4,6 @@ import {ButtonIcon} from "@/shared/ui/buttons/ButtonIcon.tsx";
 import Icon from "@/shared/ui/buttons/assets/burgerWhite.svg";
 import {PopularPhotoInfo} from "@/pages/home/sections/PopularPeople/ui/PopularPhotoInfo/PopularPhotoInfo.tsx";
 import {PopularListInfo} from "@/pages/home/sections/PopularPeople/ui/PopularListInfo/PopularListInfo.tsx";
-import {PeopleType} from "@/shared/types/PepoleType.ts";
-import {useAppDispatch} from "@/shared/hooks/useAppDispatch.ts";
-import {
-    fetchPopularPersonTC,
-    PopularPersonSelector
-} from "@/pages/home/sections/PopularPeople/model/PopularPeopleSlice.ts";
-import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
 import {useTranslation} from "react-i18next";
 import {Section} from "@/shared/ui/sections/Section.tsx";
 import {
@@ -19,25 +12,24 @@ import {
 import {
     PopularListInfoSkeleton
 } from "@/pages/home/sections/PopularPeople/ui/PopularListInfo/PopularListInfoSkeleton.tsx";
-import {PopularFilmsLoadingSelector} from "@/pages/home/sections/PopularFilms/model/PopularFilmsSlice.ts";
+// import {PopularFilmsLoadingSelector} from "@/pages/home/sections/PopularFilms/model/PopularFilmsSlice.ts";
 import {Popup} from "@/widgets/Popup/Popup.tsx";
+import {useGetPopularPeopleQuery} from "@/shared/api/people/peopleApi.ts";
+import {PeopleType} from "@/shared/api/people/peopleType.ts";
 
 
 export const PopularPeople = () => {
-    const dispatch = useAppDispatch();
     const {t} = useTranslation("popularPeople");
     const [isShow, setIsShow] = useState<boolean>(false)
-
-    useEffect(() => {
-        dispatch(fetchPopularPersonTC('day'));
-        dispatch(fetchPopularPersonTC('week'));
-    }, [dispatch]);
-
-    const popularDay = useAppSelector((state) => PopularPersonSelector(state, 'day'));
-    const popularWeek = useAppSelector((state) => PopularPersonSelector(state, 'week'));
-    const isLoaded = useAppSelector(PopularFilmsLoadingSelector);
-
     const [filterPopularTime, setFilterPopularTime] = useState<'day' | 'week'>('day');
+
+    const timeList: { label: string, value: string }[] = [
+        {label: t('week'), value: 'week'},
+        {label: t('day'), value: 'day'},
+    ];
+
+    const { data: dayData, isLoading } = useGetPopularPeopleQuery("day");
+    const { data: weekData } = useGetPopularPeopleQuery("week");
 
     const [firstPerson, setFirstPerson] = useState<PeopleType | null>(null);
     const [secondPerson, setSecondPerson] = useState<PeopleType | null>(null);
@@ -50,16 +42,14 @@ export const PopularPeople = () => {
         setRestPersons(rest || []);
     };
 
-    const timeList: { label: string, value: string }[] = [
-        {label: t('week'), value: 'week'},
-        {label: t('day'), value: 'day'},
-    ];
-
     const onClickHandler = (value: 'day' | 'week') => setFilterPopularTime(value)
 
     useEffect(() => {
-        distributorPerson(filterPopularTime === 'day' ? popularDay : popularWeek);
-    }, [filterPopularTime, popularDay, popularWeek]);
+        const data = filterPopularTime === "day" ? dayData : weekData;
+        if (data) {
+            distributorPerson(data.slice(0, 6));
+        }
+    }, [filterPopularTime, dayData, weekData]);
 
 
     return (
@@ -107,21 +97,21 @@ export const PopularPeople = () => {
 
                 <div className="grid grid-cols-12 gap-[23px] tabletLg:mt-[63px] mt-[30px]">
                     <div className="tablet:col-span-4 col-span-6">
-                        {isLoaded ? (
+                        {!isLoading ? (
                             <PopularPhotoInfo data={firstPerson} place={t('first')}/>
                         ) : (
                             <PopularPhotoInfoSkeleton/>
                         )}
                     </div>
                     <div className="tablet:col-span-4 col-span-6">
-                        {isLoaded ? (
+                        {!isLoading ? (
                             <PopularPhotoInfo data={secondPerson} place={t('second')}/>
                         ) : (
                             <PopularPhotoInfoSkeleton/>
                         )}
                     </div>
                     <div className="tablet:col-span-4 col-span-12">
-                        {isLoaded ? (
+                        {!isLoading ? (
                             <PopularListInfo data={restPersons}/>
                         ) : (
                             <PopularListInfoSkeleton/>

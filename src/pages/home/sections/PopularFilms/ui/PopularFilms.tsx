@@ -95,7 +95,6 @@ export const PopularFilms = () => {
                             <img src={Icon} width="12px" height="12px" alt="Close Popup"/>
                         </ButtonIcon>
                     </div>
-
                 </SectionTitle>
 
                 {filteredMovies.length > 0 ? (

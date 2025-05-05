@@ -13,8 +13,6 @@ type MainPreviewProps = {
 export const MainPreview = ({videoMod, setVideoMod, isLoading }: MainPreviewProps) => {
     const trailerMain = useAppSelector(newTrailersMainSelector)
 
-    console.log(trailerMain);
-
     if (isLoading || !trailerMain) {
         return <YoutubePlayerSkeleton />
     }

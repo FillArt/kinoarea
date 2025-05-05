@@ -23,9 +23,6 @@ const opts = {
 export const YoutubePlayer = ({trailer, mode, setMod}: YoutubePlayerProps) => {
     const handleVideoEnd = () => setMod(false);
 
-
-    console.log(trailer, 'Ищи тут')
-
     return (
         <>
             {mode ? (
