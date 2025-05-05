@@ -97,14 +97,13 @@ export const PopularFilms = () => {
                     </div>
                 </SectionTitle>
 
-                {filteredMovies.length > 0 ? (
+
+                {!isLoading ? (
                     <div className="tabletLg:m-0 mt-[-35px]">
-                        {!isLoading ?
-                            <CinemaListSkeleton numberOfFilms={numberOfFilms}/> : <Slider movies={filteredMovies}/>
-                        }
+                        {filteredMovies.length > 0  ?  <Slider movies={filteredMovies}/> : <EmptyCinemaList/>}
                     </div>
                 ) : (
-                    <EmptyCinemaList/>
+                    <CinemaListSkeleton numberOfFilms={numberOfFilms}/>
                 )}
 
             </Section>
