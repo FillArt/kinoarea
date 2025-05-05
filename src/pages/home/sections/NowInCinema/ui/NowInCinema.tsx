@@ -100,7 +100,7 @@ export const NowInCinema = () => {
 
                     {fullStatus && (
                         <div className="flex justify-center mt-14">
-                            <ButtonBase title={t('button_all')} style="border" disable={Boolean(!isLoading)}
+                            <ButtonBase title={t('button_all')} style="border" disable={Boolean(isLoading)}
                                         onClick={() => showMoreMovies()}/>
                         </div>
                     )}
