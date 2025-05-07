@@ -17,7 +17,6 @@ export const moviesApi = baseApi.injectEndpoints({
                 url: "/genre/movie/list",
                 method: "GET",
                 params: {
-                    language: import.meta.env.VITE_APP_LANGUAGE,
                     region: "US",
                 },
             }),
@@ -36,7 +35,6 @@ export const moviesApi = baseApi.injectEndpoints({
                 url: "/movie/now_playing",
                 method: "GET",
                 params: {
-                    language: import.meta.env.VITE_APP_LANGUAGE,
                     region: "US",
                 },
             }),
@@ -49,7 +47,6 @@ export const moviesApi = baseApi.injectEndpoints({
                 url: `/movie/${movie_id}/videos`,
                 method: "GET",
                 params: {
-                    language: import.meta.env.VITE_APP_LANGUAGE,
                     region: "US",
                 },
             }),
@@ -81,7 +78,6 @@ export const moviesApi = baseApi.injectEndpoints({
                             url: `/movie/${id}/videos`,
                             method: 'GET',
                             params: {
-                                language: import.meta.env.VITE_APP_LANGUAGE,
                                 region: 'US',
                             },
                         });
@@ -135,7 +131,6 @@ export const moviesApi = baseApi.injectEndpoints({
                 url: "movie/upcoming",
                 method: "GET",
                 params: {
-                    language: import.meta.env.VITE_APP_LANGUAGE,
                     region: "US",
                 },
 

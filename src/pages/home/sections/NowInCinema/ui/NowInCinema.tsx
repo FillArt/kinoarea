@@ -88,7 +88,7 @@ export const NowInCinema = () => {
                         </div>
                     </SectionTitle>
 
-                    {isLoading ?
+                    {isLoading && movies.length > 0 ?
                         <CinemaList
                             movies={fullStatus ? movies.slice(0, numberOfFilms) : movies}
                             filter={filter}

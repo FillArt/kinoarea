@@ -39,13 +39,10 @@ import expectedProductsEn from "./locales/en/home/expectedProducts.json"
 import expectedProductsRu from "./locales/ru/home/expectedProducts.json";
 
 // Box Office | Home page
-import boxOfficeEn from "./locales/en/home/ boxOffice.json"
+import boxOfficeEn from "./locales/en/home/boxOffice.json"
 import boxOfficeRu from "./locales/ru/home/boxOffice.json";
 
-const defaultLanguage = import.meta.env.VITE_APP_LANGUAGE || "en"; // Язык по умолчанию
-
-
-const initI18n = async () => {
+export const initI18n = async (language: string = "en") => {
     await i18n
         //.use(LanguageDetector)
         .use(initReactI18next)
@@ -81,14 +78,9 @@ const initI18n = async () => {
 
                 },
             },
-            fallbackLng: defaultLanguage,
+            lng: language,
+            fallbackLng: "en",
             interpolation: {escapeValue: false},
             debug: true, // Включить логи в консоли
         });
 }
-
-initI18n();
-
-
-
-export default i18n;
