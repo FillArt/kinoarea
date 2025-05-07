@@ -10,6 +10,10 @@ import headerRu from "./locales/ru/common/header.json";
 import cardsEn from "./locales/en/common/cards.json"
 import cardsRu from "./locales/ru/common/cards.json";
 
+// Footer | Common
+import footerEn from "./locales/en/common/footer.json"
+import footerRu from "./locales/ru/common/footer.json";
+
 // Now in Cinema | Home Page
 import nowInCinemaEn from "./locales/en/home/nowInCinema.json"
 import nowInCinemaRu from "./locales/ru/home/nowInCinema.json";
@@ -51,6 +55,7 @@ const initI18n = async () => {
                     // common
                     header: headerRu,
                     cards: cardsRu,
+                    footer: footerRu,
                     // home
                     nowInCinema: nowInCinemaRu,
                     newTrailers: newTrailersRu,
@@ -64,6 +69,7 @@ const initI18n = async () => {
                     // common
                     header: headerEn,
                     cards: cardsEn,
+                    footer: footerEn,
                     // home
                     nowInCinema: nowInCinemaEn,
                     newTrailers: newTrailersEn,
