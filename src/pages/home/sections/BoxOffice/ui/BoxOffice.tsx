@@ -15,11 +15,13 @@ export const BoxOffice = () => {
     const lastWeek = new Date();
     lastWeek.setDate(today.getDate() - 7);
 
+    const {t} = useTranslation('boxOffice');
+    const [prepareMovies, setPrepareMovies] = useState<BoxOfficeType[]>([])
+
     const dispatch = useAppDispatch();
     const infoMovies: BoxOfficeType[] = useAppSelector(BoxOfficeSelector)
     const breakpoint = useBreakpoint()
-    const {t} = useTranslation('boxOffice');
-    const [prepareMovies, setPrepareMovies] = useState<BoxOfficeType[]>([])
+
 
     // const isLoading = useAppSelector(BoxOfficeLoadedSelector)
 

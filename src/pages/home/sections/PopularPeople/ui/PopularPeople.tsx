@@ -97,21 +97,21 @@ export const PopularPeople = () => {
 
                 <div className="grid grid-cols-12 gap-[23px] tabletLg:mt-[63px] mt-[30px]">
                     <div className="tablet:col-span-4 col-span-6">
-                        {!isLoading ? (
+                        {isLoading ? (
                             <PopularPhotoInfo data={firstPerson} place={t('first')}/>
                         ) : (
                             <PopularPhotoInfoSkeleton/>
                         )}
                     </div>
                     <div className="tablet:col-span-4 col-span-6">
-                        {!isLoading ? (
+                        {isLoading ? (
                             <PopularPhotoInfo data={secondPerson} place={t('second')}/>
                         ) : (
                             <PopularPhotoInfoSkeleton/>
                         )}
                     </div>
                     <div className="tablet:col-span-4 col-span-12">
-                        {!isLoading ? (
+                        {isLoading ? (
                             <PopularListInfo data={restPersons}/>
                         ) : (
                             <PopularListInfoSkeleton/>

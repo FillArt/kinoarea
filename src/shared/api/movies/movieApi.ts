@@ -137,7 +137,7 @@ export const moviesApi = baseApi.injectEndpoints({
                     language: import.meta.env.VITE_APP_LANGUAGE,
                     region: "US",
                 },
-                
+
             }),
             transformResponse: (response: { results: MovieType[] }) => {
                 const today = new Date();
@@ -149,16 +149,24 @@ export const moviesApi = baseApi.injectEndpoints({
                     return movieDate >= today; // Оставляем только сегодняшние и будущие
                 })
             }
+        }),
+
+        getDiscoverMovies: build.query<MovieType[], { startDate: string; endDate: string }>({
+            async queryFn(payload, _api, _extraOptions, fetchWithBQ) {
+
+            }
         })
+
+
 
     }),
 })
 
 export const {
-    useGetGenresQuery, 
-    useGetNowPlayingQuery, 
-    useGetTrailerQuery, 
-    useGetPopular100MoviesQuery, 
+    useGetGenresQuery,
+    useGetNowPlayingQuery,
+    useGetTrailerQuery,
+    useGetPopular100MoviesQuery,
     useGetMultipleTrailersQuery,
     useGetUpcomingMovieQuery
 } = moviesApi;

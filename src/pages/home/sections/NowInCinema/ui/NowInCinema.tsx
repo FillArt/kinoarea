@@ -88,13 +88,17 @@ export const NowInCinema = () => {
                     </SectionTitle>
 
                     {!isLoading ?
-                        <CinemaListSkeleton numberOfFilms={numberOfFilms}/> :
-                        <CinemaList movies={fullStatus ? movies.slice(0, numberOfFilms) : movies} filter={filter}
-                                    setFullStatus={setFullStatus}/>}
+                        <CinemaList
+                            movies={fullStatus ? movies.slice(0, numberOfFilms) : movies}
+                            filter={filter}
+                            setFullStatus={setFullStatus}
+                            isLoading={isLoading}
+                        /> : <CinemaListSkeleton numberOfFilms={numberOfFilms}/>
+                    }
 
                     {fullStatus && (
                         <div className="flex justify-center mt-14">
-                            <ButtonBase title={t('button_all')} style="border" disable={Boolean(!isLoading)}
+                            <ButtonBase title={t('button_all')} style="border" disable={Boolean(isLoading)}
                                         onClick={() => showMoreMovies()}/>
                         </div>
                     )}

@@ -8,10 +8,11 @@ type CinemaListProps = {
     movies: MovieType[],
     filter: Filter,
     setFullStatus: (value: boolean) => void,
+    isLoading: any,
 }
 
 
-export const CinemaList = ({movies, filter, setFullStatus}: CinemaListProps) => {
+export const CinemaList = ({movies, filter, setFullStatus, isLoading}: CinemaListProps) => {
 
     let filteredMovies: MovieType[] = movies;
 
@@ -43,9 +44,11 @@ export const CinemaList = ({movies, filter, setFullStatus}: CinemaListProps) => 
 
     if(filteredMovies.length === 0) setFullStatus(true);
 
+    console.log(isLoading, 'Helllo man!')
 
     return (
         <div className="tabletLg:mt-14 mt-[28px] grid grid-cols-12 gap-[23px]">
+
 
             {filteredMovies.length > 0 ? (
                 filteredMovies.map((movie: MovieType) => (
@@ -59,6 +62,7 @@ export const CinemaList = ({movies, filter, setFullStatus}: CinemaListProps) => 
                 </div>
 
             )}
+
 
         </div>
     );
