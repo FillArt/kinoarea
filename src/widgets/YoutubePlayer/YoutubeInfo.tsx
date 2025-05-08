@@ -1,18 +1,13 @@
 import {useState} from "react";
 import {TrailerType} from "@/shared/api/movies/movieType.ts";
-import {LikesOrDislikes} from "@/widgets/YoutubePlayer/LikesOrDislikes.tsx";
 import {truncateString} from "@/shared/helpers/truncateString.ts";
+import {ShareContent} from "@/widgets/YoutubePlayer/ShareContent/ShareContent.tsx";
 
 type YouTubeInfoProps = {
     trailer: TrailerType
 }
 
 export const YoutubeInfo = ({trailer}: YouTubeInfoProps) => {
-    const [likesLocal, setLikesLocal] = useState<number>(0);
-    const [dislikesLocal, setDislikesLocal] = useState<number>(0);
-
-
-
 
     return (
         <div>
@@ -24,10 +19,7 @@ export const YoutubeInfo = ({trailer}: YouTubeInfoProps) => {
                 </div>
 
                 <div className="flex items-center gap-[8px]">
-                    <LikesOrDislikes type="like" digital={likesLocal}
-                                     onClick={() => setLikesLocal(likesLocal => likesLocal + 1)}/>
-                    <LikesOrDislikes type="dislike" digital={dislikesLocal}
-                                     onClick={() => setDislikesLocal(dislikesLocal => dislikesLocal + 1)}/>
+                    <ShareContent />
                 </div>
             </div>
         </div>
