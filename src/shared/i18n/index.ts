@@ -10,6 +10,10 @@ import headerRu from "./locales/ru/common/header.json";
 import cardsEn from "./locales/en/common/cards.json"
 import cardsRu from "./locales/ru/common/cards.json";
 
+// Footer | Common
+import footerEn from "./locales/en/common/footer.json"
+import footerRu from "./locales/ru/common/footer.json";
+
 // Now in Cinema | Home Page
 import nowInCinemaEn from "./locales/en/home/nowInCinema.json"
 import nowInCinemaRu from "./locales/ru/home/nowInCinema.json";
@@ -35,13 +39,10 @@ import expectedProductsEn from "./locales/en/home/expectedProducts.json"
 import expectedProductsRu from "./locales/ru/home/expectedProducts.json";
 
 // Box Office | Home page
-import boxOfficeEn from "./locales/en/home/ boxOffice.json"
+import boxOfficeEn from "./locales/en/home/boxOffice.json"
 import boxOfficeRu from "./locales/ru/home/boxOffice.json";
 
-const defaultLanguage = import.meta.env.VITE_APP_LANGUAGE || "en"; // Язык по умолчанию
-
-
-const initI18n = async () => {
+export const initI18n = async (language: string = "en") => {
     await i18n
         //.use(LanguageDetector)
         .use(initReactI18next)
@@ -51,6 +52,7 @@ const initI18n = async () => {
                     // common
                     header: headerRu,
                     cards: cardsRu,
+                    footer: footerRu,
                     // home
                     nowInCinema: nowInCinemaRu,
                     newTrailers: newTrailersRu,
@@ -64,6 +66,7 @@ const initI18n = async () => {
                     // common
                     header: headerEn,
                     cards: cardsEn,
+                    footer: footerEn,
                     // home
                     nowInCinema: nowInCinemaEn,
                     newTrailers: newTrailersEn,
@@ -75,14 +78,9 @@ const initI18n = async () => {
 
                 },
             },
-            fallbackLng: defaultLanguage,
+            lng: language,
+            fallbackLng: "en",
             interpolation: {escapeValue: false},
             debug: true, // Включить логи в консоли
         });
 }
-
-initI18n();
-
-
-
-export default i18n;

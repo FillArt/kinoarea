@@ -1,6 +1,7 @@
-import {PeopleType} from "@/shared/types/PepoleType.ts";
+
 import {ButtonBase} from "@/shared/ui/buttons/ButtonBase.tsx";
 import {Empty} from "@/shared/ui/cards/CardMovie/Empty/Empty.tsx";
+import {PeopleType} from "@/shared/api/people/peopleType.ts";
 
 type PopularPhotoInfoProps = {
     data: PeopleType | null

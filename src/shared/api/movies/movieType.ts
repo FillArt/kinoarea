@@ -58,4 +58,5 @@ export type BoxOfficeType = {
     revenue: string,
     img: string,
     budget: string,
+    backdrop_path?: string
 }

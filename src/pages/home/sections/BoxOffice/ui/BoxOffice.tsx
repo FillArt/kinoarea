@@ -1,42 +1,36 @@
 import {Section} from "@/shared/ui/sections/Section.tsx";
 import {SectionTitle} from "@/shared/ui/sections/SectionTitle.tsx";
 import {formatDate} from "@/shared/helpers/formatDate.ts";
-import {useAppDispatch} from "@/shared/hooks/useAppDispatch.ts";
 import {useEffect, useState} from "react";
-import {BoxOfficeSelector, fetchBoxOfficeTC} from "@/pages/home/sections/BoxOffice/model/BoxOfficeSlice.ts";
-import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
 import {BoxOfficeType} from "@/shared/api/movies/movieType.ts";
 import {ItemMovie} from "@/pages/home/sections/BoxOffice/ui/ItemMovie.tsx";
 import {useBreakpoint} from "@/shared/hooks/useBreakpoint.ts";
 import {useTranslation} from "react-i18next";
+import {useGetDiscoverMoviesQuery} from "@/shared/api/movies/movieApi.ts";
 
 export const BoxOffice = () => {
     const today = new Date();
     const lastWeek = new Date();
     lastWeek.setDate(today.getDate() - 7);
 
+    const {data } = useGetDiscoverMoviesQuery()
+
+    console.log(data, 'Test')
+
     const {t} = useTranslation('boxOffice');
     const [prepareMovies, setPrepareMovies] = useState<BoxOfficeType[]>([])
-
-    const dispatch = useAppDispatch();
-    const infoMovies: BoxOfficeType[] = useAppSelector(BoxOfficeSelector)
     const breakpoint = useBreakpoint()
 
-
-    // const isLoading = useAppSelector(BoxOfficeLoadedSelector)
-
     useEffect(() => {
-        if (breakpoint === "phone") {
-            setPrepareMovies(infoMovies.slice(0, 4));
+        if (breakpoint === "phone" && data) {
+            setPrepareMovies(data.slice(0, 4));
         } else {
-            setPrepareMovies(infoMovies.slice(0, 5));
+            if(data) {
+                setPrepareMovies(data.slice(0, 5));
+            }
         }
-    }, [infoMovies, breakpoint]);
+    }, [data, breakpoint]);
 
-
-    useEffect(() => {
-        dispatch(fetchBoxOfficeTC())
-    }, []);
 
 
     return (

@@ -6,6 +6,8 @@ import {SubscriptionForm} from "@/widgets/Subscription/ui/SubscriptionForm.tsx";
 
 export const Subscription = () => {
 
+
+
     return (
         <section className="mt-[95px]">
             <div

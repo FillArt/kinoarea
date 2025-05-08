@@ -2,6 +2,7 @@ import {SocialButtons} from "@/widgets/Header/ui/Logo/SocialButtons/SocialButton
 import {Navigation} from "@/widgets/Header/ui/Navigation/Navigation.tsx";
 import {NavigationLinksType} from "@/widgets/Header/ui/Header.tsx";
 import {SocialLinksType} from "@/widgets/Header/model/social.ts";
+import {useTranslation} from "react-i18next";
 
 
 export type FooterProps = {
@@ -10,6 +11,7 @@ export type FooterProps = {
 }
 
 export const Footer = ({navigation, socialLinks}: FooterProps) => {
+    const {t} = useTranslation('footer');
     return (
         <footer className="pt-[61px] pb-[51px]">
             <div className="container max-w-container order-1 mx-auto">
@@ -22,8 +24,8 @@ export const Footer = ({navigation, socialLinks}: FooterProps) => {
                         links={navigation}/>
                 </div>
                 <div className="flex flex-col justify-center w-full text-center text-white gap-[25px]">
-                    <span className="text-[#E3E6F0B8]">2025 © Kinoarea.  Все права защищены</span>
-                    <a className="text-[#E3E6F0B8] underline" href="/">Политика конфиденциальности</a>
+                    <span className="text-[#E3E6F0B8]">{t('law')}</span>
+                    <a className="text-[#E3E6F0B8] underline" href="/">{t('privacy_policy')}</a>
                 </div>
 
             </div>

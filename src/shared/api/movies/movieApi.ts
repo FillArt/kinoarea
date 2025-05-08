@@ -1,5 +1,6 @@
 import {baseApi} from "@/shared/api/baseApi.ts";
 import {
+    BoxOfficeType,
     GenresResponseType,
     GenreType,
     MoviesResponseType,
@@ -16,7 +17,6 @@ export const moviesApi = baseApi.injectEndpoints({
                 url: "/genre/movie/list",
                 method: "GET",
                 params: {
-                    language: import.meta.env.VITE_APP_LANGUAGE,
                     region: "US",
                 },
             }),
@@ -35,7 +35,6 @@ export const moviesApi = baseApi.injectEndpoints({
                 url: "/movie/now_playing",
                 method: "GET",
                 params: {
-                    language: import.meta.env.VITE_APP_LANGUAGE,
                     region: "US",
                 },
             }),
@@ -48,7 +47,6 @@ export const moviesApi = baseApi.injectEndpoints({
                 url: `/movie/${movie_id}/videos`,
                 method: "GET",
                 params: {
-                    language: import.meta.env.VITE_APP_LANGUAGE,
                     region: "US",
                 },
             }),
@@ -80,7 +78,6 @@ export const moviesApi = baseApi.injectEndpoints({
                             url: `/movie/${id}/videos`,
                             method: 'GET',
                             params: {
-                                language: import.meta.env.VITE_APP_LANGUAGE,
                                 region: 'US',
                             },
                         });
@@ -134,7 +131,6 @@ export const moviesApi = baseApi.injectEndpoints({
                 url: "movie/upcoming",
                 method: "GET",
                 params: {
-                    language: import.meta.env.VITE_APP_LANGUAGE,
                     region: "US",
                 },
 
@@ -151,9 +147,28 @@ export const moviesApi = baseApi.injectEndpoints({
             }
         }),
 
-        getDiscoverMovies: build.query<MovieType[], { startDate: string; endDate: string }>({
-            async queryFn(payload, _api, _extraOptions, fetchWithBQ) {
+        getDiscoverMovies: build.query<BoxOfficeType[], void>({
+            async queryFn(_payload, _api, _extraOptions, fetchWithBQ) {
+                const today = new Date();
+                const lastWeek = new Date();
+                lastWeek.setDate(today.getDate() - 7);
 
+                const res = await fetchWithBQ(`/discover/movie?sort_by=revenue.desc&primary_release_date.gte=${lastWeek.toISOString().split("T")[0]}&primary_release_date.lte=${today.toISOString().split("T")[0]}`)
+                const resType = res.data as MoviesResponseType;
+
+                const boxOfficeData = await Promise.all(
+                    resType.results.map(async (item: MovieType) => {
+                        const details = await fetchWithBQ(`movie/${item.id}`) as { data: BoxOfficeType }
+                        return {
+                            title: item.title,
+                            revenue: details.data.revenue,
+                            img: `https://image.tmdb.org/t/p/w500/${details.data.backdrop_path}`,
+                            budget: details.data.budget,
+                        };
+                    })
+                );
+
+                return {data: boxOfficeData}
             }
         })
 
@@ -165,8 +180,8 @@ export const moviesApi = baseApi.injectEndpoints({
 export const {
     useGetGenresQuery,
     useGetNowPlayingQuery,
-    useGetTrailerQuery,
     useGetPopular100MoviesQuery,
     useGetMultipleTrailersQuery,
-    useGetUpcomingMovieQuery
+    useGetUpcomingMovieQuery,
+    useGetDiscoverMoviesQuery
 } = moviesApi;

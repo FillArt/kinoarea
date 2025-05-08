@@ -1,5 +1,6 @@
-import {PeopleType} from "@/shared/types/PepoleType.ts";
+
 import {useTranslation} from "react-i18next";
+import {PeopleType} from "@/shared/api/people/peopleType.ts";
 
 type PopularListInfoProps = {
     data: PeopleType[]

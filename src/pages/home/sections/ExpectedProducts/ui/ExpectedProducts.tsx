@@ -30,8 +30,6 @@ export const ExpectedProducts = () => {
         else if (breakpoint === "tablet") setNumberOfFilms(3)
     }, [breakpoint]);
 
-    // @ts-ignore
-    // @ts-ignore
     return (
         <Section>
             <SectionTitle title={t('title')} line={false} sectionVersion="two">
@@ -53,7 +51,7 @@ export const ExpectedProducts = () => {
                 )}
             </SectionTitle>
 
-            {isLoading ? (
+            {!isLoading ? (
                 <div className="tabletLg:m-0 mt-[-35px]">
                     {movies && movies.length > 0 ? (
                         <Slider

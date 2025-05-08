@@ -98,7 +98,7 @@ export const PopularFilms = () => {
                 </SectionTitle>
 
 
-                {!isLoading ? (
+                {isLoading ? (
                     <div className="tabletLg:m-0 mt-[-35px]">
                         {filteredMovies.length > 0  ?  <Slider movies={filteredMovies}/> : <EmptyCinemaList/>}
                     </div>

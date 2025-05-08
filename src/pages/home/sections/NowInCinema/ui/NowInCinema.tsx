@@ -69,6 +69,7 @@ export const NowInCinema = () => {
             <section className="font-main  pt-6 mb-10 text-white">
                 <div className="container max-w-container mx-auto">
                     <SectionTitle title={t("now_in_cinema_title")}>
+
                         <div className="tabletLg:max-w-[765px] max-w-[615px] w-full phone:flex hidden justify-between">
                             {categoriesList.map((item) => (
                                 <ButtonFilter
@@ -87,18 +88,18 @@ export const NowInCinema = () => {
                         </div>
                     </SectionTitle>
 
-                    {!isLoading ?
+                    {isLoading && movies.length > 0 ?
                         <CinemaList
                             movies={fullStatus ? movies.slice(0, numberOfFilms) : movies}
                             filter={filter}
                             setFullStatus={setFullStatus}
-                            isLoading={isLoading}
+                            isLoading={!isLoading}
                         /> : <CinemaListSkeleton numberOfFilms={numberOfFilms}/>
                     }
 
                     {fullStatus && (
                         <div className="flex justify-center mt-14">
-                            <ButtonBase title={t('button_all')} style="border" disable={Boolean(isLoading)}
+                            <ButtonBase title={t('button_all')} style="border" disable={Boolean(!isLoading)}
                                         onClick={() => showMoreMovies()}/>
                         </div>
                     )}
