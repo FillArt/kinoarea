@@ -1,4 +1,3 @@
-import {useState} from "react";
 import {TrailerType} from "@/shared/api/movies/movieType.ts";
 import {truncateString} from "@/shared/helpers/truncateString.ts";
 import {ShareContent} from "@/widgets/YoutubePlayer/ShareContent/ShareContent.tsx";
@@ -19,7 +18,7 @@ export const YoutubeInfo = ({trailer}: YouTubeInfoProps) => {
                 </div>
 
                 <div className="flex items-center gap-[8px]">
-                    <ShareContent />
+                    <ShareContent url={trailer.trailer.url} />
                 </div>
             </div>
         </div>

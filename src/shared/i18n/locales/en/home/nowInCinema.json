@@ -2,10 +2,14 @@
   "now_in_cinema_title": "Now in cinema",
   "all": "All",
   "action": "Action",
+  "action-filter": "Action",
   "adventures": "Adventures",
+  "adventures-filter": "Adventure",
   "comedy": "Comedy",
+  "comedy-filter": "Comedy",
   "fantasy": "Fantasy",
   "thrillers": "Thrillers",
+  "thrillers-filter": "Thriller",
   "drama": "Drama",
   "button_all": "Show all"
 }

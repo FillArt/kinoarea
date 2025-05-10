@@ -15,8 +15,6 @@ export const BoxOffice = () => {
 
     const {data } = useGetDiscoverMoviesQuery()
 
-    console.log(data, 'Test')
-
     const {t} = useTranslation('boxOffice');
     const [prepareMovies, setPrepareMovies] = useState<BoxOfficeType[]>([])
     const breakpoint = useBreakpoint()

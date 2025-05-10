@@ -25,8 +25,6 @@ export const Logo = ({socialLinks}: LogoProps) => {
         dispatch(baseApi.util.resetApiState()); // сброс и повторные запросы
     }
 
-    console.log(language, 'Logo')
-
     return (
         <div>
 

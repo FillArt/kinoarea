@@ -8,7 +8,6 @@ export const peopleApi = baseApi.injectEndpoints({
                 url: `trending/person/${timeWindow}`,
                 method: "GET",
                 params: {
-                    language: import.meta.env.VITE_APP_LANGUAGE,
                     region: "US",
                 },
             }),
