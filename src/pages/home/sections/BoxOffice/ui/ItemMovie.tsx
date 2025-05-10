@@ -2,6 +2,7 @@ import {formatCurrency} from "@/shared/helpers/formatCurrency.ts";
 import {BoxOfficeType} from "@/shared/api/movies/movieType.ts";
 import {useEffect, useState} from "react";
 import {Empty} from "@/shared/ui/cards/CardMovie/Empty/Empty.tsx";
+import {truncateString} from "@/shared/helpers/truncateString.ts";
 
 
 type ItemMovieProps = {
@@ -34,7 +35,7 @@ export const ItemMovie = ({item, index}:  ItemMovieProps) => {
             )}
 
             <div>
-                <h3 className="tablet:mb-[11px] mb-[5px] tablet:text-[18px] text-[15px] cursor-pointer font-bold hover:text-[#3657CB]">{index + 1}. {item.title}</h3>
+                <h3 className="tablet:mb-[11px] mb-[5px] tablet:text-[18px] text-[15px] cursor-pointer font-bold hover:text-[#3657CB]">{index + 1}. {truncateString(item.title, 10)}</h3>
                 <span className="block text-decorTextColor tablet:text-[16px] text-[13px]">{formatCurrency(Number(item.revenue))}</span>
                 {item.budget ? <span className="block opacity-40">{formatCurrency(Number(item.budget))}</span> :
                     <span className="block opacity-40">Not found</span>}
