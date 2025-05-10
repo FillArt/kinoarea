@@ -12,7 +12,7 @@
 - 📖 **Storybook** – UI component documentation
 - 🐳 **Docker** – containerization for easy development and deployment  
 
-## 🔗[Live Demo](https://fillart.github.io/kinoarea/)  
+## 🔗[Live Demo](https://fillart.github.io/kinoarea/#/)  
 
 ![first](https://github.com/user-attachments/assets/6778517a-3f4a-4fb2-b1dc-16185dfbf5b6)
 
