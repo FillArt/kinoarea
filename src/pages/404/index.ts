@@ -1,0 +1,1 @@
+export {NotFound} from "@/pages/404/ui/NotFound.tsx";

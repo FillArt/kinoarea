@@ -1,19 +1,16 @@
 import {ReactNode} from "react";
 import {Header} from "@/widgets/Header";
 import {SocialLinks} from "@/widgets/Header/model/social.ts";
-
-import BgImg from '@/shared/layouts/assets/bg.png'
 import {NavigationLinksType} from "@/widgets/Header/ui/Header.tsx";
 import {useTranslation} from "react-i18next";
-import {Subscription} from "@/widgets/Subscription/ui/Subscription.tsx";
 import {Footer} from "@/widgets/Footer";
 
-interface HomeLayoutProps {
+interface  WithoutSubscribeProps {
     children: ReactNode;
 }
 
 
-export const HomePageLayout = ({children}: HomeLayoutProps) => {
+export const WithoutSubscribeLayout = ({children}: WithoutSubscribeProps) => {
 
     const {t} = useTranslation('header');
 
@@ -26,18 +23,9 @@ export const HomePageLayout = ({children}: HomeLayoutProps) => {
         {title: t('categories'), link: '/categories'}
     ]
 
-    const imgStyle = {
-        backgroundImage: `url(${BgImg})`,
-        backgroundSize: "100%",
-        backgroundPosition: "top center",
-        backgroundRepeat: "no-repeat",
-        // backgroundBlendMode: 'overlay',
-    }
-
     return (
-        <div style={imgStyle} className="font-main">
+        <div className="font-main">
             <div id="modal-root"></div>
-
             <div className="flex flex-col justify-between h-[125vh]">
                 <Header
                     navigation={navigationLinks}
@@ -50,7 +38,6 @@ export const HomePageLayout = ({children}: HomeLayoutProps) => {
                     {children}
                 </main>
 
-                <Subscription />
                 <Footer
                     navigation={navigationLinks}
                     socialLinks={SocialLinks}

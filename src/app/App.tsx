@@ -1,9 +1,10 @@
 import './App.css'
-import {HomePage} from "@/pages/home";
 import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {RootState} from "@/app/store.ts";
 import {initI18n} from "@/shared/i18n";
+import {RouterProvider} from "react-router-dom";
+import {router} from "@/app/router.tsx";
 
 
 export const App = () => {
@@ -26,6 +27,6 @@ export const App = () => {
         return <div>Loading translations...</div>; // Пока i18n не готов, не рендерим остальные компоненты
     }
 
-    return <HomePage />;
+    return <RouterProvider router={router} />
 }
 
