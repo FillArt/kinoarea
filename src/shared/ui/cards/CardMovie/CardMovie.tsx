@@ -4,6 +4,7 @@ import {ButtonBase} from "@/shared/ui/buttons/ButtonBase.tsx";
 import {MovieType} from "@/shared/api/movies/movieType.ts";
 import {formatDate} from "@/shared/helpers/formatDate.ts";
 import {useTranslation} from "react-i18next";
+import {capitalizeFirstLetter} from "@/shared/helpers/capitalizeFirstLetter.ts";
 
 export type CardMovieProps = {
     movie: MovieType,
@@ -48,7 +49,7 @@ export const CardMovie = ({movie, release_date}: CardMovieProps) => {
 
             {genres && genres.map((genre: string, index: number) => (
                 <span key={index}>
-                    <a className="inline-block text-decorTextColor hover:text-[#3657CB] tabletLg:text-[15px] text-[12px]" href="/public">{genre}</a>
+                    <a className="inline-block text-decorTextColor hover:text-[#3657CB] tabletLg:text-[15px] text-[12px]" href="/public">{capitalizeFirstLetter(genre)}</a>
                     {index < genres.length - 1 && <span>,  </span>}
                 </span>
             ))}
