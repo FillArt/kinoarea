@@ -18,7 +18,7 @@ export const NotFound = () => {
                 <div className="flex phone:flex-row flex-col gap-[15px] max-w-auto justify-center mb-[32px]">
                     <ButtonBase
                         title={t('come_back')}
-                        onClick={() => navigate("/kinoarea")}
+                        onClick={() => navigate("/")}
                     />
                     <ButtonBase
                         title={t('search')}
