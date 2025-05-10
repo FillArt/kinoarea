@@ -15,8 +15,6 @@ export const BoxOffice = () => {
 
     const {data } = useGetDiscoverMoviesQuery()
 
-    console.log(data, 'Test')
-
     const {t} = useTranslation('boxOffice');
     const [prepareMovies, setPrepareMovies] = useState<BoxOfficeType[]>([])
     const breakpoint = useBreakpoint()
@@ -34,7 +32,7 @@ export const BoxOffice = () => {
 
 
     return (
-        <Section>
+        <Section backgroundTypeDark={true}>
             <SectionTitle title={t('title')} sectionVersion="two">
                 {formatDate(lastWeek.toISOString().split("T")[0])} — {formatDate(today.toISOString().split("T")[0])}
             </SectionTitle>

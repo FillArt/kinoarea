@@ -14,6 +14,10 @@ import cardsRu from "./locales/ru/common/cards.json";
 import footerEn from "./locales/en/common/footer.json"
 import footerRu from "./locales/ru/common/footer.json";
 
+// 404 | Common
+import NotFoundEn from "./locales/en/common/404.json"
+import NotFoundRu from "./locales/ru/common/404.json";
+
 // Now in Cinema | Home Page
 import nowInCinemaEn from "./locales/en/home/nowInCinema.json"
 import nowInCinemaRu from "./locales/ru/home/nowInCinema.json";
@@ -42,6 +46,7 @@ import expectedProductsRu from "./locales/ru/home/expectedProducts.json";
 import boxOfficeEn from "./locales/en/home/boxOffice.json"
 import boxOfficeRu from "./locales/ru/home/boxOffice.json";
 
+
 export const initI18n = async (language: string = "en") => {
     await i18n
         //.use(LanguageDetector)
@@ -53,6 +58,7 @@ export const initI18n = async (language: string = "en") => {
                     header: headerRu,
                     cards: cardsRu,
                     footer: footerRu,
+                    notFound: NotFoundRu,
                     // home
                     nowInCinema: nowInCinemaRu,
                     newTrailers: newTrailersRu,
@@ -67,6 +73,7 @@ export const initI18n = async (language: string = "en") => {
                     header: headerEn,
                     cards: cardsEn,
                     footer: footerEn,
+                    notFound: NotFoundEn,
                     // home
                     nowInCinema: nowInCinemaEn,
                     newTrailers: newTrailersEn,
@@ -81,6 +88,6 @@ export const initI18n = async (language: string = "en") => {
             lng: language,
             fallbackLng: "en",
             interpolation: {escapeValue: false},
-            debug: true, // Включить логи в консоли
+            debug: false, // Включить логи в консоли
         });
 }

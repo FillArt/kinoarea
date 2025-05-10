@@ -13,7 +13,7 @@ export type FooterProps = {
 export const Footer = ({navigation, socialLinks}: FooterProps) => {
     const {t} = useTranslation('footer');
     return (
-        <footer className="pt-[61px] pb-[51px]">
+        <footer className="pt-[61px] pb-[51px] bg-[#151A26]">
             <div className="container max-w-container order-1 mx-auto">
                 <div className="flex justify-center w-full mb-[34px]">
                     <SocialButtons icons={socialLinks}/>

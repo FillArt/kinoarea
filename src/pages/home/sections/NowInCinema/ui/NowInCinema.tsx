@@ -93,7 +93,6 @@ export const NowInCinema = () => {
                             movies={fullStatus ? movies.slice(0, numberOfFilms) : movies}
                             filter={filter}
                             setFullStatus={setFullStatus}
-                            isLoading={!isLoading}
                         /> : <CinemaListSkeleton numberOfFilms={numberOfFilms}/>
                     }
 

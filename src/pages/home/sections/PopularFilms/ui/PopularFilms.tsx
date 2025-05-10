@@ -43,7 +43,7 @@ export const PopularFilms = () => {
 
     const onClickHandler = ((filter: string) => {
         setFilter(filter);
-        if (filter !== "All") {
+        if (filter !== t('all')) {
             setFilteredMovies(movies.filter(movies => movies.release_date?.split('-')[0] === filter));
         } else {
             setFilteredMovies(movies)

@@ -2,17 +2,22 @@ import {CardMovie} from "@/shared/ui/cards";
 import {Filter} from "@/pages/home/sections/NowInCinema/hooks/useCategoriesList.ts";
 import {MovieType} from "@/shared/api/movies/movieType.ts";
 import {EmptyCinemaList} from "@/shared/ui/sections/EmptyCinemaList.tsx";
+import {useTranslation} from "react-i18next";
 
 
 type CinemaListProps = {
     movies: MovieType[],
     filter: Filter,
     setFullStatus: (value: boolean) => void,
-    isLoading: any,
 }
 
 
-export const CinemaList = ({movies, filter, setFullStatus, isLoading}: CinemaListProps) => {
+export const CinemaList = ({movies, filter, setFullStatus}: CinemaListProps) => {
+
+    console.log(filter, 'CinemaList Test')
+
+    const { t } = useTranslation("nowInCinema");
+
 
     let filteredMovies: MovieType[] = movies;
 
@@ -23,28 +28,26 @@ export const CinemaList = ({movies, filter, setFullStatus, isLoading}: CinemaLis
 
     switch (filter) {
         case "action":
-            filteredMovies = filterByCategory('action')
+            filteredMovies = filterByCategory(t("action-filter").toLowerCase())
             break;
         case "adventures":
-            filteredMovies = filterByCategory('adventure')
+            filteredMovies = filterByCategory(t('adventures-filter').toLowerCase())
             break;
         case "comedy":
-            filteredMovies = filterByCategory('comedy')
+            filteredMovies = filterByCategory(t('comedy-filter').toLowerCase())
             break;
         case "fantasy":
-            filteredMovies = filterByCategory('fantasy')
+            filteredMovies = filterByCategory(t('fantasy').toLowerCase())
             break;
         case "thrillers":
-            filteredMovies = filterByCategory('thrillers')
+            filteredMovies = filterByCategory(t('thrillers-filter').toLowerCase())
             break;
         case "drama":
-            filteredMovies = filterByCategory('drama')
+            filteredMovies = filterByCategory(t('drama').toLowerCase())
             break;
     }
 
     if(filteredMovies.length === 0) setFullStatus(true);
-
-    console.log(isLoading, 'Helllo man!')
 
     return (
         <div className="tabletLg:mt-14 mt-[28px] grid grid-cols-12 gap-[23px]">

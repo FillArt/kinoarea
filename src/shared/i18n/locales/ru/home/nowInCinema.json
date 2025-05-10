@@ -1,10 +1,14 @@
 {
   "all": "Все",
   "action": "Боевики",
+  "action-filter": "Боевик",
   "adventures": "Приключения",
+  "adventures-filter": "приключения",
   "comedy": "Комедии",
+  "comedy-filter": "Комедия",
   "fantasy": "Фантастика",
   "thrillers": "Триллеры",
+  "thrillers-filter": "Триллер",
   "drama": "Драма",
   "now_in_cinema_title": "Сейчас в кино",
   "button_all": "Все новинки"

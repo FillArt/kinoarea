@@ -1,21 +1,22 @@
 import {FacebookIcon, FacebookShareButton, VKShareButton, VKIcon, TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon} from "react-share";
 
-export const ShareContent = () => {
+type ShareContentProps = {
+    url: string;
+}
 
-    const shareUrl = `https://mywebsite.com/share/video/123`;
-
+export const ShareContent = ({url}: ShareContentProps) => {
     return (
         <div className="flex gap-2">
-            <VKShareButton url={shareUrl} className="transition-transform hover:scale-110">
+            <VKShareButton url={url} className="transition-transform hover:scale-110">
                 <VKIcon size={42} bgStyle={{ fill: "transparent" }} iconFillColor="#6D7792" />
             </VKShareButton>
-            <FacebookShareButton url={shareUrl} className="transition-transform hover:scale-110">
+            <FacebookShareButton url={url} className="transition-transform hover:scale-110">
                 <FacebookIcon size={42} bgStyle={{ fill: "transparent" }} iconFillColor="#6D7792" />
             </FacebookShareButton>
-            <TwitterShareButton url={shareUrl} className="transition-transform hover:scale-110">
+            <TwitterShareButton url={url} className="transition-transform hover:scale-110">
                 <TwitterIcon size={42} bgStyle={{ fill: "transparent" }} iconFillColor="#6D7792" />
             </TwitterShareButton>
-            <LinkedinShareButton url={shareUrl} className="transition-transform hover:scale-110">
+            <LinkedinShareButton url={url} className="transition-transform hover:scale-110">
                 <LinkedinIcon size={42} bgStyle={{ fill: "transparent" }} iconFillColor="#6D7792" />
             </LinkedinShareButton>
 
