@@ -5,11 +5,8 @@ import {SubscriptionDescription} from "@/widgets/Subscription/ui/SubscriptionDes
 import {SubscriptionForm} from "@/widgets/Subscription/ui/SubscriptionForm.tsx";
 
 export const Subscription = () => {
-
-
-
     return (
-        <section className="mt-[95px]">
+        <section className="pt-[95px] bg-[#151A26]">
             <div
 
                 className="container max-w-container mx-auto">

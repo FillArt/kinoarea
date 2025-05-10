@@ -31,7 +31,7 @@ export const ExpectedProducts = () => {
     }, [breakpoint]);
 
     return (
-        <Section>
+        <Section backgroundTypeDark={true}>
             <SectionTitle title={t('title')} line={false} sectionVersion="two">
                 {!isLoading && (
                     <div className="phone:flex hidden items-center gap-[20px] justify-center">

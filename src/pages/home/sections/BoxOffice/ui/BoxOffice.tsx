@@ -32,7 +32,7 @@ export const BoxOffice = () => {
 
 
     return (
-        <Section>
+        <Section backgroundTypeDark={true}>
             <SectionTitle title={t('title')} sectionVersion="two">
                 {formatDate(lastWeek.toISOString().split("T")[0])} — {formatDate(today.toISOString().split("T")[0])}
             </SectionTitle>
