@@ -1,0 +1,1 @@
+export {CategoryPage} from "@/pages/category/ui/CategoryPage.tsx";

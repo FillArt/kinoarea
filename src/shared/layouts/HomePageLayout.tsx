@@ -10,10 +10,11 @@ import {Footer} from "@/widgets/Footer";
 
 interface HomeLayoutProps {
     children: ReactNode;
+    imgStatus: boolean
 }
 
 
-export const HomePageLayout = ({children}: HomeLayoutProps) => {
+export const HomePageLayout = ({children, imgStatus}: HomeLayoutProps) => {
 
     const {t} = useTranslation('header');
 
@@ -35,7 +36,7 @@ export const HomePageLayout = ({children}: HomeLayoutProps) => {
     }
 
     return (
-        <div style={imgStyle} className="font-main">
+        <div style={imgStatus ? imgStyle : undefined} className="font-main">
             <div id="modal-root"></div>
 
             <div className="flex flex-col justify-between h-[125vh]">
