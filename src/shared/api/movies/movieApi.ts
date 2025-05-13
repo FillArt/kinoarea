@@ -30,6 +30,22 @@ export const moviesApi = baseApi.injectEndpoints({
             },
         }),
 
+        getMoviesByGenreId: build.query<MovieType[], { genre_id: number, page: number }>({
+            query: ({genre_id, page}) => ({
+                url: "/discover/movie",
+                method: "GET",
+                params: {
+                    region: "US",
+                    with_genres: genre_id,
+                    page
+                }
+            }),
+
+            transformResponse: (response: {results: MovieType[]}) => {
+                return response.results;
+            }
+        }),
+
         getNowPlaying: build.query<MovieType[], void>({
             query: () => ({
                 url: "/movie/now_playing",
@@ -172,8 +188,6 @@ export const moviesApi = baseApi.injectEndpoints({
             }
         })
 
-
-
     }),
 })
 
@@ -183,5 +197,6 @@ export const {
     useGetPopular100MoviesQuery,
     useGetMultipleTrailersQuery,
     useGetUpcomingMovieQuery,
-    useGetDiscoverMoviesQuery
+    useGetDiscoverMoviesQuery,
+    useGetMoviesByGenreIdQuery
 } = moviesApi;

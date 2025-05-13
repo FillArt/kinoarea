@@ -1,25 +1,46 @@
-import {HomePageLayout} from "@/shared/layouts";
-import {useNavigate, useParams} from "react-router-dom";
-import {useGenreIdByName} from "@/shared/api/movies/hooks/useGenreIdByName.ts";
-import {capitalizeFirstLetter} from "@/shared/helpers/capitalizeFirstLetter.ts";
-import {useEffect} from "react";
+import { HomePageLayout } from "@/shared/layouts";
+import { useParams } from "react-router-dom";
+import { useGenreIdByName } from "@/shared/api/movies/hooks/useGenreIdByName.ts";
+import { capitalizeFirstLetter } from "@/shared/helpers/capitalizeFirstLetter.ts";
+import { useEffect, useState } from "react";
+import { useGetMoviesByGenreIdQuery } from "@/shared/api/movies/movieApi.ts";
 
 export const CategoryPage = () => {
+    const [page, setPage] = useState(2);
+
+    // const navigate = useNavigate();
     const { genre } = useParams();
-    const navigate = useNavigate();
+    const idGenre = useGenreIdByName(capitalizeFirstLetter(genre ?? ""));
 
-    const idGenre = useGenreIdByName(capitalizeFirstLetter(genre ?? ''))
+    const { data, isLoading, isError } = useGetMoviesByGenreIdQuery(
+        { genre_id: idGenre ?? 0, page },
+        { skip: !idGenre }
+    );
 
+
+    // Scroll to top on mount
     useEffect(() => {
-        if (!idGenre) {
-            navigate(`/404`);
-        }
-    }, [idGenre, navigate]);
+        window.scrollTo(0, 0);
+    }, []);
+
+    // Redirect to 404 if genre is invalid
+    // useEffect(() => {
+    //     if (genre && !idGenre) {
+    //         navigate("/404");
+    //     }
+    // }, [idGenre, genre, navigate]);
 
     return (
         <HomePageLayout imgStatus={false}>
-            <div className="container max-w-container mx-auto outline text-white my-10">
-                CategoryPage = {idGenre}
+            <div className="container max-w-container mx-auto text-white my-10">
+                <h1 className="text-2xl mb-4">{capitalizeFirstLetter(genre ?? "")}</h1>
+
+                <button onClick={() => setPage(page + 1)}>+</button>
+
+                {data && data.map((item) => (
+                    <div key={item.id}>{item.title}</div>
+                ))}
+
             </div>
         </HomePageLayout>
     );

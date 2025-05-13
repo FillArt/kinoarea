@@ -8,6 +8,7 @@ import {appLanguageSelector, setLanguage} from "@/app/AppSlice.ts";
 import {useAppSelector} from "@/shared/hooks/useAppSelector.ts";
 import {useAppDispatch} from "@/shared/hooks/useAppDispatch.ts";
 import {baseApi} from "@/shared/api/baseApi.ts";
+import {Link} from "react-router-dom";
 
 
 type LogoProps = {
@@ -18,7 +19,7 @@ export const Logo = ({socialLinks}: LogoProps) => {
 
     const dispatch = useAppDispatch();
     const language = useAppSelector(appLanguageSelector)
-    const currentImage = language === 'en' ?  UsaLogoIcon : RussiaLogoIcon;
+    const currentImage = language === 'en' ? UsaLogoIcon : RussiaLogoIcon;
 
     const onClickHandler = () => {
         dispatch(setLanguage(language === 'en' ? 'ru' : 'en'));
@@ -30,14 +31,17 @@ export const Logo = ({socialLinks}: LogoProps) => {
 
             <div className="flex items-center gap-[6px] mb-2 tabletLg:justify-normal justify-center">
 
-                <img onClick={() => onClickHandler()} src={currentImage} width="24px" height="24px" className="hover:opacity-50 cursor-pointer" alt="Kinoarea Logo"/>
+                <img onClick={() => onClickHandler()} src={currentImage} width="24px" height="24px"
+                     className="hover:opacity-50 cursor-pointer" alt="Kinoarea Logo"/>
 
-                <a href="/">
-                    <strong className="tabletLg:text-descriptionFontSize text-[19px] text-white">
+
+                <Link to={"/"}>
+                    <strong className="tabletLg:text-descriptionFontSize text-[19px] hover:opacity-50 transition-all text-white">
                         <span style={{color: '#3657CB'}}>Kino</span>
                         area
                     </strong>
-                </a>
+                </Link>
+
             </div>
 
 
