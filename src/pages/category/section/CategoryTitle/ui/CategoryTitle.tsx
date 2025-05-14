@@ -11,7 +11,8 @@ type CategoryTitleProps = {
 }
 
 export const CategoryTitle = ({genre, setPage}: CategoryTitleProps) => {
-    const {t} = useTranslation('nameCategory');
+    const { t } = useTranslation(['nameCategory', 'descriptionCategory']);  // Используем оба namespaces для перевода
+
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -27,10 +28,7 @@ export const CategoryTitle = ({genre, setPage}: CategoryTitleProps) => {
                 {capitalizeFirstLetter(t(`${genre}`) ?? "")}
             </div>
             <p className="mb-[30px] text-[18px] max-w-[951px]">
-                Также как дальнейшее развитие различных форм деятельности, в своём классическом представлении, допускает
-                внедрение первоочередных требований. Современные технологии достигли такого уровня, что внедрение
-                современных методик предполагает независимые способы реализации стандартных подходов. Сторонники
-                тоталитаризма в науке могут быть объявлены нарушающими общечеловеческие нормы этики и морали.
+                {t(`${genre}`, { ns: 'descriptionCategory' })}  {/* Используем t для получения описания */}
             </p>
         </div>
     );

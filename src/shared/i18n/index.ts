@@ -50,6 +50,10 @@ import boxOfficeRu from "./locales/ru/home/boxOffice.json";
 import nameCategoryEn from "./locales/en/category/name.json"
 import nameCategoryRu from "./locales/ru/category/name.json"
 
+// Description | Category
+import descriptionCategoryEn from "./locales/en/category/description.json"
+import descriptionCategoryRu from "./locales/ru/category/description.json"
+
 
 export const initI18n = async (language: string = "en") => {
     await i18n
@@ -73,6 +77,7 @@ export const initI18n = async (language: string = "en") => {
                     boxOffice: boxOfficeRu,
                     // category
                     nameCategory: nameCategoryRu,
+                    descriptionCategory: descriptionCategoryRu
                 },
                 en: {
                     // common
@@ -90,8 +95,7 @@ export const initI18n = async (language: string = "en") => {
                     boxOffice: boxOfficeEn,
                     //category
                     nameCategory: nameCategoryEn,
-
-
+                    descriptionCategory: descriptionCategoryEn
                 },
             },
             lng: language,
