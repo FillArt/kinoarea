@@ -18,6 +18,8 @@ export const CardMovie = ({movie, release_date}: CardMovieProps) => {
     const {title, vote_average, poster_path, genres} = movie;
     const {t} = useTranslation('cards');
 
+    console.log(movie, 'Проверка')
+
     const rounded = (num: number, decimals: number) => Number(num.toFixed(decimals));
 
     const imgStyle = poster_path ? {

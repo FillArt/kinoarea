@@ -14,7 +14,6 @@ type CinemaListProps = {
 
 export const CinemaList = ({movies, filter, setFullStatus}: CinemaListProps) => {
 
-    console.log(filter, 'CinemaList Test')
 
     const { t } = useTranslation("nowInCinema");
 

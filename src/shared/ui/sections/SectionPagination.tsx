@@ -17,13 +17,20 @@ export const SectionPagination = ({currentPage, changeNumber, maxPages = 100}: S
     const nextPageHandler = () => {
         if (currentPage !== 100) {
             changeNumber(currentPage + 1);
+            window.scrollTo(0, 0);
         }
     }
 
     const prevPageHandler = () => {
         if (currentPage > 1) {
             changeNumber(currentPage - 1);
+            window.scrollTo(0, 0);
         }
+    }
+
+    const changeNumberHandler = (page: number) => {
+        changeNumber(page);
+        window.scrollTo(0, 0);
     }
 
     const getPageItems = () => {
@@ -59,7 +66,7 @@ export const SectionPagination = ({currentPage, changeNumber, maxPages = 100}: S
             {pagesToShow.map((page) => (
                 <div
                     key={page}
-                    onClick={() => changeNumber(page)}
+                    onClick={() => changeNumberHandler(page)}
                     className={`phone:w-[73px] w-[50px] h-[50px] phone:h-[73px] rounded-[10px] cursor-pointer flex items-center  justify-center phone:text-[25px] text-[15px] ${
                         currentPage === page && currentPage !== maxPages ? "bg-blue-600 hover:opacity-100" : "bg-[#1B2133] hover:opacity-65 transition-all hover:bg-blue-600"
                     }`}
@@ -75,7 +82,7 @@ export const SectionPagination = ({currentPage, changeNumber, maxPages = 100}: S
 
 
             <div
-                onClick={() => changeNumber(100)}
+                onClick={() => changeNumberHandler(100)}
                 className={`phone:w-[73px] w-[50px] h-[50px] phone:h-[73px] rounded-[10px] cursor-pointer flex items-center  justify-center phone:text-[25px] text-[15px] ${
                     currentPage === maxPages ? "bg-blue-600" : "bg-[#1B2133] hover:opacity-65 transition-all hover:bg-blue-600"
                 }`}
