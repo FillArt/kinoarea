@@ -7,6 +7,7 @@ import {useTranslation} from "react-i18next";
 import {capitalizeFirstLetter} from "@/shared/helpers/capitalizeFirstLetter.ts";
 import {Link} from "react-router-dom";
 import {lowercaseFirstLetter} from "@/shared/helpers/lowercaseFirstLetter.ts";
+import {stabilizerEnURL} from "@/shared/helpers/stabilizerEnURL.ts";
 
 export type CardMovieProps = {
     movie: MovieType,
@@ -17,8 +18,6 @@ export const CardMovie = ({movie, release_date}: CardMovieProps) => {
 
     const {title, vote_average, poster_path, genres} = movie;
     const {t} = useTranslation('cards');
-
-    console.log(movie, 'Проверка')
 
     const rounded = (num: number, decimals: number) => Number(num.toFixed(decimals));
 
@@ -53,7 +52,7 @@ export const CardMovie = ({movie, release_date}: CardMovieProps) => {
 
             {genres && genres.map((genre: string, index: number) => (
                 <span key={index}>
-                    <Link to={`/category/${lowercaseFirstLetter(genre)}`}>
+                    <Link to={`/category/${stabilizerEnURL(lowercaseFirstLetter(genre))}`}>
                         <span className="inline-block text-decorTextColor hover:text-[#3657CB] tabletLg:text-[15px] text-[12px]">{capitalizeFirstLetter(genre)}</span>
                         {index < genres.length - 1 && <span>,  </span>}
                     </Link>

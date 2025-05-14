@@ -1,0 +1,22 @@
+{
+  "home" : "Главная",
+  "adventure": "приключения",
+  "fantasy": "фэнтези",
+  "animation": "мультфильм",
+  "drama": "драма",
+  "horror": "ужасы",
+  "action": "боевик",
+  "comedy": "комедия",
+  "history": "история",
+  "western": "вестерн",
+  "thriller": "триллер",
+  "crime": "криминал",
+  "documentary": "документальный",
+  "science fiction": "фантастика",
+  "mystery": "детектив",
+  "music": "музыка",
+  "romance": "мелодрама",
+  "family": "семейный",
+  "war": "военный",
+  "tv movie": "телевизионный фильм"
+}
