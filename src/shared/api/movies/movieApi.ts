@@ -30,7 +30,7 @@ export const moviesApi = baseApi.injectEndpoints({
             },
         }),
 
-        getMoviesByGenreId: build.query<MovieType[], { genre_id: number, page: number }>({
+        getMoviesByGenreId: build.query<MoviesResponseType, { genre_id: number, page: number }>({
             query: ({genre_id, page}) => ({
                 url: "/discover/movie",
                 method: "GET",
@@ -40,10 +40,6 @@ export const moviesApi = baseApi.injectEndpoints({
                     page
                 }
             }),
-
-            transformResponse: (response: {results: MovieType[]}) => {
-                return response.results;
-            }
         }),
 
         getNowPlaying: build.query<MovieType[], void>({
