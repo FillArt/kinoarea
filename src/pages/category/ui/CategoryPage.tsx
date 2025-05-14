@@ -21,14 +21,12 @@ export const CategoryPage = () => {
     const { genre } = useParams();
     const idGenre = useGenreIdByName(t(`${genre}`) ?? "");
 
-    const { data, isError } = useGetMoviesByGenreIdQuery(
+    const { data } = useGetMoviesByGenreIdQuery(
         { genre_id: idGenre ?? 0, page },
         { skip: !idGenre }
     );
 
     const { movies } = useMoviesWithGenres({movies: data?.results ?? []});
-
-console.log(data, isError);
 
     // Scroll to top on mount
     useEffect(() => {

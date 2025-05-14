@@ -25,7 +25,7 @@ export const CategoryTitle = ({genre, setPage, style, setStyle}: CategoryTitlePr
 
     return (
         <div className="phone:text-left text-center">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center phone:justify-between justify-center gap-[16px]">
                 <h1 className="tabletLg:text-[65px] phone:text-[40px] text-[32px] font-black">{capitalizeFirstLetter(t(`${genre}`) ?? "")}</h1>
 
                 <div className="flex gap-[9px]">

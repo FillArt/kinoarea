@@ -34,9 +34,9 @@ export const CardMovieLong = ({movie, isFirst,isLast}: CardMovieLongProps) => {
         <div className={`pt-[33px] pb-[33px] border-[#3B486B] ${borderTop} ${borderBottom} flex items-center`}>
             <div style={imgStyle} className="min-h-[200px] min-w-[146px] mr-[28px] rounded-[10px]"></div>
 
-            <div className="flex items-center justify-between w-[100%]">
+            <div className="flex phone:items-center phone:gap-[0] gap-[10px] justify-between w-[100%] phone:flex-row flex-col">
                 <div>
-                    <h3 className="text-[25px] font-bold cursor-pointer hover:text-[#3657CB] transition-all">{title}</h3>
+                    <h3 className="tabletLg:text-[25px] text-[17px] font-bold cursor-pointer hover:text-[#3657CB] transition-all">{title}</h3>
                     {genres && genres.map((genre: string, index: number) => (
                         <span key={index}>
                             <Link to={`/category/${stabilizerEnURL(lowercaseFirstLetter(genre))}`}>
@@ -48,7 +48,7 @@ export const CardMovieLong = ({movie, isFirst,isLast}: CardMovieLongProps) => {
                     ))}
                 </div>
 
-                <div className="flex gap-[50px]">
+                <div className="flex phone:gap-[50px] gap-[20px] phone:flex-row flex-col">
                     <div className="flex flex-col max-w-[77px] gap-[8px] text-center">
                         <Rating absolute={false} rating={rounded(vote_average, 1)}/>
                         <span>IMDb</span>

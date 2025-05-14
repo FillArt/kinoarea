@@ -19,7 +19,7 @@ export const CategoryContent = ({movies, style}: CategoryContentProps) => {
                     ))}
                 </div>
             ) : (
-                <div>
+                <>
                     {movies.map((movie: MovieType, index: number) => (
                         <div key={movie.id}>
                             <CardMovieLong
@@ -29,7 +29,7 @@ export const CategoryContent = ({movies, style}: CategoryContentProps) => {
                             />
                         </div>
                     ))}
-                </div>
+                </>
             )}
         </>
     );
