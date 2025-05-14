@@ -14,6 +14,8 @@ export const CategoryPage = () => {
     const [page, setPage] = useState(1);
     const {t} = useTranslation('nameCategory');
 
+    const [style, setStyle] = useState<'col' | 'row'>('col')
+
     // const navigate = useNavigate();
 
     const { genre } = useParams();
@@ -43,10 +45,13 @@ console.log(data, isError);
     return (
         <HomePageLayout imgStatus={false}>
             <div className="container max-w-container mx-auto text-white phone:my-10 mt-[23px] mb-[32px]">
-                <CategoryTitle genre={genre!} setPage={setPage} />
+                <CategoryTitle genre={genre!}
+                               setPage={setPage}
+                               setStyle={setStyle}
+                               style={style} />
 
                 {movies && movies.length > 0 ? (
-                    <CategoryContent movies={movies} />
+                    <CategoryContent movies={movies} style={style} />
                 ) : (
                     <EmptyCinemaList />
                 )}
