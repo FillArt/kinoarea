@@ -3,7 +3,6 @@ import ArrowMobile from "./assets/arrow-pagination-mobile.svg"
 
 
 import {useBreakpoint} from "@/shared/hooks/useBreakpoint.ts";
-import {useEffect} from "react";
 
 type SectionPaginationType = {
     currentPage: number;
