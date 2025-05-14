@@ -1,20 +1,28 @@
 import Arrow from "./assets/arrow-pagination.svg"
+import ArrowMobile from "./assets/arrow-pagination-mobile.svg"
+
+
+import {useBreakpoint} from "@/shared/hooks/useBreakpoint.ts";
+import {useEffect} from "react";
 
 type SectionPaginationType = {
     currentPage: number;
     changeNumber: (page: number) => void;
+    maxPages?: number;
 }
 
-export const SectionPagination = ({currentPage, changeNumber}: SectionPaginationType) => {
+export const SectionPagination = ({currentPage, changeNumber, maxPages = 100}: SectionPaginationType) => {
+
+    const breakpoint = useBreakpoint()
 
     const nextPageHandler = () => {
-        if(currentPage !== 100) {
+        if (currentPage !== 100) {
             changeNumber(currentPage + 1);
         }
     }
 
     const prevPageHandler = () => {
-        if(currentPage > 1) {
+        if (currentPage > 1) {
             changeNumber(currentPage - 1);
         }
     }
@@ -22,7 +30,7 @@ export const SectionPagination = ({currentPage, changeNumber}: SectionPagination
     const getPageItems = () => {
         const pages: number[] = [];
 
-        const total = 100;
+        const total = maxPages;
 
         let start = Math.max(currentPage - 1, 1);
         let end = start + 2;
@@ -44,41 +52,42 @@ export const SectionPagination = ({currentPage, changeNumber}: SectionPagination
     return (
         <div className="flex items-center justify-center gap-[7px] mt-[66px]">
             <button
-                className={`${currentPage > 1 ? "bg-[#1B2133] cursor-pointer" : "opacity-50 cursor-no-drop"} w-[73px] h-[73px] rounded-[10px] flex items-center justify-center text-[25px] rotate-180`}
+                className={`${currentPage > 1 ? "bg-[#1B2133] cursor-pointer hover:opacity-65 transition-all hover:bg-blue-600" : "opacity-50 cursor-no-drop"} phone:w-[73px] w-[50px] h-[50px] phone:h-[73px] rounded-[10px] cursor-pointer flex items-center  justify-center phone:text-[25px] text-[15px] rotate-180`}
                 onClick={() => prevPageHandler()}>
-                <img src={Arrow} alt="Arrow Prev"/>
+                {breakpoint === "phone" ? <img src={ArrowMobile} alt="Arrow Prev"/> : <img src={Arrow} alt="Arrow Prev"/>  }
             </button>
 
             {pagesToShow.map((page) => (
                 <div
                     key={page}
                     onClick={() => changeNumber(page)}
-                    className={`w-[73px] h-[73px] rounded-[10px] cursor-pointer flex items-center justify-center text-[25px] ${
-                        currentPage === page && currentPage !== 100 ? "bg-blue-600" : "bg-[#1B2133]"
+                    className={`phone:w-[73px] w-[50px] h-[50px] phone:h-[73px] rounded-[10px] cursor-pointer flex items-center  justify-center phone:text-[25px] text-[15px] ${
+                        currentPage === page && currentPage !== maxPages ? "bg-blue-600 hover:opacity-100" : "bg-[#1B2133] hover:opacity-65 transition-all hover:bg-blue-600"
                     }`}
                 >
                     {page}
                 </div>
             ))}
 
-            <div className="w-[73px] h-[73px] rounded-[10px] cursor-pointer flex items-center justify-center text-[25px]">
+            <div
+                className="wphone:w-[73px] w-[50px] h-[50px] phone:h-[73px] rounded-[10px] cursor-pointer flex items-center  justify-center phone:text-[25px] text-[15px]]">
                 <span>...</span>
             </div>
 
 
             <div
                 onClick={() => changeNumber(100)}
-                className={`w-[73px] h-[73px] rounded-[10px] cursor-pointer flex items-center justify-center text-[25px] ${
-                    currentPage === 100 ? "bg-blue-600" : "bg-[#1B2133]"
+                className={`phone:w-[73px] w-[50px] h-[50px] phone:h-[73px] rounded-[10px] cursor-pointer flex items-center  justify-center phone:text-[25px] text-[15px] ${
+                    currentPage === maxPages ? "bg-blue-600" : "bg-[#1B2133] hover:opacity-65 transition-all hover:bg-blue-600"
                 }`}
             >
-                100
+                {maxPages}
             </div>
 
             <button
-                className={`${currentPage !== 100 ? "bg-[#1B2133] cursor-pointer" : "opacity-50 cursor-no-drop"} w-[73px] h-[73px] rounded-[10px] flex items-center justify-center text-[25px]`}
+                className={`${currentPage !== maxPages ? "bg-[#1B2133] cursor-pointer hover:opacity-65 transition-all hover:bg-blue-600" : "opacity-50 cursor-no-drop"} phone:w-[73px] w-[50px] h-[50px] phone:h-[73px] rounded-[10px] cursor-pointer flex items-center  justify-center phone:text-[25px] text-[15px]`}
                 onClick={() => nextPageHandler()}>
-                <img src={Arrow} alt="Arrow Next"/>
+                {breakpoint === "phone" ? <img src={ArrowMobile} alt="Arrow Prev"/> : <img src={Arrow} alt="Arrow Prev"/>  }
             </button>
 
         </div>
