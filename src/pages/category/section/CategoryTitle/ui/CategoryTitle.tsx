@@ -20,14 +20,14 @@ export const CategoryTitle = ({genre, setPage}: CategoryTitleProps) => {
     }, [genre]);
 
     return (
-        <div>
-            <h1 className="text-[65px] font-black">{capitalizeFirstLetter(t(`${genre}`) ?? "")}</h1>
-            <div className="flex gap-[10px] text-[16px] mb-[17px] font-medium">
+        <div className="phone:text-left text-center">
+            <h1 className="tabletLg:text-[65px] phone:text-[40px] text-[32px] font-black">{capitalizeFirstLetter(t(`${genre}`) ?? "")}</h1>
+            <div className="flex gap-[10px] text-[16px] mb-[17px] font-medium phone:justify-normal justify-center">
                 <NavLink className="text-[#4F5B7C] hover:text-blue-600 transition-all" to="/">{t('home')}</NavLink>
                 <img src={Arrow} alt="decor"/>
                 {capitalizeFirstLetter(t(`${genre}`) ?? "")}
             </div>
-            <p className="mb-[30px] text-[18px] max-w-[951px]">
+            <p className="mb-[30px] tabletLg:text-[18px] phone:text-[15px] text-[13px] max-w-[951px]">
                 {t(`${genre}`, { ns: 'descriptionCategory' })}  {/* Используем t для получения описания */}
             </p>
         </div>

@@ -42,7 +42,7 @@ console.log(data, isError);
 
     return (
         <HomePageLayout imgStatus={false}>
-            <div className="container max-w-container mx-auto text-white my-10">
+            <div className="container max-w-container mx-auto text-white phone:my-10 mt-[23px] mb-[32px]">
                 <CategoryTitle genre={genre!} setPage={setPage} />
 
                 {movies && movies.length > 0 ? (
