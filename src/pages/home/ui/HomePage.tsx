@@ -10,7 +10,7 @@ import {BoxOffice} from "@/pages/home/sections/BoxOffice";
 
 export const HomePage = () => {
     return (
-        <HomePageLayout>
+        <HomePageLayout imgStatus={true}>
             <NowInCinema />
             <NewTrailers />
             <PopularFilms />

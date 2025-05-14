@@ -1,8 +1,9 @@
 type RatingProps = {
     rating: number;
+    absolute?: boolean
 };
 
-export const Rating = ({rating}: RatingProps) => {
+export const Rating = ({rating, absolute = true}: RatingProps) => {
 
     const roundedRating = Math.round(rating);
 
@@ -26,8 +27,9 @@ export const Rating = ({rating}: RatingProps) => {
             className={`
             py-1 px-5 
             rounded-[5px] 
-            inline-block 
-            absolute font-bold 
+            inline-block
+            text-center
+            ${absolute ? 'absolute' : ''} font-bold 
             ${style} 
             top-[10px] right-[17px]`}
         >

@@ -46,6 +46,14 @@ import expectedProductsRu from "./locales/ru/home/expectedProducts.json";
 import boxOfficeEn from "./locales/en/home/boxOffice.json"
 import boxOfficeRu from "./locales/ru/home/boxOffice.json";
 
+// Name | Category
+import nameCategoryEn from "./locales/en/category/name.json"
+import nameCategoryRu from "./locales/ru/category/name.json"
+
+// Description | Category
+import descriptionCategoryEn from "./locales/en/category/description.json"
+import descriptionCategoryRu from "./locales/ru/category/description.json"
+
 
 export const initI18n = async (language: string = "en") => {
     await i18n
@@ -67,6 +75,9 @@ export const initI18n = async (language: string = "en") => {
                     news: newsRu,
                     expectedProducts: expectedProductsRu,
                     boxOffice: boxOfficeRu,
+                    // category
+                    nameCategory: nameCategoryRu,
+                    descriptionCategory: descriptionCategoryRu
                 },
                 en: {
                     // common
@@ -82,7 +93,9 @@ export const initI18n = async (language: string = "en") => {
                     news: newsEn,
                     expectedProducts: expectedProductsEn,
                     boxOffice: boxOfficeEn,
-
+                    //category
+                    nameCategory: nameCategoryEn,
+                    descriptionCategory: descriptionCategoryEn
                 },
             },
             lng: language,
