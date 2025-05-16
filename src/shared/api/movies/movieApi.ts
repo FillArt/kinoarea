@@ -2,7 +2,7 @@ import {baseApi} from "@/shared/api/baseApi.ts";
 import {
     BoxOfficeType,
     GenresResponseType,
-    GenreType,
+    GenreType, MovieMainInfo,
     MoviesResponseType,
     MovieType,
     TrailerResponseType,
@@ -184,7 +184,7 @@ export const moviesApi = baseApi.injectEndpoints({
             }
         }),
 
-        getMovieInfo: build.query<any, number>({
+        getMovieInfo: build.query<MovieMainInfo, number>({
             query: (movie_id: number) => ({
                 url: `/movie/${movie_id}`,
                 method: "GET",

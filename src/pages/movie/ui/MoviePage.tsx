@@ -8,6 +8,8 @@ export const MoviePage = () => {
     const { id } = useParams();
     const { data: movieInfo, isLoading, error } = useGetMovieInfoQuery(Number(id));
 
+    console.log(movieInfo);
+
     if (isLoading || !movieInfo) {
         return <div className="text-white text-center mt-10">Loading...</div>; // или скелетон
     }
@@ -22,7 +24,7 @@ export const MoviePage = () => {
             imgPath={`https://image.tmdb.org/t/p/w1280${movieInfo.backdrop_path}`}
             additionalShadow={true}
         >
-            <Info />
+            <Info info={movieInfo} />
         </HomePageLayout>
     );
 };
