@@ -9,12 +9,15 @@ import {CategoryContent} from "@/pages/category/section/CategoryContent";
 import {EmptyCinemaList} from "@/shared/ui/sections/EmptyCinemaList.tsx";
 import {useMoviesWithGenres} from "@/shared/api/movies/hooks/useMoviesWithGenres.ts";
 import {useTranslation} from "react-i18next";
+import {CategoryFilterType} from "@/pages/category/section/CategoryContent/ui/CategoryContent.tsx";
+
 
 export const CategoryPage = () => {
     const [page, setPage] = useState(1);
     const {t} = useTranslation('nameCategory');
 
     const [style, setStyle] = useState<'col' | 'row'>('col')
+    const [filter, setFilter] = useState<CategoryFilterType>('default');
 
     // const navigate = useNavigate();
 
@@ -28,6 +31,7 @@ export const CategoryPage = () => {
 
     const { movies } = useMoviesWithGenres({movies: data?.results ?? []});
 
+
     // Scroll to top on mount
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -40,16 +44,20 @@ export const CategoryPage = () => {
     //     }
     // }, [idGenre, genre, navigate]);
 
+
+
     return (
         <HomePageLayout imgStatus={false}>
             <div className="container max-w-container mx-auto text-white phone:my-10 mt-[23px] mb-[32px]">
                 <CategoryTitle genre={genre!}
                                setPage={setPage}
                                setStyle={setStyle}
-                               style={style} />
+                               setFilter={setFilter}
+                               style={style}
+                />
 
                 {movies && movies.length > 0 ? (
-                    <CategoryContent movies={movies} style={style} />
+                    <CategoryContent movies={movies} style={style} filter={filter} />
                 ) : (
                     <EmptyCinemaList />
                 )}

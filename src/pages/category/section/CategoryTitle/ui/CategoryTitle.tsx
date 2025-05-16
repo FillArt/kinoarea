@@ -7,15 +7,17 @@ import {NavLink} from "react-router-dom";
 import {useEffect} from "react";
 import {useTranslation} from "react-i18next";
 import {CategoryFilter} from "@/pages/category/section/CategoryTitle/ui/CategoryFilter.tsx";
+import {CategoryFilterType} from "@/pages/category/section/CategoryContent/ui/CategoryContent.tsx";
 
 type CategoryTitleProps = {
     genre: string,
     setPage: (page: number) => void
     setStyle: (style: 'col' | 'row') => void
+    setFilter: (filter: CategoryFilterType) => void
     style: 'col' | 'row'
 }
 
-export const CategoryTitle = ({genre, setPage, style, setStyle}: CategoryTitleProps) => {
+export const CategoryTitle = ({genre, setPage, style, setStyle, setFilter}: CategoryTitleProps) => {
     const { t } = useTranslation(['nameCategory', 'descriptionCategory']);  // Используем оба namespaces для перевода
 
 
@@ -38,7 +40,7 @@ export const CategoryTitle = ({genre, setPage, style, setStyle}: CategoryTitlePr
                         <img src={ColIcon} alt=""/>
                     </button>
 
-                    <CategoryFilter />
+                    <CategoryFilter setValue={setFilter} />
                 </div>
             </div>
 
