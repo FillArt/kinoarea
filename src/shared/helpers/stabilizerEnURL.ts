@@ -39,6 +39,6 @@ const CategoryObj: Record<string, string> = {
     "телевизионный фильм": "tv movie",
 }
 
-export const stabilizerEnURL = (name: string): string => {
- return  CategoryObj[name]
+export const stabilizerEnURL = (name: string): string | null => {
+ return  CategoryObj[name] ? CategoryObj[name] : null
 }

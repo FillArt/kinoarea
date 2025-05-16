@@ -1,5 +1,5 @@
 import {HomePageLayout} from "@/shared/layouts";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useGenreIdByName} from "@/shared/api/movies/hooks/useGenreIdByName.ts";
 import {useEffect, useState} from "react";
 import {useGetMoviesByGenreIdQuery} from "@/shared/api/movies/movieApi.ts";
@@ -10,6 +10,7 @@ import {EmptyCinemaList} from "@/shared/ui/sections/EmptyCinemaList.tsx";
 import {useMoviesWithGenres} from "@/shared/api/movies/hooks/useMoviesWithGenres.ts";
 import {useTranslation} from "react-i18next";
 import {CategoryFilterType} from "@/pages/category/section/CategoryContent/ui/CategoryContent.tsx";
+import {stabilizerEnURL} from "@/shared/helpers/stabilizerEnURL.ts";
 
 
 export const CategoryPage = () => {
@@ -19,7 +20,7 @@ export const CategoryPage = () => {
     const [style, setStyle] = useState<'col' | 'row'>('col')
     const [filter, setFilter] = useState<CategoryFilterType>('default');
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const { genre } = useParams();
     const idGenre = useGenreIdByName(t(`${genre}`) ?? "");
@@ -31,18 +32,17 @@ export const CategoryPage = () => {
 
     const { movies } = useMoviesWithGenres({movies: data?.results ?? []});
 
-
     // Scroll to top on mount
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
     // Redirect to 404 if genre is invalid
-    // useEffect(() => {
-    //     if (genre && !idGenre) {
-    //         navigate("/404");
-    //     }
-    // }, [idGenre, genre, navigate]);
+    useEffect(() => {
+        if (!stabilizerEnURL(genre!)) {
+            navigate("/404");
+        }
+    }, [genre, navigate]);
 
 
 
