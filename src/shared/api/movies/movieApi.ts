@@ -182,6 +182,16 @@ export const moviesApi = baseApi.injectEndpoints({
 
                 return {data: boxOfficeData}
             }
+        }),
+
+        getMovieInfo: build.query<any, number>({
+            query: (movie_id: number) => ({
+                url: `/movie/${movie_id}`,
+                method: "GET",
+                params: {
+                    region: "US",
+                },
+            }),
         })
 
     }),
@@ -194,5 +204,6 @@ export const {
     useGetMultipleTrailersQuery,
     useGetUpcomingMovieQuery,
     useGetDiscoverMoviesQuery,
-    useGetMoviesByGenreIdQuery
+    useGetMoviesByGenreIdQuery,
+    useGetMovieInfoQuery,
 } = moviesApi;

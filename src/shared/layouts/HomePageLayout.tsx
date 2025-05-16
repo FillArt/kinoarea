@@ -11,28 +11,35 @@ import {Footer} from "@/widgets/Footer";
 interface HomeLayoutProps {
     children: ReactNode;
     imgStatus: boolean
+    imgPath?: string
+    additionalShadow?: boolean
 }
 
 
-export const HomePageLayout = ({children, imgStatus}: HomeLayoutProps) => {
+export const HomePageLayout = ({children, imgStatus, imgPath = BgImg, additionalShadow = false}: HomeLayoutProps) => {
 
     const {t} = useTranslation('header');
 
     const navigationLinks: NavigationLinksType[] = [
         {title: t('poster'), link: '/poster'},
         {title: t('movies'), link: '/movies'},
-        {title: t('actors'), link : '/actors'},
+        {title: t('actors'), link: '/actors'},
         {title: t('news'), link: '/news'},
         {title: t('collections'), link: '/collections'},
         {title: t('categories'), link: '/categories'}
     ]
 
     const imgStyle = {
-        backgroundImage: `url(${BgImg})`,
+        backgroundImage: `
+            ${additionalShadow ? 
+            'linear-gradient(to top, rgba(30, 37, 56, 1), transparent), ' +
+            'linear-gradient(to right, rgba(30, 37, 56, 0.5), transparent),' 
+            : ''}
+            url(${imgPath})
+        `,
         backgroundSize: "100%",
         backgroundPosition: "top center",
         backgroundRepeat: "no-repeat",
-        // backgroundBlendMode: 'overlay',
     }
 
     return (
@@ -51,7 +58,7 @@ export const HomePageLayout = ({children, imgStatus}: HomeLayoutProps) => {
                     {children}
                 </main>
 
-                <Subscription />
+                <Subscription/>
                 <Footer
                     navigation={navigationLinks}
                     socialLinks={SocialLinks}
