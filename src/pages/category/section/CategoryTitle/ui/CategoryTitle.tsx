@@ -30,8 +30,6 @@ export const CategoryTitle = ({genre, setPage, style, setStyle}: CategoryTitlePr
                 <h1 className="tabletLg:text-[65px] phone:text-[40px] text-[32px] font-black">{capitalizeFirstLetter(t(`${genre}`) ?? "")}</h1>
 
                 <div className="flex gap-[9px]">
-                    <CategoryFilter />
-
                     <button className={ style === 'row' ? 'opacity-100' : 'opacity-35' } onClick={() => setStyle('row')}>
                         <img src={TableIcon} alt=""/>
                     </button>
@@ -39,6 +37,8 @@ export const CategoryTitle = ({genre, setPage, style, setStyle}: CategoryTitlePr
                     <button className={ style === 'col' ? 'opacity-100' : 'opacity-35' } onClick={() => setStyle('col')}>
                         <img src={ColIcon} alt=""/>
                     </button>
+
+                    <CategoryFilter />
                 </div>
             </div>
 

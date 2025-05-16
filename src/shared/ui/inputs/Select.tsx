@@ -1,9 +1,22 @@
 import ArrowIcon from "./assets/arrow.svg";
 import { useEffect, useRef, useState } from "react";
+import {useTranslation} from "react-i18next";
 
-export const Select = () => {
+
+export type SelectItem = {
+    key: string;
+    label: string;
+};
+
+type SelectProps = {
+    array: SelectItem[];
+}
+
+
+export const Select = ({array}: SelectProps) => {
     const [open, setOpen] = useState(false);
-    const [current, setCurrent] = useState<string>('По умолчанию....');
+    const {t} = useTranslation('filterCategory');
+    const [current, setCurrent] = useState<string>(t('default'));
 
     const selectRef = useRef<HTMLDivElement>(null);
 
@@ -32,17 +45,17 @@ export const Select = () => {
 
             {open && (
                 <div className="absolute top-full rounded-b-[10px] left-0 w-full bg-[#1B2133] pl-[16px] pr-[32px] z-10 shadow max-h-[180px] overflow-y-scroll custom-scrollbar">
-                    {['1', '2', '3', '4', '5', '6', '7', '1', '2', '3', '4', '5', '6', '7',].map((item, idx) => (
+                    {array.map((item: SelectItem, idx) => (
                         <div
                             key={idx}
                             className="p-2 hover:text-[#3657CB] cursor-pointer"
                             onClick={() => {
-                                setCurrent(item);
-                                console.log("Selected:", item);
+                                setCurrent(item.label);
+                                console.log("Selected:", item.key);
                                 setOpen(false);
                             }}
                         >
-                            {item}
+                            {item.label}
                         </div>
                     ))}
                 </div>
