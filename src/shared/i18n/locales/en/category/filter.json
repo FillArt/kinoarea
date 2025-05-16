@@ -1,0 +1,7 @@
+{
+  "default": "by default",
+  "sort" : "Sort by:",
+  "imdb_rating" : "IMDB rating",
+  "year": "year",
+  "popularity" : "popularity"
+}
