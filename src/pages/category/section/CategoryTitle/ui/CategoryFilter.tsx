@@ -18,7 +18,7 @@ export const CategoryFilter = ({setValue}: CategoryFilterProps) => {
 
     return (
         <div className="ml-[25px] flex items-center">
-            <span className="inline-block mr-[20px] w-full">{t('sort')}</span>
+            <span className="inline-block mr-[20px] phone:w-full min-w-[55px]">{t('sort')}</span>
             <Select<CategoryFilterType> array={filterArray} setValue={setValue}/>
         </div>
     );

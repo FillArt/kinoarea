@@ -8,6 +8,7 @@ import {useEffect} from "react";
 import {useTranslation} from "react-i18next";
 import {CategoryFilter} from "@/pages/category/section/CategoryTitle/ui/CategoryFilter.tsx";
 import {CategoryFilterType} from "@/pages/category/section/CategoryContent/ui/CategoryContent.tsx";
+import {useBreakpoint} from "@/shared/hooks/useBreakpoint.ts";
 
 type CategoryTitleProps = {
     genre: string,
@@ -19,7 +20,7 @@ type CategoryTitleProps = {
 
 export const CategoryTitle = ({genre, setPage, style, setStyle, setFilter}: CategoryTitleProps) => {
     const { t } = useTranslation(['nameCategory', 'descriptionCategory']);  // Используем оба namespaces для перевода
-
+    const breakpoint = useBreakpoint()
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -40,7 +41,7 @@ export const CategoryTitle = ({genre, setPage, style, setStyle, setFilter}: Cate
                         <img src={ColIcon} alt=""/>
                     </button>
 
-                    <CategoryFilter setValue={setFilter} />
+                    {breakpoint !== 'phone' && <CategoryFilter setValue={setFilter} />}
                 </div>
             </div>
 
@@ -53,6 +54,8 @@ export const CategoryTitle = ({genre, setPage, style, setStyle, setFilter}: Cate
             <p className="mb-[30px] tabletLg:text-[18px] phone:text-[15px] text-[13px] max-w-[951px]">
                 {t(`${genre}`, { ns: 'descriptionCategory' })}  {/* Используем t для получения описания */}
             </p>
+            {breakpoint === 'phone' && <CategoryFilter setValue={setFilter} />}
+
         </div>
     );
 };
