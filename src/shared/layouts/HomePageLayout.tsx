@@ -33,7 +33,7 @@ export const HomePageLayout = ({children, imgStatus, imgPath = BgImg, additional
         backgroundImage: `
             ${additionalShadow ? 
             'linear-gradient(to top, rgba(30, 37, 56, 1), transparent), ' +
-            'linear-gradient(to right, rgba(30, 37, 56, 0.5), transparent),' 
+            'linear-gradient(to left, rgba(30, 37, 56, 1), transparent),' 
             : ''}
             url(${imgPath})
         `,
