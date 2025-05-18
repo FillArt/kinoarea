@@ -1,30 +1,20 @@
 import {HomePageLayout} from "@/shared/layouts";
 import {Info} from "@/pages/movie/sections/Info";
 import {useParams} from "react-router-dom";
-import {useGetMovieInfoQuery} from "@/shared/api/movies/movieApi.ts";
+import {useGetMovieBackground} from "@/shared/api/movies/hooks/useGetMovieInfo.ts";
 
 export const MoviePage = () => {
 
     const { id } = useParams();
-    const { data: movieInfo, isLoading, error } = useGetMovieInfoQuery(Number(id));
-
-    console.log(movieInfo);
-
-    if (isLoading || !movieInfo) {
-        return <div className="text-white text-center mt-10">Loading...</div>; // или скелетон
-    }
-
-    if (error) {
-        return <div className="text-red-500 text-center mt-10">Error loading movie</div>;
-    }
+    const backgroundImage = useGetMovieBackground(Number(id));
 
     return (
         <HomePageLayout
             imgStatus={true}
-            imgPath={`https://image.tmdb.org/t/p/w1280${movieInfo.backdrop_path}`}
+            imgPath={`https://image.tmdb.org/t/p/w1280${backgroundImage}`}
             additionalShadow={true}
         >
-            <Info info={movieInfo} />
+            <Info />
         </HomePageLayout>
     );
 };
