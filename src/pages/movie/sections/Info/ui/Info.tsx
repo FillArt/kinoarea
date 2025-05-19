@@ -52,18 +52,23 @@ export const Info = () => {
             </div>
 
 
-             <div className="grid grid-cols-12 gap-[63px] mb-[47px]">
-                 <div className="col-span-6 flex gap-[20px] flex-col">
-                     {general.map((item) => (
-                         <div className="flex text-[18px] ">
-                             <div className="min-w-[150px] font-semibold text-white">{item.label}</div>
-                             <div className="underline text-decorTextColor">
-                                 {Array.isArray(item.value) ? item.value.join(", ") : item.value}
-                             </div>
-                         </div>
-                     ))}
-                 </div>
-             </div>
+            <div className="grid grid-cols-12 gap-[63px] mb-[47px]">
+                <div className="col-span-12 grid grid-cols-2 gap-y-[20px] gap-x-[40px]">
+                    {general.map((item) => (
+                        <div key={item.label} className="grid grid-cols-[150px_1fr] text-[18px]">
+                            <div className="font-semibold text-white">{item.label}</div>
+                            <div className={`text-decorTextColor`}>
+                                {item?.value
+                                    ? Array.isArray(item.value)
+                                        ? item.value.join(", ")
+                                        : item.value
+                                    : "-"}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
         </section>
     );
 };
