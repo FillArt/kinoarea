@@ -2,7 +2,7 @@ import {baseApi} from "@/shared/api/baseApi.ts";
 import {
     BoxOfficeType,
     GenresResponseType,
-    GenreType,
+    GenreType, MovieCredits, MovieMainInfo,
     MoviesResponseType,
     MovieType,
     TrailerResponseType,
@@ -182,6 +182,41 @@ export const moviesApi = baseApi.injectEndpoints({
 
                 return {data: boxOfficeData}
             }
+        }),
+
+        getMovieInfo: build.query<MovieMainInfo, number>({
+            query: (movie_id: number) => ({
+                url: `/movie/${movie_id}`,
+                method: "GET",
+                params: {
+                    region: "US",
+                },
+            }),
+        }),
+
+        getMovieCredits: build.query<MovieCredits, number>({
+            query: (movie_id: number)=> ({
+                url: `/movie/${movie_id}/credits`,
+                method: "GET",
+                params: {
+                    region: "US",
+                },
+            })
+        }),
+
+        getMovieRealiseDates: build.query<any, number>({
+            query: (movie_id: number)=> ({
+                url: `/movie/${movie_id}/release_dates`,
+                method: "GET",
+                params: {
+                    region: "US",
+                },
+            }),
+            transformResponse: (response) => {
+                // @ts-ignore
+                const item = response.results.find((item: { iso_3166_1: string; }) => item.iso_3166_1 === 'US')
+                return item.release_dates[0]
+            }
         })
 
     }),
@@ -194,5 +229,8 @@ export const {
     useGetMultipleTrailersQuery,
     useGetUpcomingMovieQuery,
     useGetDiscoverMoviesQuery,
-    useGetMoviesByGenreIdQuery
+    useGetMoviesByGenreIdQuery,
+    useGetMovieInfoQuery,
+    useGetMovieCreditsQuery,
+    useGetMovieRealiseDatesQuery
 } = moviesApi;

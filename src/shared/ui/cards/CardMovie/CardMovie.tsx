@@ -5,7 +5,7 @@ import {MovieType} from "@/shared/api/movies/movieType.ts";
 import {formatDate} from "@/shared/helpers/formatDate.ts";
 import {useTranslation} from "react-i18next";
 import {capitalizeFirstLetter} from "@/shared/helpers/capitalizeFirstLetter.ts";
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import {lowercaseFirstLetter} from "@/shared/helpers/lowercaseFirstLetter.ts";
 import {stabilizerEnURL} from "@/shared/helpers/stabilizerEnURL.ts";
 
@@ -29,14 +29,14 @@ export const CardMovie = ({movie, release_date}: CardMovieProps) => {
 
     return (
         <div className="group relative max-w-[340px] cursor-pointer ">
-            <div
+            <NavLink to={"/movie/" + movie.id}
                 style={imgStyle}
                 className="bg-emptyColor tabletLg:h-[470px] h-[286px] relative flex justify-center items-center rounded-[10px]">
 
                 <div
                     className="absolute inset-0 bg-formElementColor bg-opacity-0 group-hover:bg-opacity-65
                     flex items-center justify-center rounded-[10px] transition-all duration-300 ease-in-out">
-                    <ButtonBase title={t('cards_movie_button')} onClick={() => alert('Переход на страницу...')}
+                    <ButtonBase title={t('cards_movie_button')} onClick={() => {}}
                                 style="card"
                                 className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"
                     />
@@ -46,7 +46,7 @@ export const CardMovie = ({movie, release_date}: CardMovieProps) => {
                 {!release_date && <Rating rating={rounded(vote_average, 1)}/>}
 
                 {!poster_path && <Empty/>}
-            </div>
+            </NavLink>
 
             <h3 className="tabletLg:text-smallFontSize text-[15px] mt-2 mb-1">{title}</h3>
 

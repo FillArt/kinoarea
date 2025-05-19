@@ -1,7 +1,12 @@
+export const formatDate = (
+    dateString?: string,
+    locale = import.meta.env.VITE_APP_LANGUAGE || "en-US"
+): string => {
+    if (!dateString) return "—";
 
-
-export const formatDate = (dateString: string, locale = import.meta.env.VITE_APP_LANGUAGE) => {
     const date = new Date(dateString);
+    if (isNaN(date.getTime())) return "—"; // Невалидная дата
+
     return new Intl.DateTimeFormat(locale, {
         day: "numeric",
         month: "long",

@@ -1,0 +1,1 @@
+export {MoviePage} from "@/pages/movie/ui/MoviePage.tsx";
