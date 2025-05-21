@@ -11,13 +11,13 @@ type TitleInfoProps = {
 
 export const TitleInfo = ({title, original_title, overview, vote_average}: TitleInfoProps) => {
     return (
-        <div className="mb-[30px]">
-            <h1 className="text-[65px] font-black leading-none max-w-[630px] mb-[10px]">{title}</h1>
-            <h2 className="text-[25px] font-medium mb-[15px]">{original_title}</h2>
+        <div className="tabletLg:mb-[30px] mb-[20px]">
+            <h1 className="tabletLg:text-[65px] text-[40px] font-black leading-none max-w-[630px] tabletLg:mb-[10px] mb-[3px]">{title}</h1>
+            <h2 className="tabletLg:text-[25px] text-[20px] font-medium mb-[15px]">{original_title}</h2>
             <div className="mb-[10px]">
                 <RatingCircle name="IMDb" rating={vote_average}/>
             </div>
-            <p className="text-[20px]">{truncateString(overview, 256)}</p>
+            <p className="tabletLg:text-[20px] text-[15px]">{truncateString(overview, 256)}</p>
             {/*<p className="text-[20px]">{truncateString(overview)}</p>*/}
         </div>
     );
