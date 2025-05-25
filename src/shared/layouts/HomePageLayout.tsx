@@ -37,13 +37,13 @@ export const HomePageLayout = ({children, imgStatus, imgPath = BgImg, additional
             : ''}
             url(${imgPath})
         `,
-        backgroundSize: "100%",
+        // backgroundSize: "100%",
         backgroundPosition: "top center",
         backgroundRepeat: "no-repeat",
     }
 
     return (
-        <div style={imgStatus ? imgStyle : undefined} className="font-main">
+        <div style={imgStatus ? imgStyle : undefined} className="font-main phone:bg-100 bg-auto">
             <div id="modal-root"></div>
 
             <div className="flex flex-col justify-between h-[125vh]">

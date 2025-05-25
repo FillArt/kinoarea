@@ -22,6 +22,9 @@ export default {
                 center: true,
                 padding: "10px",
             },
+            backgroundSize: {
+                '100': '100%',
+            },
             colors: {
                 baseTextColor: "#FFFFFF",
                 decorTextColor: "#F2F60F",
