@@ -6,11 +6,11 @@ import {useGetMoviesByGenreIdQuery} from "@/shared/api/movies/movieApi.ts";
 import {SectionPagination} from "@/shared/ui/sections/SectionPagination.tsx";
 import {CategoryTitle} from "@/pages/category/section/CategoryTitle";
 import {CategoryContent} from "@/pages/category/section/CategoryContent";
-import {EmptyCinemaList} from "@/shared/ui/sections/EmptyCinemaList.tsx";
 import {useMoviesWithGenres} from "@/shared/api/movies/hooks/useMoviesWithGenres.ts";
 import {useTranslation} from "react-i18next";
 import {CategoryFilterType} from "@/pages/category/section/CategoryContent/ui/CategoryContent.tsx";
 import {stabilizerEnURL} from "@/shared/helpers/stabilizerEnURL.ts";
+import {CategoryPageLoading} from "@/pages/category/ui/CategoryPageLoading.tsx";
 
 
 export const CategoryPage = () => {
@@ -22,15 +22,15 @@ export const CategoryPage = () => {
 
     const navigate = useNavigate();
 
-    const { genre } = useParams();
+    const {genre} = useParams();
     const idGenre = useGenreIdByName(t(`${genre}`) ?? "");
 
-    const { data } = useGetMoviesByGenreIdQuery(
-        { genre_id: idGenre ?? 0, page },
-        { skip: !idGenre }
+    const {data} = useGetMoviesByGenreIdQuery(
+        {genre_id: idGenre ?? 0, page},
+        {skip: !idGenre}
     );
 
-    const { movies } = useMoviesWithGenres({movies: data?.results ?? []});
+    const {movies} = useMoviesWithGenres({movies: data?.results ?? []});
 
     // Scroll to top on mount
     useEffect(() => {
@@ -45,7 +45,6 @@ export const CategoryPage = () => {
     }, [genre, navigate]);
 
 
-
     return (
         <HomePageLayout imgStatus={false}>
             <div className="container max-w-container mx-auto text-white phone:my-10 mt-[23px] mb-[32px]">
@@ -57,14 +56,14 @@ export const CategoryPage = () => {
                 />
 
                 {movies && movies.length > 0 ? (
-                    <CategoryContent movies={movies} style={style} filter={filter} />
+                    <>
+                        <CategoryContent movies={movies} style={style} filter={filter}/>
+                        <SectionPagination currentPage={page} changeNumber={setPage}/>
+                    </>
                 ) : (
-                    <EmptyCinemaList />
+                    <CategoryPageLoading/>
                 )}
 
-                {movies && movies.length > 0 && (
-                    <SectionPagination currentPage={page} changeNumber={setPage} />
-                )}
             </div>
         </HomePageLayout>
     );
