@@ -29,9 +29,6 @@ export const Info = () => {
         rating
     } = info
 
-    console.log(general)
-
-
     return (
         <section className="container mx-auto max-w-[1163px]">
             <div
@@ -85,17 +82,16 @@ export const Info = () => {
                     {general.map((item) => (
                         <div
                             key={item.label}
-                            className="flex w-full phone:w-[calc(50%-20px)] text-[16px] tabletLg:text-[18px]"
-                        >
+                            className="flex w-full phone:w-[calc(50%-20px)] text-[16px] tabletLg:text-[18px]">
                             <div className="phone:w-[150px] w-[120px] font-semibold text-white">{item.label}</div>
                             <div className="flex-1 text-decorTextColor">
-                    <span>
-                        {item?.value
-                            ? Array.isArray(item.value)
-                                ? item.value.join(", ")
-                                : item.value
-                            : "-"}
-                    </span>
+                                <span>
+                                    {item?.value
+                                        ? Array.isArray(item.value)
+                                            ? item.value.join(", ")
+                                            : item.value
+                                        : "-"}
+                                </span>
                             </div>
                         </div>
                     ))}

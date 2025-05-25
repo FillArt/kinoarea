@@ -58,6 +58,9 @@ import descriptionCategoryRu from "./locales/ru/category/description.json"
 import filterCategoryEn from "./locales/en/category/filter.json"
 import filterCategoryRu from "./locales/ru/category/filter.json"
 
+// Info | Movie
+import infoMovieEn from "./locales/en/movie/info.json"
+import infoMovieRu from "./locales/ru/movie/info.json"
 
 export const initI18n = async (language: string = "en") => {
     await i18n
@@ -82,7 +85,9 @@ export const initI18n = async (language: string = "en") => {
                     // category
                     nameCategory: nameCategoryRu,
                     descriptionCategory: descriptionCategoryRu,
-                    filterCategory: filterCategoryRu
+                    filterCategory: filterCategoryRu,
+                    // movie
+                    infoMovie: infoMovieRu,
                 },
                 en: {
                     // common
@@ -101,7 +106,9 @@ export const initI18n = async (language: string = "en") => {
                     //category
                     nameCategory: nameCategoryEn,
                     descriptionCategory: descriptionCategoryEn,
-                    filterCategory: filterCategoryEn
+                    filterCategory: filterCategoryEn,
+                    // movie
+                    infoMovie: infoMovieEn,
                 },
             },
             lng: language,
