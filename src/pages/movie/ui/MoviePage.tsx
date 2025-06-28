@@ -3,6 +3,7 @@ import {Info} from "@/pages/movie/sections/Info";
 import {useParams} from "react-router-dom";
 import {useGetMovieBackground} from "@/shared/api/movies/hooks/useGetMovieInfo.ts";
 import {useEffect} from "react";
+import {Actors} from "@/pages/movie/sections/Actors";
 
 export const MoviePage = () => {
 
@@ -21,6 +22,7 @@ export const MoviePage = () => {
             additionalShadow={true}
         >
             <Info />
+            <Actors />
         </HomePageLayout>
     );
 };

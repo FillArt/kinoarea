@@ -9,7 +9,6 @@ interface  WithoutSubscribeProps {
     children: ReactNode;
 }
 
-
 export const WithoutSubscribeLayout = ({children}: WithoutSubscribeProps) => {
 
     const {t} = useTranslation('header');

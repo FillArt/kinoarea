@@ -1,0 +1,1 @@
+export {Actors} from "@/pages/movie/sections/Actors/ui/Actors.tsx"

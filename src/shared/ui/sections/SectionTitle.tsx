@@ -17,7 +17,7 @@ export const SectionTitle = ({title, children, line = true, sectionVersion = 'on
         <div className={`flex font-bold phone:justify-between justify-center  phone:gap-0 gap-[10px] ${resultStyle}`}>
 
 
-            <h2 className='tabletLg:text-titleFontSize phone:text-[40px] text-[32px]'>{title}</h2>
+            <h2 className='tabletLg:text-titleFontSize phone:text-[40px] text-[32px] font-black'>{title}</h2>
             {line && <div className="tabletLg:block hidden"
                           style={{width: '51px', height: '2px', backgroundColor: 'white'}}></div>}
             {children}
