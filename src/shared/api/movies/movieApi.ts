@@ -8,6 +8,7 @@ import {
     TrailerResponseType,
     TrailerType
 } from "@/shared/api/movies/movieType.ts";
+import {ActorType} from "@/shared/api/people/peopleType.ts";
 
 
 export const moviesApi = baseApi.injectEndpoints({
@@ -217,6 +218,21 @@ export const moviesApi = baseApi.injectEndpoints({
                 const item = response.results.find((item: { iso_3166_1: string; }) => item.iso_3166_1 === 'US')
                 return item.release_dates[0]
             }
+        }),
+
+        get10ActorsByFilmId: build.query<ActorType[], number>({
+            query: (movie_id: number) => ({
+                url: `movie/${movie_id}/credits`,
+                method: "GET",
+                params: {
+                    region: "US",
+                }
+            }),
+            transformResponse: (response) => {
+                // @ts-ignore
+                const data = response.cast.slice(0, 10)
+                return data
+            }
         })
 
     }),
@@ -232,5 +248,6 @@ export const {
     useGetMoviesByGenreIdQuery,
     useGetMovieInfoQuery,
     useGetMovieCreditsQuery,
-    useGetMovieRealiseDatesQuery
+    useGetMovieRealiseDatesQuery,
+    useGet10ActorsByFilmIdQuery
 } = moviesApi;
