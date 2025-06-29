@@ -1,0 +1,1 @@
+export {Content} from "@/pages/movie/sections/Content/ui/Content.tsx"
